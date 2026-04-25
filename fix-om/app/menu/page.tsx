@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { BilingualToggle } from "@/components/menu/bilingual-toggle";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
@@ -28,11 +27,65 @@ interface Category {
   items: MenuItem[];
 }
 
+const MenuItemCard = memo(function MenuItemCard({ 
+  item, 
+  isArabic 
+}: { 
+  item: MenuItem; 
+  isArabic: boolean;
+}) {
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ scale: 1.02, y: -5 }}
+      className={`relative rounded-2xl overflow-hidden ${
+        item.image 
+          ? "glass" 
+          : "bg-glass border border-glass-border"
+      }`}
+    >
+      {item.image && (
+        <div className="relative h-48 w-full overflow-hidden">
+          <Image
+            src={item.image}
+            alt={isArabic ? item.nameArabic : item.name}
+            fill
+            className="object-cover transition-transform duration-500 hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 to-transparent" />
+        </div>
+      )}
+      <div className={`p-6 ${!item.image ? 'glass' : ''}`}>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h3 className="text-xl font-semibold text-bone">
+              {isArabic ? item.nameArabic : item.name}
+            </h3>
+            <p className="mt-1 text-sm text-subtext">
+              {isArabic ? item.descriptionArabic : item.description}
+            </p>
+          </div>
+          <div className="flex-shrink-0">
+            <span className="text-lg font-mono font-medium text-gold">
+              {item.price.toFixed(1)} OMR
+            </span>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+});
+
 export default function MenuPage() {
-  const { language, isRTL } = useBilingual();
+  const { language } = useBilingual();
   const [activeTab, setActiveTab] = useState("caffeine");
 
-  const categories: Category[] = menuData.categories;
+  const categories: Category[] = useMemo(() => menuData.categories, []);
+  const isArabic = language === "ar";
 
   return (
     <div className="min-h-screen">
@@ -48,12 +101,10 @@ export default function MenuPage() {
           >
             <div className="text-center md:text-left">
               <h1 className="text-5xl md:text-7xl font-bold">
-                {language === "en" ? "Our Menu" : "قائمنا"}
+                {isArabic ? "قائمنا" : "Our Menu"}
               </h1>
               <p className="mt-3 text-subtext text-lg">
-                {language === "en" 
-                  ? "Crafted with precision" 
-                  : "صُنع بدقة"}
+                {isArabic ? "صُنع بدقة" : "Crafted with precision"}
               </p>
             </div>
             <BilingualToggle />
@@ -73,7 +124,7 @@ export default function MenuPage() {
                     value={category.id}
                     className="px-6 py-3 text-base"
                   >
-                    {language === "ar" ? category.nameArabic : category.name}
+                    {isArabic ? category.nameArabic : category.name}
                   </TabsTrigger>
                 ))}
               </TabsList>
@@ -86,50 +137,12 @@ export default function MenuPage() {
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                 >
                   <AnimatePresence mode="popLayout">
-                    {category.items.map((item, index) => (
-                      <motion.div
-                        key={item.id}
-                        layout
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        transition={{ delay: index * 0.05, duration: 0.3 }}
-                        whileHover={{ scale: 1.02, y: -5 }}
-                        className={`relative rounded-2xl overflow-hidden ${
-                          item.image 
-                            ? "glass" 
-                            : "bg-glass border border-glass-border"
-                        }`}
-                      >
-                        {item.image && (
-                          <div className="relative h-48 w-full overflow-hidden">
-                            <Image
-                              src={item.image}
-                              alt={language === "ar" ? item.nameArabic : item.name}
-                              fill
-                              className="object-cover transition-transform duration-500 hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 to-transparent" />
-                          </div>
-                        )}
-                        <div className={`p-6 ${!item.image ? 'glass' : ''}`}>
-                          <div className="flex items-start justify-between gap-4">
-                            <div>
-                              <h3 className="text-xl font-semibold text-bone">
-                                {language === "ar" ? item.nameArabic : item.name}
-                              </h3>
-                              <p className="mt-1 text-sm text-subtext">
-                                {language === "ar" ? item.descriptionArabic : item.description}
-                              </p>
-                            </div>
-                            <div className="flex-shrink-0">
-                              <span className="text-lg font-mono font-medium text-gold">
-                                {item.price.toFixed(1)} OMR
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
+                    {category.items.map((item) => (
+                      <MenuItemCard 
+                        key={item.id} 
+                        item={item} 
+                        isArabic={isArabic}
+                      />
                     ))}
                   </AnimatePresence>
                 </motion.div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Header } from "@/components/layout/header";
@@ -18,15 +18,15 @@ interface GalleryImage {
   size: "small" | "medium" | "large";
 }
 
-export default function GalleryPage() {
-  const { language } = useBilingual();
-  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
-  
-  const images: GalleryImage[] = galleryData.images.map((img) => ({
-    ...img,
-    size: img.size as "small" | "medium" | "large",
-  }));
-
+const GalleryItem = memo(function GalleryItem({ 
+  image, 
+  onClick,
+  index,
+}: { 
+  image: GalleryImage; 
+  onClick: () => void;
+  index: number;
+}) {
   const getGridClass = (size: string) => {
     switch (size) {
       case "large":
@@ -37,6 +37,37 @@ export default function GalleryPage() {
         return "";
     }
   };
+
+  return (
+    <motion.div
+      className={`relative aspect-square rounded-xl overflow-hidden cursor-pointer ${getGridClass(image.size)}`}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: index * 0.05, duration: 0.4 }}
+      whileHover={{ scale: 1.02 }}
+      onClick={onClick}
+    >
+      <Image
+        src={image.src}
+        alt={image.alt}
+        fill
+        className="object-cover transition-transform duration-500 hover:scale-110"
+      />
+      <div className="absolute inset-0 bg-obsidian/0 hover:bg-obsidian/30 transition-colors duration-300" />
+    </motion.div>
+  );
+});
+
+export default function GalleryPage() {
+  const { language } = useBilingual();
+  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  
+  const images: GalleryImage[] = useMemo(() => 
+    galleryData.images.map((img) => ({
+      ...img,
+      size: img.size as "small" | "medium" | "large",
+    })), 
+  []);
 
   return (
     <div className="min-h-screen">
@@ -66,23 +97,12 @@ export default function GalleryPage() {
           transition={{ delay: 0.3, duration: 0.6 }}
         >
           {images.map((image, index) => (
-            <motion.div
+            <GalleryItem
               key={image.src}
-              className={`relative aspect-square rounded-xl overflow-hidden cursor-pointer ${getGridClass(image.size)}`}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.05, duration: 0.4 }}
-              whileHover={{ scale: 1.02 }}
+              image={image}
+              index={index}
               onClick={() => setSelectedImage(image)}
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="object-cover transition-transform duration-500 hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-obsidian/0 hover:bg-obsidian/30 transition-colors duration-300" />
-            </motion.div>
+            />
           ))}
         </motion.div>
 
