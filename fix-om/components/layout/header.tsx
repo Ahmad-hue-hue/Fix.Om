@@ -85,19 +85,23 @@ export function Header() {
           <div className="flex items-center gap-4">
             <motion.button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-3 py-2 rounded-full bg-glass border border-glass-border text-subtext hover:text-bone hover:border-gold transition-all duration-300"
+              className="flex items-center gap-2 px-3 py-2 rounded-full bg-glass border border-glass-border text-subtext hover:text-bone hover:border-gold transition-colors duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              aria-label={language === "en" ? "Switch to Arabic" : "Switch to English"}
             >
-              <FontAwesomeIcon icon={faGlobe} className="w-4 h-4" />
+              <FontAwesomeIcon icon={faGlobe} className="w-4 h-4" aria-hidden="true" />
               <span className="text-xs font-medium">{language === "en" ? "EN" : "ع"}</span>
             </motion.button>
 
             <button
               className="md:hidden p-2 text-bone"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              type="button"
             >
-              <FontAwesomeIcon icon={isMobileMenuOpen ? faXmark : faBars} className="w-6 h-6" />
+              <FontAwesomeIcon icon={isMobileMenuOpen ? faXmark : faBars} className="w-6 h-6" aria-hidden="true" />
             </button>
           </div>
         </div>
