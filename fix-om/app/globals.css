@@ -103,3 +103,7 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+.writing-vertical-lr {
+  writing-mode: vertical-lr;
+}
