@@ -47,6 +47,10 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr" className="scroll-smooth">
       <body className={`${inter.variable} ${jetbrainsMono.variable} ${ibmPlexArabic.variable} min-h-screen bg-obsidian text-bone antialiased overflow-x-hidden`}>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+        <div className="noise-overlay" aria-hidden="true" />
         <BilingualProvider>
           {children}
         </BilingualProvider>

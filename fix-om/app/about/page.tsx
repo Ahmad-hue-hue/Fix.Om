@@ -70,7 +70,7 @@ export default function AboutPage() {
     <div className="min-h-screen" ref={containerRef}>
       <Header />
       
-      <main className="pt-32 pb-16">
+      <main id="main-content" className="pt-32 pb-16">
         <motion.div 
           className="text-center px-4 mb-24"
           style={{ opacity }}

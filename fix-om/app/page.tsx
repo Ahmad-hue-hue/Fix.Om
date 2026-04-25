@@ -30,7 +30,7 @@ export default function Home() {
     <div className="min-h-screen">
       <Header />
       
-      <main>
+      <main id="main-content">
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-obsidian via-obsidian to-obsidian/80" />
           

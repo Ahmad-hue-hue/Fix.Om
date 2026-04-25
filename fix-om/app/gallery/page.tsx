@@ -73,7 +73,7 @@ export default function GalleryPage() {
     <div className="min-h-screen">
       <Header />
       
-      <main className="pt-32 pb-16 px-4">
+      <main id="main-content" className="pt-32 pb-16 px-4">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}

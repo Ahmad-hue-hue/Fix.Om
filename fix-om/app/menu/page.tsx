@@ -91,7 +91,7 @@ export default function MenuPage() {
     <div className="min-h-screen">
       <Header />
       
-      <main className="pt-32 pb-16 px-4">
+      <main id="main-content" className="pt-32 pb-16 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12"
