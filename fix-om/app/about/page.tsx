@@ -70,13 +70,13 @@ export default function AboutPage() {
     <div className="min-h-screen" ref={containerRef}>
       <Header />
       
-      <main id="main-content" className="pt-32 pb-16">
+      <main id="main-content" className="pt-24 pb-12">
         <motion.div 
-          className="text-center px-4 mb-24"
+          className="text-center px-3 sm:px-4 mb-16 md:mb-24"
           style={{ opacity }}
         >
           <motion.span
-            className="text-gold text-sm uppercase tracking-widest"
+            className="text-gold text-xs sm:text-sm uppercase tracking-widest"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -84,7 +84,7 @@ export default function AboutPage() {
             {language === "en" ? "Our Story" : "قصتنا"}
           </motion.span>
           <motion.h1
-            className="text-6xl md:text-8xl font-bold mt-4"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mt-3 md:mt-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
@@ -92,7 +92,7 @@ export default function AboutPage() {
             {language === "en" ? "The Fix" : "الفيكس"}
           </motion.h1>
           <motion.p
-            className="mt-6 text-xl text-subtext max-w-2xl mx-auto"
+            className="mt-4 md:mt-6 text-base sm:text-xl text-subtext max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
@@ -103,17 +103,17 @@ export default function AboutPage() {
           </motion.p>
         </motion.div>
 
-        <div className="space-y-32">
+        <div className="space-y-16 md:space-y-32">
           {aboutSections.map((section, index) => (
             <ScrollRevealSection key={section.id} delay={index * 0.15}>
-              <section className="max-w-7xl mx-auto px-4">
-                <div className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-12 md:gap-24`}>
+              <section className="max-w-7xl mx-auto px-3 sm:px-4">
+                <div className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-24`}>
                   <motion.div 
-                    className="flex-1 relative"
+                    className="flex-1 relative w-full"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <div className="relative aspect-[4/5] h-full rounded-2xl overflow-hidden">
+                    <div className="relative aspect-[4/5] sm:aspect-[3/4] md:aspect-[4/5] rounded-xl md:rounded-2xl overflow-hidden">
                       <Image
                         src={section.image}
                         alt={language === "en" ? section.title : section.titleArabic}
@@ -127,17 +127,17 @@ export default function AboutPage() {
                   
                   <div className="flex-1 text-center md:text-left">
                     <motion.span
-                      className="text-gold text-sm uppercase tracking-widest"
+                      className="text-gold text-xs sm:text-sm uppercase tracking-widest"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
                     >
                       {language === "en" ? "0" + (index + 1) : "٠" + (index + 1)}
                     </motion.span>
-                    <h2 className="text-4xl md:text-5xl font-bold mt-4">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-2 md:mt-4">
                       {language === "en" ? section.title : section.titleArabic}
                     </h2>
-                    <p className="mt-6 text-lg text-subtext leading-relaxed">
+                    <p className="mt-3 md:mt-6 text-sm sm:text-base md:text-lg text-subtext leading-relaxed">
                       {language === "en" ? section.description : section.descriptionArabic}
                     </p>
                   </div>
