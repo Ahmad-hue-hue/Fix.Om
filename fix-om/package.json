@@ -2,6 +2,10 @@
   "name": "fix-om",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18",
+    "npm": ">=9"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +15,7 @@
     "test:run": "vitest run"
   },
   "dependencies": {
+    "@fontsource/ibm-plex-sans-arabic": "^5.2.9",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@fortawesome/free-brands-svg-icons": "^7.2.0",
@@ -23,9 +28,9 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
-    "next": "16.2.4",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "next": "15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
@@ -36,7 +41,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.4",
+    "eslint-config-next": "15.1.0",
     "jsdom": "^29.0.2",
     "tailwindcss": "^4",
     "typescript": "^5",
