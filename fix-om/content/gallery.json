@@ -1,0 +1,26 @@
+{
+  "images": [
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.45.25 PM.jpeg", "alt": "Coffee beans", "size": "large" },
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.45.39 PM.jpeg", "alt": "Dessert presentation", "size": "medium" },
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.45.55 PM.jpeg", "alt": "Artisan pastry", "size": "medium" },
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.46.08 PM.jpeg", "alt": "Bakery item", "size": "small" },
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.46.34 PM.jpeg", "alt": "Interior view", "size": "large" },
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.46.57 PM.jpeg", "alt": "Coffee preparation", "size": "medium" },
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.47.15 PM.jpeg", "alt": "Latte art", "size": "small" },
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.47.33 PM.jpeg", "alt": "Cafe atmosphere", "size": "large" },
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.47.46 PM.jpeg", "alt": "Beverage selection", "size": "medium" },
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.48.03 PM.jpeg", "alt": "Fresh pastries", "size": "small" },
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.48.19 PM.jpeg", "alt": "Seating area", "size": "large" },
+    { "src": "/assets/WhatsApp Image 2026-04-24 at 5.48.34 PM.jpeg", "alt": "Menu display", "size": "medium" },
+    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.04 AM (1).jpeg", "alt": "Coffee detail 1", "size": "medium" },
+    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.04 AM (2).jpeg", "alt": "Coffee detail 2", "size": "small" },
+    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.04 AM.jpeg", "alt": "Barista at work", "size": "large" },
+    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.05 AM (1).jpeg", "alt": "Ambiance 1", "size": "medium" },
+    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.05 AM (2).jpeg", "alt": "Ambiance 2", "size": "small" },
+    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.05 AM.jpeg", "alt": "Outdoor seating", "size": "large" },
+    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.06 AM (1).jpeg", "alt": "Event space", "size": "medium" },
+    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.06 AM (2).jpeg", "alt": "Decor details", "size": "small" },
+    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.06 AM.jpeg", "alt": "Night ambiance", "size": "large" },
+    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.07 AM.jpeg", "alt": "Customer moment", "size": "medium" }
+  ]
+}

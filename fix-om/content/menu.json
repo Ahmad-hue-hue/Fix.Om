@@ -1,0 +1,35 @@
+{
+  "categories": [
+    {
+      "id": "caffeine",
+      "name": "Caffeine",
+      "nameArabic": "الكافيين",
+      "items": [
+        { "id": "espresso", "name": "Espresso", "nameArabic": "إسبريسو", "price": 2.5, "description": "Double shot", "descriptionArabic": "جرعة مزدوجة" },
+        { "id": "latte", "name": "Latte", "nameArabic": "لاتيه", "price": 3.5, "description": "Espresso with steamed milk", "descriptionArabic": "إسبريسو مع حليب ساخن" },
+        { "id": "v60", "name": "V60", "nameArabic": "في 60", "price": 4.5, "description": "Pour-over single origin", "descriptionArabic": "صنع يدوي أصل واحد" },
+        { "id": "cold-brew", "name": "Cold Brew", "nameArabic": "Cold Brew", "price": 5.0, "description": "18-hour steep", "descriptionArabic": "نقع 18 ساعة" }
+      ]
+    },
+    {
+      "id": "refreshments",
+      "name": "Refreshments",
+      "nameArabic": "المشروبات المنعشة",
+      "items": [
+        { "id": "mojitos", "name": "Mojitos", "nameArabic": "موخيتوس", "price": 4.0, "description": "Mint & lime", "descriptionArabic": "نعناليمون" },
+        { "id": "acai-smoothie", "name": "Acai Smoothie", "nameArabic": "سموذي الآسايب", "price": 5.5, "description": "Berry blend", "descriptionArabic": "خلطة التوت" },
+        { "id": "fresh-juice", "name": "Fresh Juice", "nameArabic": "عصائر طازجة", "price": 3.5, "description": "Seasonal fruits", "descriptionArabic": "فواكه موسمية" }
+      ]
+    },
+    {
+      "id": "desserts",
+      "name": "Desserts",
+      "nameArabic": "الحلويات",
+      "items": [
+        { "id": "san-sebastian", "name": "San Sebastian", "nameArabic": "سان سباستيان", "price": 5.0, "description": "Burnt cheesecake", "descriptionArabic": "تشيز كيك محروق", "image": "/assets/WhatsApp Image 2026-04-24 at 5.45.39 PM.jpeg" },
+        { "id": "cookies-cake", "name": "Cookies Cake", "nameArabic": "كيك كوكيز", "price": 4.5, "description": "Cookie dough layer", "descriptionArabic": "عجين كوكيز", "image": "/assets/WhatsApp Image 2026-04-24 at 5.45.55 PM.jpeg" },
+        { "id": "brownies", "name": "Brownies", "nameArabic": "براوني", "price": 4.0, "description": "Fudgy chocolate", "descriptionArabic": "شوكولاتة كثيفة", "image": "/assets/WhatsApp Image 2026-04-24 at 5.46.08 PM.jpeg" }
+      ]
+    }
+  ]
+}
