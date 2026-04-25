@@ -150,32 +150,54 @@ export default function Home() {
           </motion.div>
         </section>
 
-        <section className="py-24 px-4">
+        <section className="py-16 md:py-24 px-3 sm:px-4">
           <div className="max-w-6xl mx-auto">
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, staggerChildren: 0.15 }}
             >
               {[
-                { title: "Premium Beans", desc: "Single origin, ethically sourced", icon: "☕" },
-                { title: "Precision Brewing", desc: "V60, Aeropress, Cold Brew", icon: "⚗️" },
-                { title: "Artisan Pastries", desc: "Freshly baked daily", icon: "🥐" },
+                { 
+                  title: "Premium Beans", 
+                  titleArabic: "حبوب فاخرة", 
+                  desc: "Single origin, ethically sourced", 
+                  descArabic: "أصل واحد، مصادر أخلاقية",
+                  icon: "☕" 
+                },
+                { 
+                  title: "Precision Brewing", 
+                  titleArabic: "تحضير دقيق", 
+                  desc: "V60, Aeropress, Cold Brew", 
+                  descArabic: "في 60، إيروس بريس، كولد برو",
+                  icon: "⚗️" 
+                },
+                { 
+                  title: "Artisan Pastries", 
+                  titleArabic: "معجنات فنية", 
+                  desc: "Freshly baked daily", 
+                  descArabic: "مخبوزة طازجة يومياً",
+                  icon: "🥐" 
+                },
               ].map((item, index) => (
                 <motion.div
                   key={item.title}
-                  className="glass rounded-2xl p-8 text-center"
+                  className="glass rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
                   whileHover={{ scale: 1.02, y: -5 }}
                 >
-                  <div className="text-4xl mb-4">{item.icon}</div>
-                  <h3 className="text-xl font-semibold text-bone mb-2">{item.title}</h3>
-                  <p className="text-subtext">{item.desc}</p>
+                  <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{item.icon}</div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-bone mb-1 sm:mb-2">
+                    {language === "en" ? item.title : item.titleArabic}
+                  </h3>
+                  <p className="text-subtext text-sm sm:text-base">
+                    {language === "en" ? item.desc : item.descArabic}
+                  </p>
                 </motion.div>
               ))}
             </motion.div>

@@ -118,12 +118,12 @@ export default function MenuPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <TabsList className="p-1.5 sm:p-2">
+              <TabsList className="p-1 sm:p-1.5">
                 {categories.map((category) => (
                   <TabsTrigger 
                     key={category.id} 
                     value={category.id}
-                    className="px-4 py-2 text-sm"
+                    className="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm"
                   >
                     {isArabic ? category.nameArabic : category.name}
                   </TabsTrigger>
