@@ -110,7 +110,7 @@ export function Header() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden fixed inset-0 top-[72px] bg-obsidian/98 backdrop-blur-lg"
+            className="md:hidden fixed inset-0 top-[72px] z-50 bg-obsidian/98 backdrop-blur-lg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
