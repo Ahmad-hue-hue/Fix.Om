@@ -93,31 +93,43 @@ export default function ContactPage() {
           </motion.div>
 
           <motion.div
-            className="glass rounded-2xl p-8 md:p-12"
+            className="glass rounded-2xl p-6 md:p-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <FontAwesomeIcon icon={faMapMarkerAlt} className="w-6 h-6 text-gold" />
-              <h2 className="text-2xl font-semibold">
+            <div className="flex items-center justify-center gap-3 mb-4 md:mb-6">
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="w-5 md:w-6 h-5 md:h-6 text-gold" />
+              <h2 className="text-xl md:text-2xl font-semibold">
                 {language === "en" ? "Visit Us" : "زربنا"}
               </h2>
             </div>
             
-            <p className="text-center text-subtext text-lg mb-8">
+            <p className="text-center text-subtext text-base md:text-lg mb-6 md:mb-8">
               {address || (language === "en" ? "Oman" : "عُمان")}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="outline" size="lg" className="gap-2">
-                <FontAwesomeIcon icon={faApple} className="w-5 h-5" />
-                {language === "en" ? "Apple Maps" : "خرائط آبل"}
-              </Button>
-              <Button variant="outline" size="lg" className="gap-2">
-                <FontAwesomeIcon icon={faGoogle} className="w-5 h-5" />
-                {language === "en" ? "Google Maps" : "خرائط غوغل"}
-              </Button>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+              <a 
+                href="https://maps.apple.com/?daddr=Al+Mouj+Muscat+Oman" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="lg" className="gap-2 w-full sm:w-auto">
+                  <FontAwesomeIcon icon={faApple} className="w-5 h-5" />
+                  {language === "en" ? "Apple Maps" : "خرائط آبل"}
+                </Button>
+              </a>
+              <a 
+                href="https://www.google.com/maps/search/?api=1&query=Al+Mouj+Muscat+Oman" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="lg" className="gap-2 w-full sm:w-auto">
+                  <FontAwesomeIcon icon={faGoogle} className="w-5 h-5" />
+                  {language === "en" ? "Google Maps" : "خرائط غوغل"}
+                </Button>
+              </a>
             </div>
           </motion.div>
 
