@@ -7,8 +7,10 @@
       "items": [
         { "id": "espresso", "name": "Espresso", "nameArabic": "إسبريسو", "price": 2.5, "description": "Double shot", "descriptionArabic": "جرعة مزدوجة" },
         { "id": "latte", "name": "Latte", "nameArabic": "لاتيه", "price": 3.5, "description": "Espresso with steamed milk", "descriptionArabic": "إسبريسو مع حليب ساخن" },
-        { "id": "v60", "name": "V60", "nameArabic": "في 60", "price": 4.5, "description": "Pour-over single origin", "descriptionArabic": "صنع يدوي أصل واحد" },
-        { "id": "cold-brew", "name": "Cold Brew", "nameArabic": "Cold Brew", "price": 5.0, "description": "18-hour steep", "descriptionArabic": "نقع 18 ساعة" }
+        { "id": "v60", "name": "V60 Pour Over", "nameArabic": "في 60 صب", "price": 4.5, "description": "Single origin pour over", "descriptionArabic": "صب أصل واحد" },
+        { "id": "cold-brew", "name": "Cold Brew", "nameArabic": "Cold Brew", "price": 5.0, "description": "18-hour steeped", "descriptionArabic": "منقوع 18 ساعة" },
+        { "id": "flat-white", "name": "Flat White", "nameArabic": "فلات وايت", "price": 3.5, "description": "Espresso with microfoam", "descriptionArabic": "إسبريسو مع رغوة دقيقة" },
+        { "id": "cappuccino", "name": "Cappuccino", "nameArabic": "كابتشينو", "price": 3.5, "description": "Equal parts espresso, milk, foam", "descriptionArabic": "أجزاء متساوية من إسبرسو وحليب ورغوة" }
       ]
     },
     {
@@ -16,9 +18,11 @@
       "name": "Refreshments",
       "nameArabic": "المشروبات المنعشة",
       "items": [
-        { "id": "mojitos", "name": "Mojitos", "nameArabic": "موخيتوس", "price": 4.0, "description": "Mint & lime", "descriptionArabic": "نعناليمون" },
-        { "id": "acai-smoothie", "name": "Acai Smoothie", "nameArabic": "سموذي الآسايب", "price": 5.5, "description": "Berry blend", "descriptionArabic": "خلطة التوت" },
-        { "id": "fresh-juice", "name": "Fresh Juice", "nameArabic": "عصائر طازجة", "price": 3.5, "description": "Seasonal fruits", "descriptionArabic": "فواكه موسمية" }
+        { "id": "mojitos", "name": "Mojito", "nameArabic": "موخيتو", "price": 4.0, "description": "Fresh mint & lime", "descriptionArabic": "نعناليمون طازج" },
+        { "id": "acai-smoothie", "name": "Acai Bowl", "nameArabic": "bowl الآسايب", "price": 6.5, "description": "Acai with granola & fresh fruits", "descriptionArabic": "آسايب مع جرانولا وفواكه طازجة" },
+        { "id": "fresh-juice", "name": "Fresh Juice", "nameArabic": "عصير طازج", "price": 3.5, "description": "Seasonal selection", "descriptionArabic": "اختيار موسمي" },
+        { "id": "lemonade", "name": "Lemonade", "nameArabic": "ليمونادة", "price": 3.0, "description": "House-made", "descriptionArabic": "منزلية" },
+        { "id": "iced-latte", "name": "Iced Latte", "nameArabic": "لاتيه مثلج", "price": 4.0, "description": "Espresso with cold milk", "descriptionArabic": "إسبريسو مع حليب بارد" }
       ]
     },
     {
@@ -26,9 +30,11 @@
       "name": "Desserts",
       "nameArabic": "الحلويات",
       "items": [
-        { "id": "san-sebastian", "name": "San Sebastian", "nameArabic": "سان سباستيان", "price": 5.0, "description": "Burnt cheesecake", "descriptionArabic": "تشيز كيك محروق", "image": "/assets/WhatsApp Image 2026-04-24 at 5.45.39 PM.jpeg" },
-        { "id": "cookies-cake", "name": "Cookies Cake", "nameArabic": "كيك كوكيز", "price": 4.5, "description": "Cookie dough layer", "descriptionArabic": "عجين كوكيز", "image": "/assets/WhatsApp Image 2026-04-24 at 5.45.55 PM.jpeg" },
-        { "id": "brownies", "name": "Brownies", "nameArabic": "براوني", "price": 4.0, "description": "Fudgy chocolate", "descriptionArabic": "شوكولاتة كثيفة", "image": "/assets/WhatsApp Image 2026-04-24 at 5.46.08 PM.jpeg" }
+        { "id": "san-sebastian", "name": "San Sebastian", "nameArabic": "سان سباستيان", "price": 5.0, "description": "Burnt cheesecake", "descriptionArabic": "تشيز كيك محروق" },
+        { "id": "cookies-cake", "name": "Cookies & Cream", "nameArabic": "كوكيز وكريم", "price": 4.5, "description": "Cookie dough layered", "descriptionArabic": "عجين كوكيز مكدس" },
+        { "id": "brownies", "name": "Brownie", "nameArabic": "براوني", "price": 4.0, "description": "Fudgy chocolate", "descriptionArabic": "شوكولاتة كثيفة" },
+        { "id": "cinnamon-roll", "name": "Cinnamon Roll", "nameArabic": "قرفة رول", "price": 4.5, "description": "Freshly baked", "descriptionArabic": "مخبوز طازج" },
+        { "id": "croissant", "name": "Croissant", "nameArabic": "كرواسان", "price": 3.5, "description": "Butter flaky", "descriptionArabic": "زبدة هش" }
       ]
     }
   ]

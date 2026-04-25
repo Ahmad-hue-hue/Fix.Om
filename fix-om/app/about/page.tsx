@@ -113,11 +113,12 @@ export default function AboutPage() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+                    <div className="relative aspect-[4/5] h-full rounded-2xl overflow-hidden">
                       <Image
                         src={section.image}
                         alt={language === "en" ? section.title : section.titleArabic}
                         fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-obsidian/30 to-transparent" />

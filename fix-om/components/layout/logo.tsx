@@ -30,7 +30,7 @@ export function Logo({ className = "", size = "md" }: LogoProps) {
     <motion.div
       ref={containerRef}
       className={`flex items-center gap-2 ${className}`}
-      style={{ scale }}
+      style={{ scale, position: "relative" }}
     >
       <svg
         width={currentSize.width}

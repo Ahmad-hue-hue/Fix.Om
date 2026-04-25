@@ -32,12 +32,22 @@ export default function Home() {
       
       <main id="main-content">
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-obsidian via-obsidian to-obsidian/80" />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-20"
+          >
+            <source src="/assets/hero-video.mp4" type="video/mp4" />
+          </video>
+          
+          <div className="absolute inset-0 bg-gradient-to-br from-obsidian/70 via-obsidian/50 to-obsidian/70" />
           
           <motion.div 
-            className="absolute inset-0 opacity-20"
+            className="absolute inset-0"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.2 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 1.5 }}
           >
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/20 rounded-full blur-[128px]" />
@@ -82,49 +92,57 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className={`absolute bottom-8 ${isRTL ? 'left-8' : 'right-8'} hidden md:flex flex-col items-center gap-4`}
-            initial={{ opacity: 0, x: isRTL ? -20 : 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.5, duration: 0.6 }}
+            className="absolute bottom-32 left-1/2 -translate-x-1/2 z-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2 }}
           >
-            <motion.div
-              className="w-px h-16 bg-gradient-to-b from-gold to-transparent"
-              initial={{ scaleY: 0 }}
-              animate={{ scaleY: 1 }}
-              transition={{ delay: 1.8, duration: 0.8 }}
-            />
-            <span className="text-xs text-subtext writing-vertical-lr rotate-180">
-              {language === "en" ? "SCROLL" : "مرر"}
-            </span>
+            <div className="flex gap-8 text-sm">
+              <motion.div
+                className="flex items-center gap-2"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 2.2 }}
+              >
+                <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+                <span className="text-subtext">Open Daily 7AM - 10PM</span>
+              </motion.div>
+              <motion.div
+                className="flex items-center gap-2"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 2.4 }}
+              >
+                <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+                <span className="text-subtext">Al Mouj, Muscat</span>
+              </motion.div>
+            </div>
           </motion.div>
 
           <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.5 }}
+            className={`absolute right-8 top-1/2 -translate-y-1/2 z-10 hidden lg:flex flex-col gap-6`}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.8, duration: 0.6 }}
           >
-            <motion.div
-              className="flex flex-col items-center gap-2"
-              animate={{ y: [0, 8, 0] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <svg width="24" height="40" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="22" height="38" rx="11" stroke="#F5F5F7" strokeWidth="1.5" strokeOpacity="0.5"/>
-                <motion.circle 
-                  cx="12" 
-                  cy="12" 
-                  r="3" 
-                  fill="#D4AF37"
-                  animate={{ cy: [8, 14, 8], opacity: [1, 0.7, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </svg>
-            </motion.div>
+            {[
+              { label: "Instagram", href: "https://instagram.com/fix.om" },
+              { label: "Location", href: "https://linktr.ee/fix.om" },
+            ].map((item, index) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="writing-vertical-lr text-xs text-subtext hover:text-gold transition-colors"
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 2 + index * 0.1 }}
+                whileHover={{ x: -5 }}
+              >
+                {item.label}
+              </motion.a>
+            ))}
           </motion.div>
         </section>
 
