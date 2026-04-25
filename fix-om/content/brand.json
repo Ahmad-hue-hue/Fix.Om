@@ -5,7 +5,8 @@
   "phone": "71776636",
   "whatsapp": "96871776636",
   "instagram": "FIX.OM",
-  "instagramUrl": "",
+  "instagramUrl": "https://www.instagram.com/fix.om",
+  "locationUrl": "https://linktr.ee/fix.om",
   "address": "Oman",
   "hours": {
     "open": "08:00",
@@ -13,8 +14,8 @@
     "timezone": "UTC+4"
   },
   "social": {
-    "instagram": "",
-    "whatsapp": "",
-    "phone": ""
+    "instagram": "https://www.instagram.com/fix.om",
+    "whatsapp": "https://wa.me/96871776636",
+    "phone": "tel:71776636"
   }
 }
