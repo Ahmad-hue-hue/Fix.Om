@@ -1,13 +1,144 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { BilingualToggle } from "@/components/menu/bilingual-toggle";
+import { useBilingual } from "@/lib/hooks/use-bilingual";
+import menuData from "@/content/menu.json";
+
+interface MenuItem {
+  id: string;
+  name: string;
+  nameArabic: string;
+  price: number;
+  description: string;
+  descriptionArabic: string;
+  image?: string;
+}
+
+interface Category {
+  id: string;
+  name: string;
+  nameArabic: string;
+  items: MenuItem[];
+}
 
 export default function MenuPage() {
+  const { language, isRTL } = useBilingual();
+  const [activeTab, setActiveTab] = useState("caffeine");
+
+  const categories: Category[] = menuData.categories;
+
   return (
-    <div className="min-h-screen pt-24">
+    <div className="min-h-screen">
       <Header />
-      <main className="max-w-7xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold">Menu</h1>
+      
+      <main className="pt-32 pb-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="text-center md:text-left">
+              <h1 className="text-5xl md:text-7xl font-bold">
+                {language === "en" ? "Our Menu" : "قائمنا"}
+              </h1>
+              <p className="mt-3 text-subtext text-lg">
+                {language === "en" 
+                  ? "Crafted with precision" 
+                  : "صُنع بدقة"}
+              </p>
+            </div>
+            <BilingualToggle />
+          </motion.div>
+
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <motion.div
+              className="flex justify-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              <TabsList className="p-2">
+                {categories.map((category) => (
+                  <TabsTrigger 
+                    key={category.id} 
+                    value={category.id}
+                    className="px-6 py-3 text-base"
+                  >
+                    {language === "ar" ? category.nameArabic : category.name}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </motion.div>
+
+            {categories.map((category) => (
+              <TabsContent key={category.id} value={category.id}>
+                <motion.div
+                  layout
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                  <AnimatePresence mode="popLayout">
+                    {category.items.map((item, index) => (
+                      <motion.div
+                        key={item.id}
+                        layout
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ delay: index * 0.05, duration: 0.3 }}
+                        whileHover={{ scale: 1.02, y: -5 }}
+                        className={`relative rounded-2xl overflow-hidden ${
+                          item.image 
+                            ? "glass" 
+                            : "bg-glass border border-glass-border"
+                        }`}
+                      >
+                        {item.image && (
+                          <div className="relative h-48 w-full overflow-hidden">
+                            <Image
+                              src={item.image}
+                              alt={language === "ar" ? item.nameArabic : item.name}
+                              fill
+                              className="object-cover transition-transform duration-500 hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 to-transparent" />
+                          </div>
+                        )}
+                        <div className={`p-6 ${!item.image ? 'glass' : ''}`}>
+                          <div className="flex items-start justify-between gap-4">
+                            <div>
+                              <h3 className="text-xl font-semibold text-bone">
+                                {language === "ar" ? item.nameArabic : item.name}
+                              </h3>
+                              <p className="mt-1 text-sm text-subtext">
+                                {language === "ar" ? item.descriptionArabic : item.description}
+                              </p>
+                            </div>
+                            <div className="flex-shrink-0">
+                              <span className="text-lg font-mono font-medium text-gold">
+                                {item.price.toFixed(1)} OMR
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </motion.div>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </div>
       </main>
+
       <Footer />
     </div>
   );
