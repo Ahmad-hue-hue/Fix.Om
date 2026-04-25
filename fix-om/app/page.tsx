@@ -67,7 +67,7 @@ export default function Home() {
 
             <motion.h1 
               variants={itemVariants}
-              className="mt-8 text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold tracking-tight leading-none"
+              className="mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none"
             >
               <span className="block">FIX</span>
               <span className="block text-gradient-gold">YOUR DAY</span>
@@ -75,7 +75,7 @@ export default function Home() {
 
             <motion.p 
               variants={itemVariants}
-              className="mt-8 text-xl sm:text-2xl md:text-3xl text-subtext font-light"
+              className="mt-6 text-base sm:text-lg md:text-xl text-subtext font-light px-4"
             >
               {language === "en" 
                 ? "Speciality Coffee. Precision Calibration." 
@@ -92,12 +92,12 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className="absolute bottom-32 left-1/2 -translate-x-1/2 z-10"
+            className="absolute bottom-24 md:bottom-32 left-1/2 -translate-x-1/2 z-10 w-full px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2 }}
           >
-            <div className="flex gap-8 text-sm">
+            <div className="flex flex-col md:flex-row gap-3 md:gap-8 text-xs sm:text-sm text-center justify-center">
               <motion.div
                 className="flex items-center gap-2"
                 initial={{ opacity: 0, x: -20 }}
