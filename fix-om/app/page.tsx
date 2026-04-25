@@ -105,7 +105,9 @@ export default function Home() {
                 transition={{ delay: 2.2 }}
               >
                 <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-                <span className="text-subtext">Open Daily 7AM - 10PM</span>
+                <span className="text-subtext">
+                  {language === "en" ? "Open Daily 7AM - 10PM" : "مفتوح يومياً 7ص - 10م"}
+                </span>
               </motion.div>
               <motion.div
                 className="flex items-center gap-2"
@@ -114,7 +116,9 @@ export default function Home() {
                 transition={{ delay: 2.4 }}
               >
                 <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-                <span className="text-subtext">Al Mouj, Muscat</span>
+                <span className="text-subtext">
+                  {language === "en" ? "Al Mouj, Muscat" : "المومبس، مسقط"}
+                </span>
               </motion.div>
             </div>
           </motion.div>

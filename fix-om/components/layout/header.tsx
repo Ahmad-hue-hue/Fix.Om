@@ -12,7 +12,7 @@ import { useBilingual } from "@/lib/hooks/use-bilingual";
 const navLinks = [
   { href: "/", label: "Home", labelArabic: "الرئيسية" },
   { href: "/menu", label: "Menu", labelArabic: "القائمة" },
-  { href: "/about", label: "About", labelArabic: "عن-nous" },
+  { href: "/about", label: "About", labelArabic: "عن الفيكس" },
   { href: "/gallery", label: "Gallery", labelArabic: "الصور" },
   { href: "/contact", label: "Contact", labelArabic: "اتصل بنا" },
 ];

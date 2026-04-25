@@ -19,8 +19,16 @@ export function BilingualProvider({ children }: { children: React.ReactNode }) {
   const isRTL = language === "ar";
 
   useEffect(() => {
+    const saved = localStorage.getItem("language") as Language;
+    if (saved && (saved === "en" || saved === "ar")) {
+      setLanguageState(saved);
+    }
+  }, []);
+
+  useEffect(() => {
     document.documentElement.dir = isRTL ? "rtl" : "ltr";
     document.documentElement.lang = language;
+    localStorage.setItem("language", language);
   }, [language, isRTL]);
 
   const toggleLanguage = () => {

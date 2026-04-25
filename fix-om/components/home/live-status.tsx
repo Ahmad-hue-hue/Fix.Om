@@ -2,13 +2,20 @@
 
 import { motion } from "framer-motion";
 import { useLiveStatus } from "@/lib/hooks/use-live-status";
+import { useBilingual } from "@/lib/hooks/use-bilingual";
 
 export function LiveStatusBadge() {
   const { isOpen, statusText, nextOpenTime } = useLiveStatus();
+  const { language } = useBilingual();
+  const isArabic = language === "ar";
+
+  const openText = isArabic ? "● مفتوح الآن" : "● Open Now";
+  const closedText = isArabic ? "○ مغلق" : "○ Closed";
+  const opensAtText = isArabic ? "يفتح في" : "Opens at";
 
   return (
     <motion.div
-      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium ${
+      className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium ${
         isOpen
           ? "bg-green-open/20 text-green-open"
           : "bg-closed/20 text-closed"
@@ -29,7 +36,7 @@ export function LiveStatusBadge() {
         }}
       />
       <span>
-        {isOpen ? statusText : `${statusText} — Opens at ${nextOpenTime}`}
+        {isOpen ? openText : `${closedText} — ${opensAtText} ${nextOpenTime}`}
       </span>
     </motion.div>
   );
