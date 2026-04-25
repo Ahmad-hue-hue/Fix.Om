@@ -15,14 +15,13 @@ const BilingualContext = createContext<BilingualContextType | undefined>(undefin
 
 export function BilingualProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
-  const [isRTL, setIsRTL] = useState(false);
+  
+  const isRTL = language === "ar";
 
   useEffect(() => {
-    const isRTL = language === "ar";
-    setIsRTL(isRTL);
     document.documentElement.dir = isRTL ? "rtl" : "ltr";
     document.documentElement.lang = language;
-  }, [language]);
+  }, [language, isRTL]);
 
   const toggleLanguage = () => {
     setLanguageState((prev) => (prev === "en" ? "ar" : "en"));
