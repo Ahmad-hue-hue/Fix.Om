@@ -120,7 +120,7 @@ export default function ContactPage() {
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <a 
-                href="https://maps.apple.com/?daddr=Al+Mouj+Muscat+Oman" 
+                href={locationUrl}
                 target="_blank" 
                 rel="noopener noreferrer"
               >
