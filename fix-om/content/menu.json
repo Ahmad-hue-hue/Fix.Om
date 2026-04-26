@@ -1,40 +1,133 @@
 {
   "categories": [
     {
-      "id": "caffeine",
-      "name": "Caffeine",
-      "nameArabic": "الكافيين",
+      "id": "coffee-hot-cold",
+      "name": "☕ Coffee Hot/Cold",
+      "nameArabic": "☕ قهوة ساخنة/باردة",
       "items": [
-        { "id": "espresso", "name": "Espresso", "nameArabic": "إسبريسو", "price": 2.5, "description": "Double shot", "descriptionArabic": "جرعة مزدوجة" },
-        { "id": "latte", "name": "Latte", "nameArabic": "لاتيه", "price": 3.5, "description": "Espresso with steamed milk", "descriptionArabic": "إسبريسو مع حليب ساخن" },
-        { "id": "v60", "name": "V60 Pour Over", "nameArabic": "في 60 صب", "price": 4.5, "description": "Single origin pour over", "descriptionArabic": "صب أصل واحد" },
-        { "id": "cold-brew", "name": "Cold Brew", "nameArabic": "Cold Brew", "price": 5.0, "description": "18-hour steeped", "descriptionArabic": "منقوع 18 ساعة" },
-        { "id": "flat-white", "name": "Flat White", "nameArabic": "فلات وايت", "price": 3.5, "description": "Espresso with microfoam", "descriptionArabic": "إسبريسو مع رغوة دقيقة" },
-        { "id": "cappuccino", "name": "Cappuccino", "nameArabic": "كابتشينو", "price": 3.5, "description": "Equal parts espresso, milk, foam", "descriptionArabic": "أجزاء متساوية من إسبرسو وحليب ورغوة" }
+        { "id": "espresso", "name": "Espresso", "nameArabic": "إسبريسو", "price": 0.8, "description": "Single shot espresso", "descriptionArabic": "جرعة إسبرسو واحدة" },
+        { "id": "espresso-macchiato", "name": "Espresso Macchiato", "nameArabic": "إسبريسو ماكياتو", "price": 1.2, "description": "Espresso with milk foam", "descriptionArabic": "إسبريسو مع رغوة حليب" },
+        { "id": "hot-americano", "name": "Hot Americano", "nameArabic": "أمريكانو ساخن", "price": 1.0, "description": "Espresso with hot water", "descriptionArabic": "إسبريسو مع ماء ساخن" },
+        { "id": "iced-americano", "name": "Iced Americano", "nameArabic": "أمريكانو مثلج", "price": 1.1, "description": "Espresso with cold water", "descriptionArabic": "إسبريسو مع ماء بارد" },
+        { "id": "afagato", "name": "Afagato", "nameArabic": "أفاتو", "price": 1.2, "description": "Espresso with ice cream", "descriptionArabic": "إسبريسو مع آيس كريم" },
+        { "id": "piccolo", "name": "Piccolo", "nameArabic": "بيكولو", "price": 1.2, "description": "Small latte with extra shot", "descriptionArabic": "لاتيه صغير مع جرعة إضافية" },
+        { "id": "cortado", "name": "Cortado", "nameArabic": "كورتادو", "price": 1.2, "description": "Equal parts espresso and milk", "descriptionArabic": "أجزاء متساوية من إسبرسو وحليب" },
+        { "id": "flat-white", "name": "Flat White", "nameArabic": "فلات وايت", "price": 1.2, "description": "Espresso with microfoam", "descriptionArabic": "إسبريسو مع رغوة دقيقة" },
+        { "id": "cappuccino", "name": "Cappuccino", "nameArabic": "كابتشينو", "price": 1.2, "description": "Espresso with milk foam", "descriptionArabic": "إسبريسو مع رغوة حليب" },
+        { "id": "latte", "name": "Latte", "nameArabic": "لاتيه", "price": 1.2, "description": "Espresso with steamed milk", "descriptionArabic": "إسبريسو مع حليب ساخن" },
+        { "id": "caramel-macchiato", "name": "Caramel Macchiato", "nameArabic": "كريم كراميل ماكياتو", "price": 1.5, "description": "Vanilla with caramel", "descriptionArabic": "فانيلا مع كراميل" },
+        { "id": "flavoured-latte", "name": "Flavoured Latte", "nameArabic": "لاتيه بالمنكهات", "price": 1.5, "description": "Latte with flavor syrup", "descriptionArabic": "لاتيه مع شراب نكهة" },
+        { "id": "spanish-latte", "name": "Spanish Latte", "nameArabic": "لاتيه إسباني", "price": 1.5, "description": "Latte with condensed milk", "descriptionArabic": "لاتيه مع حليب مكثف" },
+        { "id": "pistachio-latte", "name": "Pistachio Latte", "nameArabic": "لاتيه فستق", "price": 1.5, "description": "Latte with pistachio", "descriptionArabic": "لاتيه مع فستق" },
+        { "id": "saffron-latte", "name": "Saffron Latte", "nameArabic": "لاتيه زعفران", "price": 1.5, "description": "Latte with saffron", "descriptionArabic": "لاتيه مع زعفران" },
+        { "id": "mocha-latte", "name": "Mocha Latte", "nameArabic": "موكا لاتيه", "price": 1.5, "description": "Latte with chocolate", "descriptionArabic": "لاتيه مع شوكولاتة" },
+        { "id": "vanilla-mocha", "name": "Vanilla Mocha", "nameArabic": "فانيلا موكا", "price": 1.5, "description": "Mocha with vanilla", "descriptionArabic": "موكا مع فانيلا" },
+        { "id": "matcha-latte", "name": "Matcha Latte", "nameArabic": "ماتشا لاتيه", "price": 1.5, "description": "Green tea latte", "descriptionArabic": "لاتيه شاي أخضر" },
+        { "id": "hot-chocolate", "name": "Hot Chocolate", "nameArabic": "شوكولاتة ساخنة", "price": 1.5, "description": "Cocoa with milk", "descriptionArabic": "كاكاو مع حليب" },
+        { "id": "mocha-frappe", "name": "Mocha Frappe", "nameArabic": "موكا فرابي", "price": 1.8, "description": "Blended mocha drink", "descriptionArabic": "شرب موكا مثلج" },
+        { "id": "frappuccino", "name": "Frappuccino", "nameArabic": "فرابتشينو", "price": 1.8, "description": "Blended coffee drink", "descriptionArabic": "شرب قهوة مثلج" }
       ]
     },
     {
-      "id": "refreshments",
-      "name": "Refreshments",
-      "nameArabic": "المشروبات المنعشة",
+      "id": "fix-special",
+      "name": "⭐ FIX Special",
+      "nameArabic": "⭐خصيص الفيكس",
       "items": [
-        { "id": "mojitos", "name": "Mojito", "nameArabic": "موخيتو", "price": 4.0, "description": "Fresh mint & lime", "descriptionArabic": "نعناليمون طازج" },
-        { "id": "acai-smoothie", "name": "Acai Bowl", "nameArabic": "bowl الآسايب", "price": 6.5, "description": "Acai with granola & fresh fruits", "descriptionArabic": "آسايب مع جرانولا وفواكه طازجة" },
-        { "id": "fresh-juice", "name": "Fresh Juice", "nameArabic": "عصير طازج", "price": 3.5, "description": "Seasonal selection", "descriptionArabic": "اختيار موسمي" },
-        { "id": "lemonade", "name": "Lemonade", "nameArabic": "ليمونادة", "price": 3.0, "description": "House-made", "descriptionArabic": "منزلية" },
-        { "id": "iced-latte", "name": "Iced Latte", "nameArabic": "لاتيه مثلج", "price": 4.0, "description": "Espresso with cold milk", "descriptionArabic": "إسبريسو مع حليب بارد" }
+        { "id": "creamy-espresso", "name": "Creamy Espresso", "nameArabic": "إسبريسو كريمي", "price": 1.3, "description": "Espresso with cream", "descriptionArabic": "إسبريسو مع قشطة" },
+        { "id": "creamy-matcha", "name": "Creamy Matcha", "nameArabic": "ماتشا كريمي", "price": 1.3, "description": "Matcha with cream", "descriptionArabic": "ماتشا مع قشطة" },
+        { "id": "espresso-tonic", "name": "Espresso Tonic", "nameArabic": "إسبريسو تونيك", "price": 1.5, "description": "Espresso with tonic water", "descriptionArabic": "إسبريسو مع تونيك" },
+        { "id": "sunfreeze-coffee", "name": "SunFreeze Coffee", "nameArabic": "صيفريدز قهوة", "price": 1.5, "description": "Frozen coffee blend", "descriptionArabic": "قهوه مثلجة مطحونة" },
+        { "id": "acai-smoothie", "name": "Acai Smoothie", "nameArabic": "آسايب_smoothie", "price": 1.5, "description": "Acai berry smoothie", "descriptionArabic": "مشروب آسايب التوت" },
+        { "id": "acai-bowl", "name": "Acai Bowl", "nameArabic": "bowl الآسايب", "price": 3.0, "description": "Acai with toppings", "descriptionArabic": "آسايب مع إضافات" }
+      ]
+    },
+    {
+      "id": "filtered-coffee",
+      "name": "🫖 Filtered Coffee",
+      "nameArabic": "🫖 قهوة مصفاة",
+      "items": [
+        { "id": "hot-v60", "name": "Hot V60", "nameArabic": "في 60 ساخن", "price": 1.6, "description": "Pour over hot", "descriptionArabic": "صب ساخن" },
+        { "id": "iced-v60", "name": "Iced V60", "nameArabic": "في 60 مثلج", "price": 1.6, "description": "Pour over iced", "descriptionArabic": "صب مثلج" },
+        { "id": "aeropress", "name": "Aeropress", "nameArabic": "إيروس بريس", "price": 1.6, "description": "Press brew method", "descriptionArabic": "طريقة التحضير بريس" },
+        { "id": "cold-brew", "name": "Cold Brew", "nameArabic": "Cold Brew", "price": 1.6, "description": "Slow steeped coffee", "descriptionArabic": "قهوه منقوعة بطيئة" },
+        { "id": "cold-brew-punched", "name": "Cold Brew Punched", "nameArabic": "Cold Brew منفوخ", "price": 2.0, "description": "Cold brew with soda", "descriptionArabic": "كولد برو مع صودا" }
+      ]
+    },
+    {
+      "id": "tea",
+      "name": "🍵 Tea",
+      "nameArabic": "🍵 شاي",
+      "items": [
+        { "id": "tea", "name": "Tea", "nameArabic": "شاي", "price": 1.0, "description": "Regular tea", "descriptionArabic": "شاي عادي" },
+        { "id": "hibiscus-iced-tea", "name": "Hibiscus Iced Tea", "nameArabic": "شاي الكandakanس مثلج", "price": 1.5, "description": "Hibiscus iced tea", "descriptionArabic": "شاي الكandakanس مثلج" },
+        { "id": "lemon-iced-tea", "name": "Lemon Iced Tea", "nameArabic": "شاي ليمون مثلج", "price": 1.5, "description": "Lemon flavored iced tea", "descriptionArabic": "شاي ب نكهة ليمون مثلج" },
+        { "id": "strawberry-iced-tea", "name": "Strawberry Iced Tea", "nameArabic": "شاي فراولة مثلج", "price": 1.5, "description": "Strawberry flavored iced tea", "descriptionArabic": "شاي ب نكهة فراولة مثلج" },
+        { "id": "passion-iced-tea", "name": "Passion Iced Tea", "nameArabic": "شاي فاكيتا مثلج", "price": 1.5, "description": "Passion fruit iced tea", "descriptionArabic": "شاي الفاكهة الجنسنيسية مثلج" },
+        { "id": "peach-iced-tea", "name": "Peach Iced Tea", "nameArabic": "شاي خوخ مثلج", "price": 1.5, "description": "Peach flavored iced tea", "descriptionArabic": "شاي ب نكهة خوخ مثلج" }
+      ]
+    },
+    {
+      "id": "mojito",
+      "name": "🍹 Mojito",
+      "nameArabic": "🍹 موخيتو",
+      "items": [
+        { "id": "passion-fruit-mojito", "name": "Passion Fruit Mojito", "nameArabic": "موخيتو فاكيتا", "price": 1.0, "description": "Passion fruit mojito", "descriptionArabic": "موخيتو فاكهة جنيسية" },
+        { "id": "blueberry-mojito", "name": "Blueberry Mojito", "nameArabic": "موخيتو توت أزرق", "price": 1.0, "description": "Blueberry mojito", "descriptionArabic": "موخيتو توت أزرق" },
+        { "id": "strawberry-mojito", "name": "Strawberry Mojito", "nameArabic": "موخيتو فراولة", "price": 1.0, "description": "Strawberry mojito", "descriptionArabic": "موخيتو فراولة" },
+        { "id": "peach-mojito", "name": "Peach Mojito", "nameArabic": "موخيتو خوخ", "price": 1.0, "description": "Peach mojito", "descriptionArabic": "موخيتو خوخ" },
+        { "id": "mango-mojito", "name": "Mango Mojito", "nameArabic": "موخيتو مانغو", "price": 1.0, "description": "Mango mojito", "descriptionArabic": "موخيتو مانغو" },
+        { "id": "lemon-mojito", "name": "Lemon Mojito", "nameArabic": "موخيتو ليمون", "price": 1.0, "description": "Lemon mojito", "descriptionArabic": "موخيتو ليمون" }
+      ]
+    },
+    {
+      "id": "milkshakes-smoothies",
+      "name": "🥤 Milkshakes & Smoothies",
+      "nameArabic": "🥤 ميلك شيك وم_smoothie",
+      "items": [
+        { "id": "vanilla-milkshake", "name": "Vanilla", "nameArabic": "فانيلا", "price": 1.5, "description": "Vanilla milkshake", "descriptionArabic": "ميلك شيك فانيلا" },
+        { "id": "chocolate-milkshake", "name": "Chocolate", "nameArabic": "شوكولاتة", "price": 1.5, "description": "Chocolate milkshake", "descriptionArabic": "ميلك شيك شوكولاتة" },
+        { "id": "strawberry-milkshake", "name": "Strawberry", "nameArabic": "فراولة", "price": 1.5, "description": "Strawberry milkshake", "descriptionArabic": "ميلك شيك فراولة" },
+        { "id": "oreo-milkshake", "name": "Oreo", "nameArabic": "أوريو", "price": 1.5, "description": "Oreo milkshake", "descriptionArabic": "ميلك شيك أوريو" },
+        { "id": "passion-crush", "name": "Passion Crush", "nameArabic": "سحق فاكيتا", "price": 1.5, "description": "Passion fruit crush", "descriptionArabic": "سحق فاكهة جنيسية" },
+        { "id": "mango-smoothie", "name": "Mango Pack Smoothies", "nameArabic": "smoothie_مانغو", "price": 1.5, "description": "Mango smoothie", "descriptionArabic": "smoothie_مانغو" },
+        { "id": "wild-banana-smoothie", "name": "Wild Banana Smoothies", "nameArabic": "smoothie_الموز البري", "price": 1.5, "description": "Wild banana smoothie", "descriptionArabic": "smoothie_الموز البري" }
+      ]
+    },
+    {
+      "id": "fresh-juices",
+      "name": "🧃 Fresh Juices",
+      "nameArabic": "🧃 عصائر طازجة",
+      "items": [
+        { "id": "mango-juice", "name": "Mango Juice", "nameArabic": "عصير مانغو", "price": 0.8, "description": "Fresh mango juice", "descriptionArabic": "عصير مانغو طازج" },
+        { "id": "passion-fruit-juice", "name": "Passion Fruit Juice", "nameArabic": "عصير فاكيتا", "price": 0.8, "description": "Fresh passion fruit juice", "descriptionArabic": "عصير فاكهة جنيسية طازج" },
+        { "id": "lemon-mint-juice", "name": "Lemon Mint Juice", "nameArabic": "عصير ليمون نعناع", "price": 0.8, "description": "Fresh lemon mint juice", "descriptionArabic": "عصير ليمون نعناع طازج" },
+        { "id": "mix-fruit-juice", "name": "Mix Fruit Juice", "nameArabic": "عصير فواكة مختلطة", "price": 1.0, "description": "Mixed fresh fruits", "descriptionArabic": "فواكة طازجة مختلطة" },
+        { "id": "hibiscus-juice", "name": "Hibiscus Juice", "nameArabic": "عصير الكandakanس", "price": 1.0, "description": "Hibiscus flower juice", "descriptionArabic": "عصير زهرة الكandakanس" }
+      ]
+    },
+    {
+      "id": "water",
+      "name": "💧 Water",
+      "nameArabic": "💧 ماء",
+      "items": [
+        { "id": "still-water", "name": "Still Water 500ml", "nameArabic": "ماء عادٍ 500مل", "price": 0.1, "description": "Still water", "descriptionArabic": "ماء عادٍ" },
+        { "id": "soda-water", "name": "Soda Water 300ml", "nameArabic": "ماء فوار 300مل", "price": 0.3, "description": "Sparkling water", "descriptionArabic": "ماء فوار" }
       ]
     },
     {
       "id": "desserts",
-      "name": "Desserts",
-      "nameArabic": "الحلويات",
+      "name": "🍰 Desserts",
+      "nameArabic": "🍰 حلويات",
       "items": [
-        { "id": "san-sebastian", "name": "San Sebastian", "nameArabic": "سان سباستيان", "price": 5.0, "description": "Burnt cheesecake", "descriptionArabic": "تشيز كيك محروق" },
-        { "id": "cookies-cake", "name": "Cookies & Cream", "nameArabic": "كوكيز وكريم", "price": 4.5, "description": "Cookie dough layered", "descriptionArabic": "عجين كوكيز مكدس" },
-        { "id": "brownies", "name": "Brownie", "nameArabic": "براوني", "price": 4.0, "description": "Fudgy chocolate", "descriptionArabic": "شوكولاتة كثيفة" },
-        { "id": "cinnamon-roll", "name": "Cinnamon Roll", "nameArabic": "قرفة رول", "price": 4.5, "description": "Freshly baked", "descriptionArabic": "مخبوز طازج" },
-        { "id": "croissant", "name": "Croissant", "nameArabic": "كرواسان", "price": 3.5, "description": "Butter flaky", "descriptionArabic": "زبدة هش" }
+        { "id": "san-sebastian", "name": "San Sebastian", "nameArabic": "سان سباستيان", "price": 1.6, "description": "Burnt cheesecake", "descriptionArabic": "تشيز كيك محروق" },
+        { "id": "cookies-cake", "name": "Cookies Cake", "nameArabic": "كيك كوكيز", "price": 2.0, "description": "Cookie dough layered", "descriptionArabic": "عجين كوكيز مكدس" },
+        { "id": "saffron-cheesecake", "name": "Saffron Cheese Cake", "nameArabic": "تشيز كيك زعفران", "price": 1.6, "description": "Cheesecake with saffron", "descriptionArabic": "تشيز كيك بالزعفران" },
+        { "id": "red-velvet-cheesecake", "name": "Red Velvet Cheese Cake", "nameArabic": "تشيز كيك رد فلفت", "price": 1.6, "description": "Red velvet cheesecake", "descriptionArabic": "تشيز كيك رد فلفت" },
+        { "id": "pistachio-cheesecake", "name": "Pistachio Cheese Cake", "nameArabic": "تشيز كيك فستق", "price": 1.6, "description": "Cheesecake with pistachio", "descriptionArabic": "تشيز كيك بالفستق" },
+        { "id": "kunafa-pistachio", "name": "Kunafa Pistachio Cake", "nameArabic": "كنافة فستق", "price": 1.6, "description": "Kunafa with pistachio", "descriptionArabic": "كنافة مع فستق" },
+        { "id": "cookies", "name": "Cookies", "nameArabic": "كوكيز", "price": 1.2, "description": "Fresh cookies", "descriptionArabic": "كوكيز طازج" },
+        { "id": "brownies", "name": "Brownies", "nameArabic": "براوني", "price": 1.0, "description": "Fudgy chocolate", "descriptionArabic": "شوكولاتة كثيفة" },
+        { "id": "kunafa-brownies", "name": "Kunafa Brownies", "nameArabic": "براوني كنافة", "price": 1.3, "description": "Brownie with kunafa", "descriptionArabic": "براوني بالكنافة" }
       ]
     }
   ]

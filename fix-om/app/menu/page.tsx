@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, memo } from "react";
+import { useState, useMemo, memo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Header } from "@/components/layout/header";
@@ -83,10 +83,39 @@ const MenuItemCard = memo(function MenuItemCard({
 
 export default function MenuPage() {
   const { language } = useBilingual();
-  const [activeTab, setActiveTab] = useState("caffeine");
+  const [activeTab, setActiveTab] = useState("coffee-hot-cold");
+  const tabsListRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   const categories: Category[] = useMemo(() => menuData.categories, []);
   const isArabic = language === "ar";
+
+  useEffect(() => {
+    if (!tabsListRef.current || isPaused) return;
+
+    const scrollContainer = tabsListRef.current;
+    let scrollPosition = 0;
+    const scrollSpeed = 0.5;
+
+    const scroll = () => {
+      if (isPaused) return;
+      scrollPosition += scrollSpeed;
+      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+        scrollPosition = 0;
+      }
+      scrollContainer.scrollLeft = scrollPosition;
+    };
+
+    const interval = setInterval(scroll, 20);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handleMouseEnter = () => setIsPaused(true);
+  const handleMouseLeave = () => setIsPaused(false);
+  const handleTouchStart = () => setIsPaused(true);
+  const handleTouchEnd = () => {
+    setTimeout(() => setIsPaused(false), 2000);
+  };
 
   return (
     <div className="min-h-screen">
@@ -113,12 +142,22 @@ export default function MenuPage() {
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <motion.div
-              className="flex justify-center mb-8"
+              className="relative mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <TabsList className="p-1 sm:p-1.5">
+              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-obsidian to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-obsidian to-transparent z-10 pointer-events-none" />
+              <TabsList 
+                ref={tabsListRef}
+                className="p-1 sm:p-1.5 overflow-x-auto scrollbar-hide"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+              >
                 {categories.map((category) => (
                   <TabsTrigger 
                     key={category.id} 
