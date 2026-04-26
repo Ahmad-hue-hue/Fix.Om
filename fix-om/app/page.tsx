@@ -248,13 +248,15 @@ export default function Home() {
                 </AnimatePresence>
               </div>
               
-              <div className="flex justify-center gap-3 mt-8">
+              <div className="flex justify-center gap-2 sm:gap-3 mt-8">
                 {testimonials.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentTestimonial ? "bg-gold w-8" : "bg-glass-border hover:bg-gold/50"
+                    className={`h-2 sm:h-3 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial 
+                        ? "bg-gold w-6 sm:w-8 md:w-10" 
+                        : "w-2 sm:w-3 bg-glass-border hover:bg-gold/50"
                     }`}
                     aria-label={`Go to testimonial ${index + 1}`}
                   />
