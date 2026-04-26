@@ -110,7 +110,8 @@ export function Header() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden fixed inset-0 top-[72px] z-[9999] bg-obsidian/98 backdrop-blur-lg"
+            className="md:hidden fixed inset-0 top-[72px]"
+            style={{ position: "fixed", zIndex: 999999, backgroundColor: "#000000" }}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
