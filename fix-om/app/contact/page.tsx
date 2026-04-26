@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faMapMarkerAlt, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp, faInstagram, faApple, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
 import brandData from "@/content/brand.json";
@@ -22,6 +22,15 @@ export default function ContactPage() {
       sublabel: phone,
       href: `tel:${phone}`,
       color: "bg-gold text-obsidian hover:bg-gold-light",
+      brandIcon: null,
+    },
+    {
+      id: "email",
+      icon: faEnvelope,
+      label: language === "en" ? "Email" : "بريد إلكتروني",
+      sublabel: "fix.cafe.om@gmail.com",
+      href: "mailto:fix.cafe.om@gmail.com",
+      color: "bg-blue-500 text-white hover:bg-blue-600",
       brandIcon: null,
     },
     {
@@ -67,7 +76,7 @@ export default function ContactPage() {
 
         <div className="max-w-4xl mx-auto">
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}

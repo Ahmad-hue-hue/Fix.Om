@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { LiveStatusBadge } from "@/components/home/live-status";
@@ -153,51 +154,108 @@ export default function Home() {
         <section className="py-16 md:py-24 px-3 sm:px-4">
           <div className="max-w-6xl mx-auto">
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
-              initial={{ opacity: 0, y: 40 }}
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, staggerChildren: 0.15 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <p className="text-subtext text-sm uppercase tracking-widest mb-4">
+                {language === "en" ? "Trusted By" : "موثوق من"}
+              </p>
+              <motion.div 
+                className="flex flex-wrap justify-center items-center gap-8 md:gap-16 Grayscale"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                {[
+                  { name: "Starbucks", src: "/brand-logos/starbucks-coffee.svg" },
+                  { name: "Double Coffee", src: "/brand-logos/double-coffee.svg" },
+                  { name: "Tully's", src: "/brand-logos/tully-s-coffee.svg" },
+                  { name: "Coffee Design", src: "/brand-logos/logo-coffee-design-1.svg" },
+                  { name: "Burger King", src: "/brand-logos/burger-king-4.svg" },
+                ].map((brand, index) => (
+                  <motion.div
+                    key={brand.name}
+                    className="h-12 w-24 md:h-16 md:w-32 flex items-center justify-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 0.6, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    whileHover={{ opacity: 1, scale: 1.05 }}
+                  >
+                    <Image 
+                      src={brand.src} 
+                      alt={brand.name}
+                      width={120}
+                      height={60}
+                      className="w-full h-full object-contain invert Grayscale-hover"
+                    />
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="py-16 md:py-24 px-3 sm:px-4 bg-glass/30">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <p className="text-gold text-sm uppercase tracking-widest mb-2">
+                {language === "en" ? "Testimonials" : "آراء العملاء"}
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold">
+                {language === "en" ? "What Our Guests Say" : "ماذا يقول عملاؤنا"}
+              </h2>
+            </motion.div>
+
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
               {[
                 { 
-                  title: "Premium Beans", 
-                  titleArabic: "حبوب فاخرة", 
-                  desc: "Single origin, ethically sourced", 
-                  descArabic: "أصل واحد، مصادر أخلاقية",
-                  icon: "☕" 
+                  name: "Ahmed Al", 
+                  text: "Best coffee in Muscat! The V60 pour-over is exceptional.", 
+                  textArabic: "أفضل قهوة في مسقط! صب في 60 استثنائي.",
+                  rating: "⭐⭐⭐⭐⭐" 
                 },
                 { 
-                  title: "Precision Brewing", 
-                  titleArabic: "تحضير دقيق", 
-                  desc: "V60, Aeropress, Cold Brew", 
-                  descArabic: "في 60، إيروس بريس، كولد برو",
-                  icon: "⚗️" 
+                  name: "Sarah K.", 
+                  text: "Love the ambiance and friendly staff. My go-to spot!", 
+                  textArabic: "أحب الأجواء والموظفين الودودين! مكاني المفضل!",
+                  rating: "⭐⭐⭐⭐⭐" 
                 },
                 { 
-                  title: "Artisan Pastries", 
-                  titleArabic: "معجنات فنية", 
-                  desc: "Freshly baked daily", 
-                  descArabic: "مخبوزة طازجة يومياً",
-                  icon: "🥐" 
+                  name: "Omar B.", 
+                  text: "Great pastries and amazing cold brew. Highly recommend!", 
+                  textArabic: "معجنات رائعة وكولد برو مدهش! أنصح به بشدة!",
+                  rating: "⭐⭐⭐⭐⭐" 
                 },
-              ].map((item, index) => (
+              ].map((testimonial, index) => (
                 <motion.div
-                  key={item.title}
-                  className="glass rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center"
-                  initial={{ opacity: 0, y: 20 }}
+                  key={testimonial.name}
+                  className="glass rounded-2xl p-6"
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
-                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ delay: index * 0.15, duration: 0.6 }}
+                  whileHover={{ y: -5 }}
                 >
-                  <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{item.icon}</div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-bone mb-1 sm:mb-2">
-                    {language === "en" ? item.title : item.titleArabic}
-                  </h3>
-                  <p className="text-subtext text-sm sm:text-base">
-                    {language === "en" ? item.desc : item.descArabic}
-                  </p>
+                  <div className="text-gold mb-3">{testimonial.rating}</div>
+                  <p className="text-subtext mb-4 italic">&#8220;{language === "en" ? testimonial.text : testimonial.textArabic}&#8221;</p>
+                  <p className="text-bone font-semibold">— {testimonial.name}</p>
                 </motion.div>
               ))}
             </motion.div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Logo } from "./logo";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
 import brandData from "@/content/brand.json";
@@ -15,7 +15,7 @@ const quickLinksHrefs = ["/", "/menu", "/about", "/gallery", "/contact"];
 
 export function Footer() {
   const { language } = useBilingual();
-  const { instagram, phone, whatsapp } = brandData;
+  const { instagram, phone, whatsapp, email } = brandData;
   const isArabic = language === "ar";
   const quickLinks = isArabic ? quickLinksAr : quickLinksEn;
 
@@ -102,6 +102,16 @@ export function Footer() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <FontAwesomeIcon icon={faPhone} className="w-4 h-4" />
+                </motion.a>
+              )}
+              {email && (
+                <motion.a
+                  href={`mailto:${email}`}
+                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-gold hover:text-obsidian transition-all duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4" />
                 </motion.a>
               )}
             </div>
