@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Header } from "@/components/layout/header";
@@ -25,6 +26,15 @@ export default function Home() {
     { name: "Sarah K.", text: "Love the atmosphere!", textArabic: "أحب الأجواء!", rating: "⭐⭐⭐⭐⭐" },
     { name: "Omar B.", text: "Amazing cold brew!", textArabic: "كولد برو مدهش!", rating: "⭐⭐⭐⭐⭐" },
   ];
+
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -220,23 +230,36 @@ export default function Home() {
               <h2 className="text-2xl md:text-4xl font-bold text-bone">{language === "en" ? "What Our Guests Say" : "ماذا يقول عملاؤنا"}</h2>
             </motion.div>
 
-            <motion.div className="flex gap-6 overflow-hidden" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-              <motion.div className="flex gap-6" animate={{ x: [0, -1200] }} transition={{ repeat: Infinity, duration: 20, ease: "linear" }}>
-                {testimonials.map((t, i) => (
-                  <motion.div key={`t1-${i}`} className="glass rounded-2xl p-6 text-center w-80 flex-shrink-0" whileHover={{ y: -5 }}>
-                    <div className="text-gold mb-3">{t.rating}</div>
-                    <p className="text-subtext mb-4 italic">&#8220;{language === "en" ? t.text : t.textArabic}&#8221;</p>
-                    <p className="text-bone font-semibold">— {t.name}</p>
+            <motion.div className="max-w-3xl mx-auto px-4" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+              <div className="relative overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentTestimonial}
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 0.5 }}
+                    className="glass rounded-2xl p-8 text-center"
+                  >
+                    <div className="text-gold mb-4 text-xl">{testimonials[currentTestimonial].rating}</div>
+                    <p className="text-subtext text-lg mb-6 italic">&#8220;{language === "en" ? testimonials[currentTestimonial].text : testimonials[currentTestimonial].textArabic}&#8221;</p>
+                    <p className="text-bone font-semibold text-lg">— {testimonials[currentTestimonial].name}</p>
                   </motion.div>
+                </AnimatePresence>
+              </div>
+              
+              <div className="flex justify-center gap-3 mt-8">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial ? "bg-gold w-8" : "bg-glass-border hover:bg-gold/50"
+                    }`}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                  />
                 ))}
-                {testimonials.map((t, i) => (
-                  <motion.div key={`t2-${i}`} className="glass rounded-2xl p-6 text-center w-80 flex-shrink-0" whileHover={{ y: -5 }}>
-                    <div className="text-gold mb-3">{t.rating}</div>
-                    <p className="text-subtext mb-4 italic">&#8220;{language === "en" ? t.text : t.textArabic}&#8221;</p>
-                    <p className="text-bone font-semibold">— {t.name}</p>
-                  </motion.div>
-                ))}
-              </motion.div>
+              </div>
             </motion.div>
           </div>
         </section>
