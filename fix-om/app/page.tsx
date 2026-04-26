@@ -142,7 +142,7 @@ export default function Home() {
               >
                 <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
                 <span className="text-subtext">
-                  {language === "en" ? "Muscat, Oman" : "مسقط، سلطنة عمان"}
+                  {language === "en" ? "Ad Driz, Oman" : "الدرزيز، عُمان"}
                 </span>
               </motion.div>
             </div>
