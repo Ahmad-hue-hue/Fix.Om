@@ -12,7 +12,7 @@ import brandData from "@/content/brand.json";
 
 export default function ContactPage() {
   const { language } = useBilingual();
-  const { phone, whatsapp, instagram, address } = brandData;
+  const { phone, whatsapp, instagram, address, locationUrl } = brandData;
 
   const contactActions = [
     {
@@ -130,7 +130,7 @@ export default function ContactPage() {
                 </Button>
               </a>
               <a 
-                href="https://www.google.com/maps/search/?api=1&query=Al+Mouj+Muscat+Oman" 
+                href={locationUrl}
                 target="_blank" 
                 rel="noopener noreferrer"
               >
