@@ -12,6 +12,20 @@ import { useBilingual } from "@/lib/hooks/use-bilingual";
 export default function Home() {
   const { language, isRTL } = useBilingual();
 
+  const brands = [
+    { name: "Starbucks", src: "/brand-logos/starbucks-coffee.svg" },
+    { name: "Double Coffee", src: "/brand-logos/double-coffee.svg" },
+    { name: "Tully's", src: "/brand-logos/tully-s-coffee.svg" },
+    { name: "Coffee Design", src: "/brand-logos/logo-coffee-design-1.svg" },
+    { name: "Burger King", src: "/brand-logos/burger-king-4.svg" },
+  ];
+
+  const testimonials = [
+    { name: "Ahmed Al", text: "Best coffee in Muscat!", textArabic: "أفضل قهوة في مسقط!", rating: "⭐⭐⭐⭐⭐" },
+    { name: "Sarah K.", text: "Love the atmosphere!", textArabic: "أحب الأجواء!", rating: "⭐⭐⭐⭐⭐" },
+    { name: "Omar B.", text: "Amazing cold brew!", textArabic: "كولد برو مدهش!", rating: "⭐⭐⭐⭐⭐" },
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -154,49 +168,41 @@ export default function Home() {
         <section className="py-16 md:py-24 px-3 sm:px-4">
           <div className="max-w-6xl mx-auto">
             <motion.div
-              className="text-center mb-12"
+              className="text-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <p className="text-subtext text-sm uppercase tracking-widest mb-4">
+              <p className="text-subtext text-sm uppercase tracking-widest text-center mb-8">
                 {language === "en" ? "Trusted By" : "موثوق من"}
               </p>
-              <motion.div 
-                className="flex md:flex-wrap md:justify-center items-center gap-8 md:gap-16 Grayscale overflow-x-auto pb-4 md:pb-0 px-2 md:px-0 -mx-2 md:mx-0 w-[calc(100%+1rem)] md:w-auto scrollbar-hide"
-                style={{ scrollBehavior: "smooth" }}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                {[
-                  { name: "Starbucks", src: "/brand-logos/starbucks-coffee.svg" },
-                  { name: "Double Coffee", src: "/brand-logos/double-coffee.svg" },
-                  { name: "Tully's", src: "/brand-logos/tully-s-coffee.svg" },
-                  { name: "Coffee Design", src: "/brand-logos/logo-coffee-design-1.svg" },
-                  { name: "Burger King", src: "/brand-logos/burger-king-4.svg" },
-                ].map((brand, index) => (
-                  <motion.div
-                    key={brand.name}
-                    className="h-12 w-24 md:h-16 md:w-32 flex-shrink-0 flex items-center justify-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 0.6, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    whileHover={{ opacity: 1, scale: 1.05 }}
-                  >
-                    <Image 
-                      src={brand.src} 
-                      alt={brand.name}
-                      width={120}
-                      height={60}
-                      className="w-full h-full object-contain invert Grayscale-hover"
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
+              <div className="flex justify-center items-center gap-8 md:gap-16 overflow-hidden">
+                <motion.div
+                  className="flex justify-center items-center gap-8 md:gap-16"
+                  animate={{ x: [0, -500] }}
+                  transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+                >
+                  {brands.map((brand, index) => (
+                    <motion.div
+                      key={`brand-${index}`}
+                      className="h-10 w-20 md:h-16 md:w-32 flex items-center justify-center transition-all duration-300 Grayscale opacity-60 hover:opacity-100 flex-shrink-0"
+                      whileHover={{ scale: 1.08, opacity: 1 }}
+                    >
+                      <Image src={brand.src} alt={brand.name} width={120} height={60} className="w-full h-full object-contain" />
+                    </motion.div>
+                  ))}
+                  {brands.map((brand, index) => (
+                    <motion.div
+                      key={`brand-dup-${index}`}
+                      className="h-10 w-20 md:h-16 md:w-32 flex items-center justify-center transition-all duration-300 Grayscale opacity-60 hover:opacity-100 flex-shrink-0"
+                      whileHover={{ scale: 1.08, opacity: 1 }}
+                    >
+                      <Image src={brand.src} alt={brand.name} width={120} height={60} className="w-full h-full object-contain" />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -210,56 +216,27 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <p className="text-gold text-sm uppercase tracking-widest mb-2">
-                {language === "en" ? "Testimonials" : "آراء العملاء"}
-              </p>
-              <h2 className="text-3xl md:text-5xl font-bold">
-                {language === "en" ? "What Our Guests Say" : "ماذا يقول عملاؤنا"}
-              </h2>
+              <p className="text-gold text-sm uppercase tracking-widest mb-2">{language === "en" ? "Testimonials" : "آراء العملاء"}</p>
+              <h2 className="text-2xl md:text-4xl font-bold text-bone">{language === "en" ? "What Our Guests Say" : "ماذا يقول عملاؤنا"}</h2>
             </motion.div>
 
-            <motion.div 
-              className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto pb-4 md:pb-0 px-2 md:px-0 -mx-2 md:mx-0 w-[calc(100%+1rem)] md:w-auto scrollbar-hide"
-              style={{ scrollBehavior: "smooth" }}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              {[
-                { 
-                  name: "Ahmed Al", 
-                  text: "Best coffee in Muscat! The V60 pour-over is exceptional.", 
-                  textArabic: "أفضل قهوة في مسقط! صب في 60 استثنائي.",
-                  rating: "⭐⭐⭐⭐⭐" 
-                },
-                { 
-                  name: "Sarah K.", 
-                  text: "Love the ambiance and friendly staff. My go-to spot!", 
-                  textArabic: "أحب الأجواء والموظفين الودودين! مكاني المفضل!",
-                  rating: "⭐⭐⭐⭐⭐" 
-                },
-                { 
-                  name: "Omar B.", 
-                  text: "Great pastries and amazing cold brew. Highly recommend!", 
-                  textArabic: "معجنات رائعة وكولد برو مدهش! أنصح به بشدة!",
-                  rating: "⭐⭐⭐⭐⭐" 
-                },
-              ].map((testimonial, index) => (
-                <motion.div
-                  key={testimonial.name}
-                  className="glass rounded-2xl p-6 flex-shrink-0 w-80 md:w-auto"
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15, duration: 0.6 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="text-gold mb-3">{testimonial.rating}</div>
-                  <p className="text-subtext mb-4 italic">&#8220;{language === "en" ? testimonial.text : testimonial.textArabic}&#8221;</p>
-                  <p className="text-bone font-semibold">— {testimonial.name}</p>
-                </motion.div>
-              ))}
+            <motion.div className="flex gap-6 overflow-hidden" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+              <motion.div className="flex gap-6" animate={{ x: [0, -1200] }} transition={{ repeat: Infinity, duration: 20, ease: "linear" }}>
+                {testimonials.map((t, i) => (
+                  <motion.div key={`t1-${i}`} className="glass rounded-2xl p-6 text-center w-80 flex-shrink-0" whileHover={{ y: -5 }}>
+                    <div className="text-gold mb-3">{t.rating}</div>
+                    <p className="text-subtext mb-4 italic">&#8220;{language === "en" ? t.text : t.textArabic}&#8221;</p>
+                    <p className="text-bone font-semibold">— {t.name}</p>
+                  </motion.div>
+                ))}
+                {testimonials.map((t, i) => (
+                  <motion.div key={`t2-${i}`} className="glass rounded-2xl p-6 text-center w-80 flex-shrink-0" whileHover={{ y: -5 }}>
+                    <div className="text-gold mb-3">{t.rating}</div>
+                    <p className="text-subtext mb-4 italic">&#8220;{language === "en" ? t.text : t.textArabic}&#8221;</p>
+                    <p className="text-bone font-semibold">— {t.name}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           </div>
         </section>
