@@ -164,7 +164,8 @@ export default function Home() {
                 {language === "en" ? "Trusted By" : "موثوق من"}
               </p>
               <motion.div 
-                className="flex flex-wrap justify-center items-center gap-8 md:gap-16 Grayscale"
+                className="flex md:flex-wrap md:justify-center items-center gap-8 md:gap-16 Grayscale overflow-x-auto pb-4 md:pb-0 px-2 md:px-0 -mx-2 md:mx-0 w-[calc(100%+1rem)] md:w-auto scrollbar-hide"
+                style={{ scrollBehavior: "smooth" }}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -179,7 +180,7 @@ export default function Home() {
                 ].map((brand, index) => (
                   <motion.div
                     key={brand.name}
-                    className="h-12 w-24 md:h-16 md:w-32 flex items-center justify-center"
+                    className="h-12 w-24 md:h-16 md:w-32 flex-shrink-0 flex items-center justify-center"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 0.6, y: 0 }}
                     viewport={{ once: true }}
@@ -218,7 +219,8 @@ export default function Home() {
             </motion.div>
 
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto pb-4 md:pb-0 px-2 md:px-0 -mx-2 md:mx-0 w-[calc(100%+1rem)] md:w-auto scrollbar-hide"
+              style={{ scrollBehavior: "smooth" }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -246,9 +248,9 @@ export default function Home() {
               ].map((testimonial, index) => (
                 <motion.div
                   key={testimonial.name}
-                  className="glass rounded-2xl p-6"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  className="glass rounded-2xl p-6 flex-shrink-0 w-80 md:w-auto"
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.15, duration: 0.6 }}
                   whileHover={{ y: -5 }}
