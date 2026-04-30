@@ -95,8 +95,8 @@ export default function ContactPage() {
                 whileTap={{ scale: 0.98 }}
               >
                 <FontAwesomeIcon icon={action.icon} className="w-10 h-10 mb-4" />
-                <span className="text-lg font-semibold">{action.label}</span>
-                <span className="text-sm opacity-80 mt-1">{action.sublabel}</span>
+                <span className="text-lg font-semibold" dir="auto">{action.label}</span>
+                <span className="text-sm opacity-80 mt-1" dir="auto">{action.sublabel}</span>
               </motion.a>
             ))}
           </motion.div>
