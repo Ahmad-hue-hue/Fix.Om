@@ -80,9 +80,9 @@ export default function GalleryPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold">
-            {language === "en" ? "Gallery" : "الصور"}
-          </h1>
+<h1 className="text-5xl md:text-7xl font-bold text-primary">
+              {language === "en" ? "Gallery" : "الصور"}
+            </h1>
           <p className="mt-4 text-subtext text-lg">
             {language === "en" 
               ? "A visual journey through our world" 

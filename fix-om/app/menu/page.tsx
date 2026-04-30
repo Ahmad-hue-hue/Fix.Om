@@ -62,7 +62,7 @@ export default function MenuPage() {
             transition={{ duration: 0.6 }}
           >
             <div className="text-center md:text-left">
-              <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-primary">
                 {isArabic ? "قائمنا" : "Our Menu"}
               </h1>
               <p className="mt-2 text-subtext text-base sm:text-lg">

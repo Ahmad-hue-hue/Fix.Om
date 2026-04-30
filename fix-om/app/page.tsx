@@ -94,7 +94,7 @@ export default function Home() {
               variants={itemVariants}
               className="mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none"
             >
-              <span className="block">FIX</span>
+              <span className="block text-primary">FIX</span>
               <span className="block text-gradient-primary">YOUR DAY</span>
             </motion.h1>
 

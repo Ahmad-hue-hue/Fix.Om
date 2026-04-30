@@ -64,9 +64,9 @@ export default function ContactPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold">
-            {language === "en" ? "Get in Touch" : "تواصل معنا"}
-          </h1>
+<h1 className="text-5xl md:text-7xl font-bold text-primary">
+              {language === "en" ? "Get in Touch" : "تواصل معنا"}
+            </h1>
           <p className="mt-4 text-subtext text-lg">
             {language === "en" 
               ? "We'd love to hear from you" 
