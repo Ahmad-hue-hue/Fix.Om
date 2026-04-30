@@ -69,14 +69,15 @@ export default function MenuPage() {
                 {isArabic ? "صُنع بدقة" : "Crafted with precision"}
               </p>
             </div>
-            <button
+            <motion.button
               onClick={toggleLanguage}
               className="flex items-center gap-2 px-4 py-2 rounded-full bg-glass border border-glass-border text-subtext hover:text-bone hover:border-primary transition-all"
+              whileTap={{ scale: 0.95 }}
             >
               <span className="text-xs font-medium">{language === "en" ? "EN" : "ع"}</span>
               <span className="text-subtext">/</span>
               <span className="text-xs font-medium">{language === "en" ? "ع" : "EN"}</span>
-            </button>
+            </motion.button>
           </motion.div>
 
           <motion.div
@@ -89,7 +90,7 @@ export default function MenuPage() {
             onTouchEnd={() => setTimeout(() => setIsPaused(false), 2000)}
           >
             {categories.map((category, index) => (
-              <button
+              <motion.button
                 key={category.id}
                 onClick={() => setActiveCategory(index)}
                 className={`flex-shrink-0 px-3 py-2 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
@@ -97,9 +98,10 @@ export default function MenuPage() {
                     ? "bg-primary text-bone"
                     : "bg-glass border border-glass-border text-subtext hover:text-bone hover:border-primary"
                 }`}
+                whileTap={{ scale: 0.95 }}
               >
                 {isArabic ? category.nameArabic : category.name}
-              </button>
+              </motion.button>
             ))}
           </motion.div>
 

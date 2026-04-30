@@ -94,15 +94,16 @@ export function Header() {
               <span className="text-xs font-medium">{language === "en" ? "EN" : "ع"}</span>
             </motion.button>
 
-            <button
+            <motion.button
               className="md:hidden p-2 text-bone"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
               type="button"
+              whileTap={{ scale: 0.9 }}
             >
               <FontAwesomeIcon icon={isMobileMenuOpen ? faXmark : faBars} className="w-6 h-6" aria-hidden="true" />
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
@@ -127,8 +128,8 @@ export function Header() {
                 >
                   <Link
                     href={link.href}
-                    className={`text-2xl font-semibold ${
-                      pathname === link.href ? "text-primary" : "text-bone"
+                    className={`text-2xl font-semibold transition-colors duration-300 ${
+                      pathname === link.href ? "text-primary" : "text-bone hover:text-primary"
                     }`}
                   >
                     {language === "ar" ? link.labelArabic : link.label}

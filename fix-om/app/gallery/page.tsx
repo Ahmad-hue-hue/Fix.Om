@@ -39,13 +39,10 @@ const GalleryItem = memo(function GalleryItem({
   };
 
   return (
-    <motion.div
-      className={`relative aspect-square rounded-xl overflow-hidden cursor-pointer ${getGridClass(image.size)}`}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: index * 0.05, duration: 0.4 }}
-      whileHover={{ scale: 1.02 }}
+<motion.div
+      className="relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer"
       onClick={onClick}
+      whileTap={{ scale: 0.98 }}
     >
       <Image
         src={image.src}
