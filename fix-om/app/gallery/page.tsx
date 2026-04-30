@@ -53,7 +53,7 @@ const GalleryItem = memo(function GalleryItem({
         fill
         className="object-cover transition-transform duration-500 hover:scale-110"
       />
-      <div className="absolute inset-0 bg-obsidian/0 hover:bg-obsidian/30 transition-colors duration-300" />
+      <div className="absolute inset-0 bg-obsidian/0 hover:bg-obsidian/10 transition-colors duration-300" />
     </motion.div>
   );
 });

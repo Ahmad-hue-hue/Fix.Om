@@ -67,7 +67,7 @@ export default function Home() {
             <source src="/assets/hero-video.mp4" type="video/mp4" />
           </video>
           
-          <div className="absolute inset-0 bg-gradient-to-br from-obsidian/70 via-obsidian/50 to-obsidian/70" />
+          <div className="absolute inset-0 bg-gradient-to-br from-obsidian/20 via-transparent to-obsidian/10" />
           
           <motion.div 
             className="absolute inset-0"

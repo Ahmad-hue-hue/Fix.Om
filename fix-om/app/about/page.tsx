@@ -121,7 +121,7 @@ export default function AboutPage() {
                         sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-obsidian/30 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-obsidian/10 to-transparent" />
                     </div>
                   </motion.div>
                   
