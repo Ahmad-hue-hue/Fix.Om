@@ -71,7 +71,7 @@ export default function MenuPage() {
             </div>
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-glass border border-glass-border text-subtext hover:text-bone hover:border-gold transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-glass border border-glass-border text-subtext hover:text-bone hover:border-primary transition-all"
             >
               <span className="text-xs font-medium">{language === "en" ? "EN" : "ع"}</span>
               <span className="text-subtext">/</span>
@@ -94,8 +94,8 @@ export default function MenuPage() {
                 onClick={() => setActiveCategory(index)}
                 className={`flex-shrink-0 px-3 py-2 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
                   activeCategory === index
-                    ? "bg-gold text-obsidian"
-                    : "bg-glass border border-glass-border text-subtext hover:text-bone hover:border-gold"
+                    ? "bg-primary text-bone"
+                    : "bg-glass border border-glass-border text-subtext hover:text-bone hover:border-primary"
                 }`}
               >
                 {isArabic ? category.nameArabic : category.name}
@@ -131,7 +131,7 @@ export default function MenuPage() {
                         {isArabic ? item.descriptionArabic : item.description}
                       </p>
                     </div>
-                    <span className="text-sm sm:text-lg font-mono font-medium text-gold whitespace-nowrap">
+                    <span className="text-sm sm:text-lg font-mono font-medium text-primary whitespace-nowrap">
                       {item.price.toFixed(1)} OMR
                     </span>
                   </div>

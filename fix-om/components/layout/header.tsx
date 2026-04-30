@@ -66,13 +66,13 @@ export function Header() {
                 <Link
                   href={link.href}
                   className={`relative text-sm font-medium transition-colors duration-300 ${
-                    pathname === link.href ? "text-gold" : "text-bone hover:text-gold"
+                    pathname === link.href ? "text-primary" : "text-bone hover:text-primary"
                   }`}
                 >
                   {language === "ar" ? link.labelArabic : link.label}
                   {pathname === link.href && (
                     <motion.span
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gold"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
                       layoutId="nav-indicator"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
@@ -85,7 +85,7 @@ export function Header() {
           <div className="flex items-center gap-4">
             <motion.button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-3 py-2 rounded-full bg-glass border border-glass-border text-subtext hover:text-bone hover:border-gold transition-colors duration-300"
+              className="flex items-center gap-2 px-3 py-2 rounded-full bg-glass border border-glass-border text-subtext hover:text-bone hover:border-primary transition-colors duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label={language === "en" ? "Switch to Arabic" : "Switch to English"}
@@ -128,7 +128,7 @@ export function Header() {
                   <Link
                     href={link.href}
                     className={`text-2xl font-semibold ${
-                      pathname === link.href ? "text-gold" : "text-bone"
+                      pathname === link.href ? "text-primary" : "text-bone"
                     }`}
                   >
                     {language === "ar" ? link.labelArabic : link.label}

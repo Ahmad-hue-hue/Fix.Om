@@ -75,9 +75,9 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5 }}
           >
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/20 rounded-full blur-[128px]" />
-            <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gold/10 rounded-full blur-[96px]" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[160px]" />
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px]" />
+            <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[96px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[160px]" />
           </motion.div>
 
           <motion.div 
@@ -95,7 +95,7 @@ export default function Home() {
               className="mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none"
             >
               <span className="block">FIX</span>
-              <span className="block text-gradient-gold">YOUR DAY</span>
+              <span className="block text-gradient-primary">YOUR DAY</span>
             </motion.h1>
 
             <motion.p 
@@ -129,7 +129,7 @@ export default function Home() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 2.2 }}
               >
-                <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-subtext">
                   {language === "en" ? "Open Daily 7AM - 10PM" : "مفتوح يومياً 7ص - 10م"}
                 </span>
@@ -140,7 +140,7 @@ export default function Home() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 2.4 }}
               >
-                <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-subtext">
                   {language === "en" ? "Ad Driz, Oman" : "الدرزيز، عُمان"}
                 </span>
@@ -163,7 +163,7 @@ export default function Home() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="writing-vertical-lr text-xs text-subtext hover:text-gold transition-colors"
+                className="writing-vertical-lr text-xs text-subtext hover:text-primary transition-colors"
                 initial={{ opacity: 0, x: 10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 2 + index * 0.1 }}
@@ -226,7 +226,7 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <p className="text-gold text-sm uppercase tracking-widest mb-2">{language === "en" ? "Testimonials" : "آراء العملاء"}</p>
+              <p className="text-primary text-sm uppercase tracking-widest mb-2">{language === "en" ? "Testimonials" : "آراء العملاء"}</p>
               <h2 className="text-2xl md:text-4xl font-bold text-bone">{language === "en" ? "What Our Guests Say" : "ماذا يقول عملاؤنا"}</h2>
             </motion.div>
 
@@ -241,7 +241,7 @@ export default function Home() {
                     transition={{ duration: 0.5 }}
                     className="glass rounded-2xl p-8 text-center"
                   >
-                    <div className="text-gold mb-4 text-xl">{testimonials[currentTestimonial].rating}</div>
+                    <div className="text-primary mb-4 text-xl">{testimonials[currentTestimonial].rating}</div>
                     <p className="text-subtext text-lg mb-6 italic">&#8220;{language === "en" ? testimonials[currentTestimonial].text : testimonials[currentTestimonial].textArabic}&#8221;</p>
                     <p className="text-bone font-semibold text-lg">— {testimonials[currentTestimonial].name}</p>
                   </motion.div>
@@ -255,8 +255,8 @@ export default function Home() {
                     onClick={() => setCurrentTestimonial(index)}
                     className={`h-2 sm:h-3 rounded-full transition-all duration-300 ${
                       index === currentTestimonial 
-                        ? "bg-gold w-6 sm:w-8 md:w-10" 
-                        : "w-2 sm:w-3 bg-glass-border hover:bg-gold/50"
+                        ? "bg-primary w-6 sm:w-8 md:w-10" 
+                        : "w-2 sm:w-3 bg-glass-border hover:bg-primary/50"
                     }`}
                     aria-label={`Go to testimonial ${index + 1}`}
                   />

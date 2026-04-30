@@ -76,7 +76,7 @@ export default function AboutPage() {
           style={{ opacity }}
         >
           <motion.span
-            className="text-gold text-xs sm:text-sm uppercase tracking-widest"
+            className="text-primary text-xs sm:text-sm uppercase tracking-widest"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -127,7 +127,7 @@ export default function AboutPage() {
                   
                   <div className="flex-1 text-center md:text-left">
                     <motion.span
-                      className="text-gold text-xs sm:text-sm uppercase tracking-widest"
+                      className="text-primary text-xs sm:text-sm uppercase tracking-widest"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}

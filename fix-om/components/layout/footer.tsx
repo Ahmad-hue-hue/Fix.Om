@@ -51,7 +51,7 @@ export function Footer() {
                 <Link
                   key={link}
                   href={quickLinksHrefs[index]}
-                  className="text-subtext hover:text-gold transition-colors text-xs sm:text-sm"
+                  className="text-subtext hover:text-primary transition-colors text-xs sm:text-sm"
                 >
                   {link}
                 </Link>
@@ -75,7 +75,7 @@ export function Footer() {
                   href={instagram.startsWith("http") ? instagram : `https://instagram.com/${instagram}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-gold hover:text-obsidian transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-primary hover:text-obsidian transition-all duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -87,7 +87,7 @@ export function Footer() {
                   href={`https://wa.me/${whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-gold hover:text-obsidian transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-primary hover:text-obsidian transition-all duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -97,7 +97,7 @@ export function Footer() {
               {phone && (
                 <motion.a
                   href={`tel:${phone}`}
-                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-gold hover:text-obsidian transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-primary hover:text-obsidian transition-all duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -107,7 +107,7 @@ export function Footer() {
               {email && (
                 <motion.a
                   href={`mailto:${email}`}
-                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-gold hover:text-obsidian transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-primary hover:text-obsidian transition-all duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -119,7 +119,7 @@ export function Footer() {
                   href={locationUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-gold hover:text-obsidian transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-primary hover:text-obsidian transition-all duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >

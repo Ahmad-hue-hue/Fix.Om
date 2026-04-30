@@ -21,7 +21,7 @@ export default function ContactPage() {
       label: language === "en" ? "Call Now" : "اتصل الآن",
       sublabel: phone,
       href: `tel:${phone}`,
-      color: "bg-gold text-obsidian hover:bg-gold-light",
+      color: "bg-primary text-bone hover:bg-primary-light",
       brandIcon: null,
     },
     {
@@ -108,7 +108,7 @@ export default function ContactPage() {
             transition={{ delay: 0.5, duration: 0.6 }}
           >
             <div className="flex items-center justify-center gap-3 mb-4 md:mb-6">
-              <FontAwesomeIcon icon={faMapMarkerAlt} className="w-5 md:w-6 h-5 md:h-6 text-gold" />
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="w-5 md:w-6 h-5 md:h-6 text-primary" />
               <h2 className="text-xl md:text-2xl font-semibold">
                 {language === "en" ? "Visit Us" : "زربنا"}
               </h2>
