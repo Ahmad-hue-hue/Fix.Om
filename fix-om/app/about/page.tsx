@@ -84,7 +84,7 @@ export default function AboutPage() {
             {language === "en" ? "Our Story" : "قصتنا"}
           </motion.span>
           <motion.h1
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mt-3 md:mt-4"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mt-3 md:mt-4 text-primary"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
@@ -134,7 +134,7 @@ export default function AboutPage() {
                     >
                       {language === "en" ? "0" + (index + 1) : "٠" + (index + 1)}
                     </motion.span>
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-2 md:mt-4">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-2 md:mt-4 text-primary">
                       {language === "en" ? section.title : section.titleArabic}
                     </h2>
                     <p className="mt-3 md:mt-6 text-sm sm:text-base md:text-lg text-subtext leading-relaxed">
