@@ -34,7 +34,7 @@ export function Logo({ className = "", size = "md" }: LogoProps) {
     >
       <div className="relative flex-shrink-0" style={{ width: currentSize.width, height: currentSize.height }}>
         <Image
-          src="/assets/logo.jpeg"
+          src="/assets/logo.png"
           alt="FIX"
           fill
           sizes={`${currentSize.width}px`}

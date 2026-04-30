@@ -16,11 +16,11 @@
     { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.04 AM (2).jpeg", "alt": "Coffee detail 2", "size": "small" },
     { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.04 AM.jpeg", "alt": "Barista at work", "size": "large" },
     { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.05 AM (1).jpeg", "alt": "Ambiance 1", "size": "medium" },
-    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.05 AM (2).jpeg", "alt": "Ambiance 2", "size": "small" },
-    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.05 AM.jpeg", "alt": "Outdoor seating", "size": "large" },
-    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.06 AM (1).jpeg", "alt": "Event space", "size": "medium" },
-    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.06 AM (2).jpeg", "alt": "Decor details", "size": "small" },
-    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.06 AM.jpeg", "alt": "Night ambiance", "size": "large" },
-    { "src": "/assets/WhatsApp Image 2026-04-25 at 12.09.07 AM.jpeg", "alt": "Customer moment", "size": "medium" }
+    { "src": "/assets/01.png", "alt": "Ambiance 2", "size": "small" },
+    { "src": "/assets/02.png", "alt": "Outdoor seating", "size": "large" },
+    { "src": "/assets/03.png", "alt": "Event space", "size": "medium" },
+    { "src": "/assets/BUSINESS CARD.png", "alt": "Decor details", "size": "small" },
+    { "src": "/assets/PATTERN.png", "alt": "Night ambiance", "size": "large" },
+    { "src": "/assets/plastic cup.png", "alt": "Customer moment", "size": "medium" }
   ]
 }
