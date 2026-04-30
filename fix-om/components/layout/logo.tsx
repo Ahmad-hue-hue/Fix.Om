@@ -41,12 +41,6 @@ export function Logo({ className = "", size = "md" }: LogoProps) {
           className="object-contain"
         />
       </div>
-      <motion.span
-        className={`font-bold tracking-tight ${currentSize.text}`}
-        style={{ color: "#D4AF37" }}
-      >
-        FIX
-      </motion.span>
-    </motion.div>
+      </motion.div>
   );
 }
