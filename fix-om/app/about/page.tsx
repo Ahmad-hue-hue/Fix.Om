@@ -154,7 +154,7 @@ export default function AboutPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h3 className="text-2xl font-semibold text-bone">
+          <h3 className="text-2xl font-semibold text-primary">
             {language === "en" 
               ? "Visit us and experience the difference" 
               : "زربنا واختبر الفرق"}

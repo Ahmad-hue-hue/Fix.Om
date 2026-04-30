@@ -124,7 +124,7 @@ export default function MenuPage() {
                 >
                   <div className="flex justify-between items-start gap-2">
                     <div className="min-w-0 flex-1">
-                      <h3 className="text-base sm:text-lg font-semibold text-bone truncate">
+                      <h3 className="text-base sm:text-lg font-semibold text-primary truncate">
                         {isArabic ? item.nameArabic : item.name}
                       </h3>
                       <p className="text-xs sm:text-sm text-subtext line-clamp-2 mt-1">

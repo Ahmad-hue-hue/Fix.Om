@@ -43,7 +43,7 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h4 className="text-bone font-semibold mb-3 md:mb-4">
+            <h4 className="text-primary font-semibold mb-3 md:mb-4">
               {isArabic ? "روابط سريعة" : "Quick Links"}
             </h4>
             <div className="flex flex-col gap-1.5 md:gap-2">
@@ -66,7 +66,7 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h4 className="text-bone font-semibold mb-3 md:mb-4">
+            <h4 className="text-primary font-semibold mb-3 md:mb-4">
               {isArabic ? "تواصل معنا" : "Connect"}
             </h4>
             <div className="flex gap-3 md:gap-4">

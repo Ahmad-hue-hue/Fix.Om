@@ -114,7 +114,7 @@ export default function GalleryPage() {
           transition={{ duration: 0.6 }}
         >
           <div className="glass rounded-2xl p-8 inline-block">
-            <h3 className="text-xl font-semibold text-bone mb-4">
+            <h3 className="text-xl font-semibold text-primary mb-4">
               {language === "en" ? "Follow us on Instagram" : "تابعنا على إنستغرام"}
             </h3>
             <p className="text-subtext mb-6">

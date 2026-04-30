@@ -227,7 +227,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <p className="text-primary text-sm uppercase tracking-widest mb-2">{language === "en" ? "Testimonials" : "آراء العملاء"}</p>
-              <h2 className="text-2xl md:text-4xl font-bold text-bone">{language === "en" ? "What Our Guests Say" : "ماذا يقول عملاؤنا"}</h2>
+              <h2 className="text-2xl md:text-4xl font-bold text-primary">{language === "en" ? "What Our Guests Say" : "ماذا يقول عملاؤنا"}</h2>
             </motion.div>
 
             <motion.div className="max-w-3xl mx-auto px-4" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
@@ -243,7 +243,7 @@ export default function Home() {
                   >
                     <div className="text-primary mb-4 text-xl">{testimonials[currentTestimonial].rating}</div>
                     <p className="text-subtext text-lg mb-6 italic">&#8220;{language === "en" ? testimonials[currentTestimonial].text : testimonials[currentTestimonial].textArabic}&#8221;</p>
-                    <p className="text-bone font-semibold text-lg">— {testimonials[currentTestimonial].name}</p>
+                    <p className="text-primary font-semibold text-lg">— {testimonials[currentTestimonial].name}</p>
                   </motion.div>
                 </AnimatePresence>
               </div>
