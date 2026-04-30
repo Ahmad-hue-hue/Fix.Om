@@ -138,7 +138,7 @@ export function Footer() {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <p className="text-subtext text-xs sm:text-sm">
-            © {new Date().getFullYear()} FIX Speciality Coffee. {isArabic ? "جميع الحقوق محفوظة." : "All rights reserved."}
+            © {new Date().getFullYear()} <span className="text-primary">FIX</span> Speciality Coffee. {isArabic ? "جميع الحقوق محفوظة." : "All rights reserved."}
           </p>
         </motion.div>
       </div>
