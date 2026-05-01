@@ -151,8 +151,8 @@ export default function ContactPage() {
           >
             <p className="text-subtext">
               {language === "en" 
-                ? "Open daily from 8:00 AM to 11:00 PM" 
-                : "مفتوح يومياً من الساعة 8 صباحاً حتى 11 مساءً"}
+                ? "Open daily from 7:00 AM to 5:00 PM" 
+                : "مفتوح يومياً من الساعة 7 صباحاً حتى 5 مساءً"}
             </p>
           </motion.div>
         </div>

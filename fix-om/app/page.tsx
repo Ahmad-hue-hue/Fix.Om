@@ -138,7 +138,7 @@ export default function Home() {
               >
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-subtext">
-                  {language === "en" ? "Open Daily 7AM - 10PM" : "مفتوح يومياً 7ص - 10م"}
+                  {language === "en" ? "Open Daily 7AM - 5PM" : "مفتوح يومياً 7ص - 5م"}
                 </span>
               </motion.div>
               <motion.div
