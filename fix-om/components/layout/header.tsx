@@ -43,7 +43,7 @@ export function Header() {
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "bg-obsidian/95 backdrop-blur-md py-3" : "bg-obsidian/30 py-6"
+        isScrolled ? "bg-obsidian/95 backdrop-blur-md py-3" : "bg-obsidian/20 py-6"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
