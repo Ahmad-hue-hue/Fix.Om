@@ -62,7 +62,7 @@ export default function Home() {
             muted
             loop
             playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-20"
+            className="absolute inset-0 w-full h-full object-cover opacity-10"
           >
             <source src="/assets/hero-video.mp4" type="video/mp4" />
           </video>
@@ -86,6 +86,16 @@ export default function Home() {
             initial="hidden"
             animate="visible"
           >
+            <motion.div 
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 1 }}
+            >
+              <span className="text-[15vw] md:text-[20vw] font-bold text-primary/5 tracking-tighter leading-none">
+                FIX
+              </span>
+            </motion.div>
             <motion.div variants={itemVariants}>
               <LiveStatusBadge />
             </motion.div>
@@ -175,48 +185,6 @@ export default function Home() {
           </motion.div>
         </section>
 
-        <section className="py-16 md:py-24 px-3 sm:px-4">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <p className="text-subtext text-sm uppercase tracking-widest text-center mb-8">
-                {language === "en" ? "Trusted By" : "موثوق من"}
-              </p>
-              <div className="flex justify-center items-center gap-8 md:gap-16 overflow-hidden">
-                <motion.div
-                  className="flex justify-center items-center gap-8 md:gap-16"
-                  animate={{ x: [0, -500] }}
-                  transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
-                >
-                  {brands.map((brand, index) => (
-                    <motion.div
-                      key={`brand-${index}`}
-                      className="h-10 w-20 md:h-16 md:w-32 flex items-center justify-center transition-all duration-300 Grayscale opacity-60 hover:opacity-100 flex-shrink-0"
-                      whileHover={{ scale: 1.08, opacity: 1 }}
-                    >
-                      <Image src={brand.src} alt={brand.name} width={120} height={60} className="w-full h-full object-contain" />
-                    </motion.div>
-                  ))}
-                  {brands.map((brand, index) => (
-                    <motion.div
-                      key={`brand-dup-${index}`}
-                      className="h-10 w-20 md:h-16 md:w-32 flex items-center justify-center transition-all duration-300 Grayscale opacity-60 hover:opacity-100 flex-shrink-0"
-                      whileHover={{ scale: 1.08, opacity: 1 }}
-                    >
-                      <Image src={brand.src} alt={brand.name} width={120} height={60} className="w-full h-full object-contain" />
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
         <section className="py-16 md:py-24 px-3 sm:px-4 bg-glass/30">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -239,7 +207,7 @@ export default function Home() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -100 }}
                     transition={{ duration: 0.5 }}
-                    className="glass rounded-2xl p-8 text-center"
+                    className="glass rounded-2xl p-8 text-center bg-primary/5"
                   >
                     <div className="text-primary mb-4 text-xl">{testimonials[currentTestimonial].rating}</div>
                     <p className="text-subtext text-lg mb-6 italic">&#8220;{language === "en" ? testimonials[currentTestimonial].text : testimonials[currentTestimonial].textArabic}&#8221;</p>
