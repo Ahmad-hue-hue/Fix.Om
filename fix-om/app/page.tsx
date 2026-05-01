@@ -67,7 +67,7 @@ export default function Home() {
             <source src="/assets/hero-video.mp4" type="video/mp4" />
           </video>
           
-          <div className="absolute inset-0 bg-obsidian/50" />
+          <div className="absolute inset-0 bg-obsidian/60" />
           
           <motion.div 
             className="absolute inset-0"
@@ -100,7 +100,7 @@ export default function Home() {
 
             <motion.p
               variants={itemVariants}
-              className="mt-6 text-lg sm:text-2xl md:text-3xl font-bold text-primary tracking-wide"
+              className="mt-6 text-lg sm:text-2xl md:text-3xl font-bold text-white tracking-wide"
             >
               {language === "en" ? "Speciality Coffee" : "قهوه متخصصة"}
             </motion.p>

@@ -66,7 +66,7 @@ export function Header() {
                 <Link
                   href={link.href}
                   className={`relative text-sm font-medium transition-colors duration-300 ${
-                    pathname === link.href ? "text-primary" : "text-white hover:text-primary"
+                    pathname === link.href ? "text-primary" : "text-white/70 hover:text-primary"
                   }`}
                 >
                   {language === "ar" ? link.labelArabic : link.label}
@@ -95,7 +95,7 @@ export function Header() {
             </motion.button>
 
             <motion.button
-              className="md:hidden p-2 text-white"
+              className="md:hidden p-2 text-white/80"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
@@ -129,7 +129,7 @@ export function Header() {
                   <Link
                     href={link.href}
                     className={`text-2xl font-semibold transition-colors duration-300 ${
-                      pathname === link.href ? "text-primary" : "text-white hover:text-primary"
+                      pathname === link.href ? "text-primary" : "text-white/70 hover:text-primary"
                     }`}
                   >
                     {language === "ar" ? link.labelArabic : link.label}
