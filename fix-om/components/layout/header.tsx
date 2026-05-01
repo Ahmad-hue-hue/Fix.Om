@@ -43,7 +43,7 @@ export function Header() {
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "bg-obsidian/95 backdrop-blur-md py-3" : "bg-obsidian/20 py-6"
+        isScrolled ? "bg-obsidian/95 backdrop-blur-md py-3" : "bg-transparent py-6"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -66,7 +66,7 @@ export function Header() {
                 <Link
                   href={link.href}
                   className={`relative text-sm font-medium transition-colors duration-300 ${
-                    pathname === link.href ? "text-primary" : "text-bone hover:text-primary"
+                    pathname === link.href ? "text-primary" : "text-white hover:text-primary"
                   }`}
                 >
                   {language === "ar" ? link.labelArabic : link.label}
@@ -95,7 +95,7 @@ export function Header() {
             </motion.button>
 
             <motion.button
-              className="md:hidden p-2 text-bone"
+              className="md:hidden p-2 text-white"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
@@ -129,7 +129,7 @@ export function Header() {
                   <Link
                     href={link.href}
                     className={`text-2xl font-semibold transition-colors duration-300 ${
-                      pathname === link.href ? "text-primary" : "text-bone hover:text-primary"
+                      pathname === link.href ? "text-primary" : "text-white hover:text-primary"
                     }`}
                   >
                     {language === "ar" ? link.labelArabic : link.label}
