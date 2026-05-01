@@ -94,8 +94,8 @@ export default function Home() {
               variants={itemVariants}
               className="mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none"
             >
-              <span className="block text-primary">FIX</span>
-              <span className="block text-gradient-primary">YOUR DAY</span>
+              <span className="block text-white">FIX</span>
+              <span className="block text-white">YOUR DAY</span>
             </motion.h1>
 
             <motion.p
@@ -107,7 +107,7 @@ export default function Home() {
 
             <motion.p 
               variants={itemVariants}
-              className="mt-6 text-base sm:text-lg md:text-xl text-subtext font-light px-4"
+              className="mt-6 text-base sm:text-lg md:text-xl text-white/80 font-light px-4"
             >
               {language === "en" 
                 ? "Speciality Coffee. Precision Calibration." 
