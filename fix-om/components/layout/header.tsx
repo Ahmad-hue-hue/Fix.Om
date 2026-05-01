@@ -85,7 +85,7 @@ export function Header() {
           <div className="flex items-center gap-4">
             <motion.button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-3 py-2 rounded-full bg-glass border border-glass-border text-subtext hover:text-bone hover:border-primary transition-colors duration-300"
+              className="flex items-center gap-2 px-3 py-2 rounded-full bg-primary border border-primary text-white hover:bg-primary-light hover:border-primary-light transition-colors duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label={language === "en" ? "Switch to Arabic" : "Switch to English"}
