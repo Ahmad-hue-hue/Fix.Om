@@ -73,7 +73,7 @@ export function Footer() {
             <h4 className="text-primary font-semibold mb-3">
               {isArabic ? "تواصل معنا" : "Connect"}
             </h4>
-            <div className="flex gap-4">
+            <div className="flex gap-4 mb-4">
               {instagram && (
                 <motion.a
                   href={instagram.startsWith("http") ? instagram : `https://instagram.com/${instagram}`}
@@ -118,43 +118,18 @@ export function Footer() {
                   <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4" />
                 </motion.a>
               )}
-            </div>
-          </motion.div>
-
-          {/* Divider */}
-          <div className="border-t border-glass-border" />
-
-          {/* Contact Info */}
-          <motion.div
-            className="flex flex-col gap-3"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {locationUrl && (
-              <a
-                href={locationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-subtext hover:text-primary transition-colors text-sm"
-              >
-                <FontAwesomeIcon icon={faMapMarkerAlt} className="w-4 h-4" />
-                <span>{address || (isArabic ? "الدرزيز، عُمان" : "Ad Driz, Oman")}</span>
-              </a>
-            )}
-            {phone && (
-              <a
-                href={`tel:${phone}`}
-                className="flex items-center gap-2 text-subtext hover:text-primary transition-colors text-sm"
-              >
-                <FontAwesomeIcon icon={faPhone} className="w-4 h-4" />
-                <span>{phone}</span>
-              </a>
-            )}
-            <div className="flex items-center gap-2 text-subtext text-sm">
-              <FontAwesomeIcon icon={faClock} className="w-4 h-4" />
-              <span>{isArabic ? "مفتوح يومياً 7ص - 5م" : "Open Daily 7AM - 5PM"}</span>
+              {locationUrl && (
+                <motion.a
+                  href={locationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-primary hover:text-white transition-all duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FontAwesomeIcon icon={faMapMarkerAlt} className="w-4 h-4" />
+                </motion.a>
+              )}
             </div>
           </motion.div>
 
@@ -263,6 +238,18 @@ export function Footer() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4" />
+                </motion.a>
+              )}
+              {locationUrl && (
+                <motion.a
+                  href={locationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-glass flex items-center justify-center text-bone hover:bg-primary hover:text-white transition-all duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FontAwesomeIcon icon={faMapMarkerAlt} className="w-4 h-4" />
                 </motion.a>
               )}
             </div>
