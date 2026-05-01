@@ -22,7 +22,7 @@ export default function Home() {
   ];
 
   const testimonials = [
-    { name: "Ahmed Al", text: "Best coffee in Muscat!", textArabic: "أفضل قهوة في مسقط!", rating: "⭐⭐⭐⭐⭐" },
+    { name: "Ahmed Al", text: "Best coffee in Ad Driz!", textArabic: "أفضل قهوة في الدرزيز!", rating: "⭐⭐⭐⭐⭐" },
     { name: "Sarah K.", text: "Love the atmosphere!", textArabic: "أحب الأجواء!", rating: "⭐⭐⭐⭐⭐" },
     { name: "Omar B.", text: "Amazing cold brew!", textArabic: "كولد برو مدهش!", rating: "⭐⭐⭐⭐⭐" },
   ];
