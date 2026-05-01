@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
 import galleryData from "@/content/gallery.json";
+import brandData from "@/content/brand.json";
 
 interface GalleryImage {
   src: string;
@@ -57,6 +58,7 @@ const GalleryItem = memo(function GalleryItem({
 
 export default function GalleryPage() {
   const { language } = useBilingual();
+  const { instagram } = brandData;
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   
   const images: GalleryImage[] = useMemo(() => 
@@ -117,10 +119,15 @@ export default function GalleryPage() {
             <p className="text-subtext mb-6">
               @{language === "en" ? "Stay updated with our latest creations" : "ابق على اطلاع بأحدث إبداعاتنا"}
             </p>
-            <Button variant="outline" className="gap-2">
+            <a
+              href={instagram.startsWith("http") ? instagram : `https://instagram.com/${instagram}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-bone text-bone hover:bg-primary hover:border-primary hover:text-white transition-all duration-300"
+            >
               <FontAwesomeIcon icon={faInstagram} className="w-5 h-5" />
-              @FIX.OM
-            </Button>
+              @fix.om
+            </a>
           </div>
         </motion.div>
       </main>
