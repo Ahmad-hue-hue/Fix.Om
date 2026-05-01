@@ -98,6 +98,13 @@ export default function Home() {
               <span className="block text-gradient-primary">YOUR DAY</span>
             </motion.h1>
 
+            <motion.p
+              variants={itemVariants}
+              className="mt-6 text-lg sm:text-2xl md:text-3xl font-bold text-white tracking-wide"
+            >
+              {language === "en" ? "Speciality Coffee" : "قهوه متخصصة"}
+            </motion.p>
+
             <motion.p 
               variants={itemVariants}
               className="mt-6 text-base sm:text-lg md:text-xl text-subtext font-light px-4"
