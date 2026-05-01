@@ -86,16 +86,6 @@ export default function Home() {
             initial="hidden"
             animate="visible"
           >
-            <motion.div 
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 1 }}
-            >
-              <span className="text-[15vw] md:text-[20vw] font-bold text-primary/5 tracking-tighter leading-none">
-                FIX
-              </span>
-            </motion.div>
             <motion.div variants={itemVariants}>
               <LiveStatusBadge />
             </motion.div>
@@ -207,11 +197,17 @@ export default function Home() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -100 }}
                     transition={{ duration: 0.5 }}
-                    className="glass rounded-2xl p-8 text-center bg-primary/5"
+                    className="rounded-2xl p-8 text-center bg-primary"
                   >
-                    <div className="text-primary mb-4 text-xl">{testimonials[currentTestimonial].rating}</div>
-                    <p className="text-subtext text-lg mb-6 italic">&#8220;{language === "en" ? testimonials[currentTestimonial].text : testimonials[currentTestimonial].textArabic}&#8221;</p>
-                    <p className="text-primary font-semibold text-lg">— {testimonials[currentTestimonial].name}</p>
+                    <div className="text-bone mb-4 text-xl flex justify-center gap-1">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <svg key={star} className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="text-bone text-lg mb-6 italic">&#8220;{language === "en" ? testimonials[currentTestimonial].text : testimonials[currentTestimonial].textArabic}&#8221;</p>
+                    <p className="text-bone font-semibold text-lg">— {testimonials[currentTestimonial].name}</p>
                   </motion.div>
                 </AnimatePresence>
               </div>
