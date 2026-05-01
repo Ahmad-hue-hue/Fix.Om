@@ -120,11 +120,11 @@ export function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.div
-              className="md:hidden fixed top-[72px] left-0 bottom-0 w-64"
+              className="md:hidden fixed top-[72px] right-0 bottom-0 w-64"
               style={{ position: "fixed", zIndex: 999999, backgroundColor: "#F7F7F7" }}
-              initial={{ x: "-100%" }}
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
+              exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
               <nav className="flex flex-col pt-12 px-6 gap-6">
