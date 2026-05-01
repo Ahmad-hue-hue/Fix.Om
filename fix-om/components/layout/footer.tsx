@@ -26,21 +26,21 @@ export function Footer() {
         <div className="md:hidden space-y-6">
           {/* Logo & Tagline */}
           <motion.div
-            className="flex flex-col items-center"
+            className="flex flex-col items-start"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <Logo size="sm" />
-            <p className="mt-3 text-subtext text-sm text-center">
+            <p className="mt-3 text-subtext text-sm">
               {isArabic ? "قهوه متخصصة. معايرة دقيقة." : "Speciality Coffee. Precision Calibration."}
             </p>
           </motion.div>
 
           {/* Quick Links */}
           <motion.div
-            className="flex flex-col items-center"
+            className="flex flex-col items-start"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -49,7 +49,7 @@ export function Footer() {
             <h4 className="text-primary font-semibold mb-3">
               {isArabic ? "روابط سريعة" : "Quick Links"}
             </h4>
-            <div className="flex flex-col gap-2 text-center">
+            <div className="flex flex-col gap-2">
               {quickLinks.map((link, index) => (
                 <Link
                   key={link}
@@ -64,7 +64,7 @@ export function Footer() {
 
           {/* Connect */}
           <motion.div
-            className="flex flex-col items-center"
+            className="flex flex-col items-start"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -126,7 +126,7 @@ export function Footer() {
 
           {/* Contact Info */}
           <motion.div
-            className="flex flex-col items-center gap-3"
+            className="flex flex-col gap-3"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -160,7 +160,7 @@ export function Footer() {
 
           {/* Copyright */}
           <motion.div
-            className="text-center pt-4"
+            className="pt-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
