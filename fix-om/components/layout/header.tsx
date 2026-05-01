@@ -102,7 +102,7 @@ export function Header() {
               type="button"
               whileTap={{ scale: 0.9 }}
             >
-              <FontAwesomeIcon icon={isMobileMenuOpen ? faXmark : faBars} className="w-6 h-6" aria-hidden="true" />
+              <FontAwesomeIcon icon={isMobileMenuOpen ? faXmark : faBars} className="w-6 h-6 text-primary" aria-hidden="true" />
             </motion.button>
           </div>
         </div>
