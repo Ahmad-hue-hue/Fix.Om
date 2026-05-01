@@ -115,7 +115,7 @@ export default function ContactPage() {
             </div>
             
             <p className="text-center text-subtext text-base md:text-lg mb-6 md:mb-8">
-              {address || (language === "en" ? "Oman" : "عُمان")}
+              {address || (language === "en" ? "Ad Driz, Oman" : "الدرزيز، عُمان")}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
