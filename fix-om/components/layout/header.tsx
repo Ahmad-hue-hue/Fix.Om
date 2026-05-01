@@ -110,34 +110,45 @@ export function Header() {
 
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            className="md:hidden fixed inset-0 top-[72px]"
-            style={{ position: "fixed", zIndex: 999999, backgroundColor: "#F7F7F7" }}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-          >
-            <nav className="flex flex-col items-center justify-center h-full gap-8">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    href={link.href}
-                    className={`text-2xl font-semibold transition-colors duration-300 ${
-                      pathname === link.href ? "text-primary" : "text-white/70 hover:text-primary"
-                    }`}
+          <>
+            <motion.div
+              className="md:hidden fixed inset-0 top-[72px] bg-obsidian/50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <motion.div
+              className="md:hidden fixed top-[72px] left-0 bottom-0 w-64"
+              style={{ position: "fixed", zIndex: 999999, backgroundColor: "#F7F7F7" }}
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            >
+              <nav className="flex flex-col pt-12 px-6 gap-6">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
                   >
-                    {language === "ar" ? link.labelArabic : link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-          </motion.div>
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`text-lg font-semibold transition-colors duration-300 ${
+                        pathname === link.href ? "text-primary" : "text-bone hover:text-primary"
+                      }`}
+                    >
+                      {language === "ar" ? link.labelArabic : link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.header>
