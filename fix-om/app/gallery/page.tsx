@@ -9,7 +9,6 @@ import { SafeImage } from "@/components/ui/safe-image";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExpand } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
 import {
@@ -59,10 +58,11 @@ const GalleryItem = memo(function GalleryItem({
       variants={revealScale}
       transition={{ ...scrollTransition, delay: (index % 6) * 0.06 }}
       onClick={onClick}
+      aria-label={image.alt}
       className={`gallery-item group relative w-full overflow-hidden rounded-2xl text-start shadow-soft ring-1 ring-glass-border ${
         tall ? "gallery-item-tall" : ""
       }`}
-      whileHover={{ y: -6 }}
+      whileHover={{ y: -4 }}
       whileTap={{ scale: 0.99 }}
     >
       <SafeImage
@@ -70,15 +70,9 @@ const GalleryItem = memo(function GalleryItem({
         alt={image.alt}
         fill
         sizes="(max-width: 768px) 50vw, 33vw"
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/85 via-primary-dark/15 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4">
-        <p className="text-sm font-medium text-white drop-shadow-sm">{image.alt}</p>
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15 text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
-          <FontAwesomeIcon icon={faExpand} className="h-3 w-3" />
-        </span>
-      </div>
+      <div className="absolute inset-0 bg-primary-dark/0 transition-colors duration-300 group-hover:bg-primary-dark/10" />
     </motion.button>
   );
 });
@@ -131,6 +125,7 @@ export default function GalleryPage() {
             <button
               type="button"
               onClick={() => setSelectedImage(featured[0])}
+              aria-label={featured[0].alt}
               className="group relative col-span-12 aspect-[16/10] overflow-hidden rounded-2xl ring-1 ring-glass-border md:col-span-7 md:row-span-2 md:aspect-auto md:min-h-[360px]"
             >
               <SafeImage
@@ -138,17 +133,14 @@ export default function GalleryPage() {
                 alt={featured[0].alt}
                 fill
                 sizes="(max-width: 768px) 100vw, 60vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/70 to-transparent" />
-              <p className="absolute bottom-4 start-4 text-lg font-semibold text-white">
-                {featured[0].alt}
-              </p>
             </button>
             <button
               type="button"
               onClick={() => setSelectedImage(featured[1])}
+              aria-label={featured[1].alt}
               className="group relative col-span-6 aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-glass-border md:col-span-5"
             >
               <SafeImage
@@ -156,12 +148,13 @@ export default function GalleryPage() {
                 alt={featured[1].alt}
                 fill
                 sizes="40vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />
             </button>
             <button
               type="button"
               onClick={() => setSelectedImage(featured[2])}
+              aria-label={featured[2].alt}
               className="group relative col-span-6 aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-glass-border md:col-span-5"
             >
               <SafeImage
@@ -169,7 +162,7 @@ export default function GalleryPage() {
                 alt={featured[2].alt}
                 fill
                 sizes="40vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />
             </button>
           </motion.section>
@@ -258,7 +251,6 @@ export default function GalleryPage() {
                     className="object-contain"
                   />
                 </div>
-                <p className="mt-3 text-center text-sm text-white/80">{selectedImage.alt}</p>
               </motion.div>
             )}
           </AnimatePresence>

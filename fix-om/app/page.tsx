@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { StoreInfoBar } from "@/components/home/store-info-bar";
+import { PopularPicks } from "@/components/home/popular-picks";
 import { SafeImage } from "@/components/ui/safe-image";
 import { Button } from "@/components/ui/button";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
@@ -17,7 +18,7 @@ import {
   scrollTransition,
   viewportOnce,
 } from "@/lib/motion";
-import { getItemImage, localPhotos } from "@/lib/images";
+import { localPhotos } from "@/lib/images";
 import menuData from "@/content/menu.json";
 import brandData from "@/content/brand.json";
 
@@ -139,69 +140,7 @@ export default function Home() {
 
         <StoreInfoBar />
 
-        {/* Popular picks */}
-        <section className="section-padding">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <motion.div
-              className="mb-10 flex items-end justify-between gap-4"
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              variants={fadeUp}
-              transition={scrollTransition}
-            >
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
-                  {isArabic ? "الأكثر طلباً" : "Popular picks"}
-                </p>
-                <h2 className="mt-1 font-display text-2xl font-bold text-bone sm:text-3xl">
-                  {isArabic ? "من قائمتنا" : "From our menu"}
-                </h2>
-              </div>
-              <Link
-                href="/menu"
-                className="text-sm font-semibold text-primary transition-colors hover:text-primary-light"
-              >
-                {isArabic ? "عرض الكل →" : "See all →"}
-              </Link>
-            </motion.div>
-
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
-              {featuredItems.map((item, i) => (
-                <motion.article
-                  key={item.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={viewportOnce}
-                  transition={{ ...scrollTransition, delay: i * 0.05 }}
-                  whileHover={{ y: -4 }}
-                  className="overflow-hidden rounded-2xl border border-glass-border bg-surface shadow-soft transition-shadow hover:shadow-card"
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden bg-cream">
-                    <SafeImage
-                      src={getItemImage(item.categoryId, item.id, i)}
-                      alt={isArabic ? item.nameArabic : item.name}
-                      fill
-                      sizes="(max-width: 768px) 50vw, 25vw"
-                      className="object-cover"
-                    />
-                    <span className="absolute end-2.5 top-2.5 rounded-full bg-white/95 px-2 py-0.5 text-[11px] font-bold text-primary shadow-sm">
-                      {item.price.toFixed(1)} OMR
-                    </span>
-                  </div>
-                  <div className="p-3.5 sm:p-4">
-                    <h3 className="text-sm font-semibold text-bone line-clamp-1 sm:text-base">
-                      {isArabic ? item.nameArabic : item.name}
-                    </h3>
-                    <p className="mt-1 text-xs leading-relaxed text-subtext line-clamp-2 sm:text-sm">
-                      {isArabic ? item.descriptionArabic : item.description}
-                    </p>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <PopularPicks items={featuredItems} isArabic={isArabic} />
 
         {/* Gallery preview */}
         <section className="border-y border-glass-border bg-surface section-padding">
