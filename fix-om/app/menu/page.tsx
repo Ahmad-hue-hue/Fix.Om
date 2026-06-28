@@ -8,7 +8,7 @@ import { PageHeroStrip } from "@/components/ui/page-hero-strip";
 import { CategoryTabs } from "@/components/menu/category-tabs";
 import { MenuItemCard } from "@/components/menu/menu-item-card";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
-import { getItemImage, pageImages } from "@/lib/images";
+import { assignUniqueImages, pageImages } from "@/lib/images";
 import { staggerContainer } from "@/lib/motion";
 import menuData from "@/content/menu.json";
 
@@ -34,6 +34,14 @@ export default function MenuPage() {
   const categories: Category[] = useMemo(() => menuData.categories, []);
   const isArabic = language === "ar";
   const current = categories[activeCategory];
+
+  const itemImages = useMemo(
+    () =>
+      assignUniqueImages(
+        current.items.map((item) => ({ categoryId: current.id, itemId: item.id }))
+      ),
+    [current]
+  );
 
   return (
     <div className="min-h-screen bg-obsidian">
@@ -66,7 +74,7 @@ export default function MenuPage() {
               key={item.id}
               item={item}
               isArabic={isArabic}
-              image={getItemImage(current.id, item.id, index)}
+              image={itemImages[index]}
             />
           ))}
         </motion.div>
