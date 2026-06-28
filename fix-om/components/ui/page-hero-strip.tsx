@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
+import { SafeImage } from "@/components/ui/safe-image";
 import { fadeUp } from "@/lib/motion";
 
 interface PageHeroStripProps {
@@ -14,14 +14,14 @@ interface PageHeroStripProps {
 export function PageHeroStrip({ image, label, title, description }: PageHeroStripProps) {
   return (
     <motion.section
-      className="relative mb-10 overflow-hidden rounded-2xl md:mb-14"
+      className="relative mb-10 overflow-hidden rounded-2xl shadow-card ring-1 ring-glass-border md:mb-14"
       variants={fadeUp}
       initial="hidden"
       animate="visible"
     >
-      <div className="relative aspect-[21/9] min-h-[160px] max-h-[220px] w-full">
-        <Image src={image} alt="" fill sizes="100vw" className="object-cover" priority />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/90 via-primary-dark/70 to-primary-dark/30" />
+      <div className="relative aspect-[21/9] min-h-[180px] max-h-[280px] w-full">
+        <SafeImage src={image} alt="" fill sizes="100vw" className="object-cover" priority />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/92 via-primary-dark/65 to-primary-dark/25" />
         <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70">
             {label}

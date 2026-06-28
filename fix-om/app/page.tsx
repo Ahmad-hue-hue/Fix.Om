@@ -6,14 +6,27 @@ import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { StoreInfoBar } from "@/components/home/store-info-bar";
-import { Reveal } from "@/components/layout/page-header";
 import { SafeImage } from "@/components/ui/safe-image";
 import { Button } from "@/components/ui/button";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
-import { fadeUp, staggerContainer, defaultTransition } from "@/lib/motion";
-import { getItemImage, pageImages } from "@/lib/images";
+import {
+  fadeUp,
+  staggerContainer,
+  defaultTransition,
+  revealScale,
+  scrollTransition,
+  viewportOnce,
+} from "@/lib/motion";
+import { getItemImage, localPhotos } from "@/lib/images";
 import menuData from "@/content/menu.json";
 import brandData from "@/content/brand.json";
+
+const galleryPreview = [
+  { src: localPhotos.homeGallery1, alt: "Interior" },
+  { src: localPhotos.homeGallery2, alt: "Barista" },
+  { src: localPhotos.homeGallery3, alt: "Atmosphere" },
+  { src: localPhotos.homeGallery4, alt: "Latte art" },
+];
 
 export default function Home() {
   const { language } = useBilingual();
@@ -48,7 +61,8 @@ export default function Home() {
       <Header />
 
       <main id="main-content">
-        <section className="relative isolate min-h-[88svh] overflow-hidden">
+        {/* Hero */}
+        <section className="relative isolate min-h-[92svh] overflow-hidden">
           <video
             autoPlay
             muted
@@ -58,14 +72,14 @@ export default function Home() {
           >
             <source src="/assets/hero-video.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/95 via-primary-dark/55 to-primary-dark/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/95 via-primary-dark/50 to-primary-dark/20" />
 
-          <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-6xl flex-col justify-end px-4 pb-12 pt-28 sm:px-6 sm:pb-16">
+          <div className="relative z-10 mx-auto flex min-h-[92svh] max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20">
             <motion.div
               variants={staggerContainer}
               initial="hidden"
               animate="visible"
-              className="max-w-lg"
+              className="max-w-xl"
             >
               <motion.p
                 variants={fadeUp}
@@ -77,86 +91,109 @@ export default function Home() {
               <motion.h1
                 variants={fadeUp}
                 transition={defaultTransition}
-                className="mt-3 font-display text-[2.5rem] font-bold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl"
+                className="mt-3 font-display text-[2.75rem] font-bold leading-[1.02] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
               >
                 {isArabic ? "أصلح يومك" : "Your Day, Fixed"}
               </motion.h1>
               <motion.p
                 variants={fadeUp}
                 transition={defaultTransition}
-                className="mt-4 text-base leading-relaxed text-white/80 sm:text-lg"
+                className="mt-5 max-w-md text-base leading-relaxed text-white/85 sm:text-lg"
               >
                 {isArabic ? brandData.taglineArabic : brandData.tagline}
               </motion.p>
               <motion.div
                 variants={fadeUp}
                 transition={defaultTransition}
-                className="mt-8 flex flex-col gap-3 sm:flex-row"
+                className="mt-9 flex flex-col gap-3 sm:flex-row"
               >
                 <Link href="/menu" className="w-full sm:w-auto">
-                  <Button size="lg" variant="hero" className="w-full sm:min-w-[148px]">
+                  <Button size="lg" variant="hero" className="w-full sm:min-w-[160px]">
                     {isArabic ? "القائمة" : "View Menu"}
                   </Button>
                 </Link>
                 <Link href="/contact" className="w-full sm:w-auto">
-                  <Button size="lg" variant="heroOutline" className="w-full sm:min-w-[148px]">
+                  <Button size="lg" variant="heroOutline" className="w-full sm:min-w-[160px]">
                     {isArabic ? "زُرنا" : "Find Us"}
                   </Button>
                 </Link>
               </motion.div>
             </motion.div>
           </div>
+
+          <motion.div
+            className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
+          >
+            <div className="h-8 w-5 rounded-full border border-white/30 p-1">
+              <motion.div
+                className="mx-auto h-1.5 w-1 rounded-full bg-white/70"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
+          </motion.div>
         </section>
 
         <StoreInfoBar />
 
+        {/* Popular picks */}
         <section className="section-padding">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <Reveal className="mb-8 flex items-end justify-between gap-4">
+            <motion.div
+              className="mb-10 flex items-end justify-between gap-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={fadeUp}
+              transition={scrollTransition}
+            >
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
                   {isArabic ? "الأكثر طلباً" : "Popular picks"}
                 </p>
-                <h2 className="mt-1 text-2xl font-bold text-bone sm:text-3xl">
+                <h2 className="mt-1 font-display text-2xl font-bold text-bone sm:text-3xl">
                   {isArabic ? "من قائمتنا" : "From our menu"}
                 </h2>
               </div>
               <Link
                 href="/menu"
-                className="text-sm font-semibold text-primary hover:text-primary-light"
+                className="text-sm font-semibold text-primary transition-colors hover:text-primary-light"
               >
                 {isArabic ? "عرض الكل →" : "See all →"}
               </Link>
-            </Reveal>
+            </motion.div>
 
-            <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-1 scrollbar-hide snap-x snap-mandatory sm:-mx-6 sm:px-6">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
               {featuredItems.map((item, i) => (
                 <motion.article
                   key={item.id}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ ...defaultTransition, delay: i * 0.04 }}
+                  viewport={viewportOnce}
+                  transition={{ ...scrollTransition, delay: i * 0.05 }}
                   whileHover={{ y: -4 }}
-                  className="w-[220px] shrink-0 snap-start overflow-hidden rounded-2xl border border-glass-border bg-surface shadow-soft sm:w-[240px]"
+                  className="overflow-hidden rounded-2xl border border-glass-border bg-surface shadow-soft transition-shadow hover:shadow-card"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-cream">
                     <SafeImage
                       src={getItemImage(item.categoryId, item.id, i)}
                       alt={isArabic ? item.nameArabic : item.name}
                       fill
-                      sizes="240px"
+                      sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-cover"
                     />
-                    <span className="absolute end-2.5 top-2.5 rounded-full bg-white/95 px-2 py-0.5 text-[11px] font-bold text-primary">
+                    <span className="absolute end-2.5 top-2.5 rounded-full bg-white/95 px-2 py-0.5 text-[11px] font-bold text-primary shadow-sm">
                       {item.price.toFixed(1)} OMR
                     </span>
                   </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-bone line-clamp-1">
+                  <div className="p-3.5 sm:p-4">
+                    <h3 className="text-sm font-semibold text-bone line-clamp-1 sm:text-base">
                       {isArabic ? item.nameArabic : item.name}
                     </h3>
-                    <p className="mt-1 text-sm text-subtext line-clamp-2 leading-relaxed">
+                    <p className="mt-1 text-xs leading-relaxed text-subtext line-clamp-2 sm:text-sm">
                       {isArabic ? item.descriptionArabic : item.description}
                     </p>
                   </div>
@@ -166,50 +203,124 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Gallery preview */}
         <section className="border-y border-glass-border bg-surface section-padding">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <motion.div
+              className="mb-8 flex items-end justify-between gap-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={fadeUp}
+              transition={scrollTransition}
+            >
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
+                  {isArabic ? "الصور" : "Gallery"}
+                </p>
+                <h2 className="mt-1 font-display text-2xl font-bold text-bone sm:text-3xl">
+                  {isArabic ? "أجواء FIX" : "Life at FIX"}
+                </h2>
+              </div>
+              <Link
+                href="/gallery"
+                className="text-sm font-semibold text-primary transition-colors hover:text-primary-light"
+              >
+                {isArabic ? "عرض المعرض →" : "View gallery →"}
+              </Link>
+            </motion.div>
+
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+              {galleryPreview.map((photo, i) => (
+                <motion.div
+                  key={photo.src}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportOnce}
+                  variants={revealScale}
+                  transition={{ ...scrollTransition, delay: i * 0.08 }}
+                  className={`relative overflow-hidden rounded-2xl ring-1 ring-glass-border ${
+                    i === 0 ? "col-span-2 aspect-[16/10] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[280px]" : "aspect-square"
+                  }`}
+                >
+                  <Link href="/gallery" className="group block h-full w-full">
+                    <SafeImage
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-primary-dark/0 transition-colors duration-300 group-hover:bg-primary-dark/20" />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* About teaser */}
+        <section className="section-padding">
           <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center md:gap-16">
-            <Reveal>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={fadeUp}
+              transition={scrollTransition}
+            >
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
                 {isArabic ? "عنّا" : "About us"}
               </p>
-              <h2 className="mt-2 text-2xl font-bold text-bone sm:text-3xl">
+              <h2 className="mt-2 font-display text-2xl font-bold text-bone sm:text-3xl md:text-4xl">
                 {isArabic ? "معايرة دقيقة في كل فنجان" : "Precision in every cup"}
               </h2>
-              <p className="mt-4 text-subtext leading-relaxed">
+              <p className="mt-4 text-base leading-relaxed text-subtext md:text-lg">
                 {isArabic
-                  ? "نحضّر قهوتنا المتخصصة بعناية في أجواء هادئة بالدرزيز."
-                  : "Specialty coffee, carefully prepared in a calm space in Ad Driz."}
+                  ? "نحضّر قهوتنا المتخصصة بعناية في أجواء هادئة بالدرزيز — مكان للتركيز، المحادثة، والاستمتاع."
+                  : "Specialty coffee, carefully prepared in a calm space in Ad Driz — built for focus, conversation, and great taste."}
               </p>
-              <Link href="/about" className="mt-6 inline-block">
+              <Link href="/about" className="mt-7 inline-block">
                 <Button variant="outline">{isArabic ? "اقرأ المزيد" : "Learn more"}</Button>
               </Link>
-            </Reveal>
+            </motion.div>
 
             <motion.div
-              className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card ring-1 ring-glass-border"
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={defaultTransition}
+              className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-card ring-1 ring-glass-border md:aspect-[4/5]"
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={revealScale}
+              transition={scrollTransition}
+              whileHover={{ scale: 1.01 }}
             >
               <SafeImage
-                src={pageImages.homeAbout}
+                src={localPhotos.homeAbout}
                 alt={isArabic ? "تحضير القهوة" : "Coffee craft"}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/40 to-transparent" />
             </motion.div>
           </div>
         </section>
 
-        <section className="section-padding">
+        {/* Reviews */}
+        <section className="border-t border-glass-border bg-surface section-padding">
           <div className="mx-auto max-w-xl px-4 sm:px-6">
-            <Reveal className="text-center">
-              <h2 className="text-2xl font-bold text-bone sm:text-3xl">
+            <motion.div
+              className="text-center"
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={fadeUp}
+              transition={scrollTransition}
+            >
+              <h2 className="font-display text-2xl font-bold text-bone sm:text-3xl">
                 {isArabic ? "آراء العملاء" : "Guest reviews"}
               </h2>
-            </Reveal>
+            </motion.div>
 
             <div className="relative mt-8 min-h-[160px]">
               <AnimatePresence mode="wait">
@@ -219,7 +330,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35 }}
-                  className="rounded-2xl border border-glass-border bg-surface p-7 text-center shadow-soft sm:p-8"
+                  className="rounded-2xl border border-glass-border bg-obsidian p-7 text-center shadow-soft sm:p-8"
                 >
                   <p className="text-base leading-relaxed text-bone sm:text-lg">
                     &ldquo;{isArabic ? testimonials[reviewIndex].textArabic : testimonials[reviewIndex].text}&rdquo;
@@ -245,13 +356,31 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="border-t border-glass-border bg-surface section-padding">
-          <Reveal className="mx-auto max-w-6xl px-4 text-center sm:px-6">
-            <h2 className="text-2xl font-bold text-bone sm:text-3xl">
-              {isArabic ? "زُرنا" : "Visit us"}
+        {/* Visit CTA */}
+        <section className="relative overflow-hidden section-padding">
+          <div className="absolute inset-0">
+            <SafeImage
+              src={localPhotos.homeGallery3}
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover opacity-20"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/90 to-obsidian/70" />
+          </div>
+          <motion.div
+            className="relative mx-auto max-w-6xl px-4 text-center sm:px-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={fadeUp}
+            transition={scrollTransition}
+          >
+            <h2 className="font-display text-2xl font-bold text-bone sm:text-3xl">
+              {isArabic ? "زُرنا اليوم" : "Visit us today"}
             </h2>
             <p className="mx-auto mt-3 max-w-md text-subtext">
-              {isArabic ? "الدرزيز، عُمان" : "Ad Driz, Oman"}
+              {isArabic ? "الدرزيز، عُمان · يومياً 8 ص – 11 م" : "Ad Driz, Oman · Daily 8 AM – 11 PM"}
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={brandData.locationUrl} target="_blank" rel="noopener noreferrer">
@@ -261,7 +390,7 @@ export default function Home() {
                 <Button size="lg" variant="outline">{isArabic ? "واتساب" : "WhatsApp"}</Button>
               </a>
             </div>
-          </Reveal>
+          </motion.div>
         </section>
       </main>
 
