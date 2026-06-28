@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { SafeImage } from "@/components/ui/safe-image";
 import { fadeUp, defaultTransition } from "@/lib/motion";
 
 interface MenuItem {
@@ -31,7 +31,7 @@ export function MenuItemCard({ item, isArabic, image }: MenuItemCardProps) {
       className="group overflow-hidden rounded-2xl border border-glass-border bg-surface shadow-soft transition-shadow hover:shadow-card"
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-cream">
-        <Image
+        <SafeImage
           src={image}
           alt={name}
           fill

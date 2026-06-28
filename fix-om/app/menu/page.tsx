@@ -61,12 +61,12 @@ export default function MenuPage() {
           animate="visible"
           className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {current.items.map((item) => (
+          {current.items.map((item, index) => (
             <MenuItemCard
               key={item.id}
               item={item}
               isArabic={isArabic}
-              image={getItemImage(current.id)}
+              image={getItemImage(current.id, item.id, index)}
             />
           ))}
         </motion.div>

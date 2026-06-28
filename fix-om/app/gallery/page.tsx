@@ -4,15 +4,20 @@ import { useState, useMemo, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { PageHeader } from "@/components/layout/page-header";
+import { PageHeroStrip } from "@/components/ui/page-hero-strip";
 import { SafeImage } from "@/components/ui/safe-image";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
-import { Reveal } from "@/components/layout/page-header";
-import { fadeUp, staggerContainer, defaultTransition } from "@/lib/motion";
+import {
+  revealScale,
+  scrollTransition,
+  viewportTight,
+  defaultTransition,
+} from "@/lib/motion";
+import { pageImages } from "@/lib/images";
 import galleryData from "@/content/gallery.json";
 import brandData from "@/content/brand.json";
 
@@ -29,19 +34,24 @@ function getGridClass(size: string) {
 
 const GalleryItem = memo(function GalleryItem({
   image,
+  index,
   onClick,
 }: {
   image: GalleryImage;
+  index: number;
   onClick: () => void;
 }) {
   return (
     <motion.button
       type="button"
-      variants={fadeUp}
-      transition={defaultTransition}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportTight}
+      variants={revealScale}
+      transition={{ ...scrollTransition, delay: (index % 8) * 0.05 }}
       onClick={onClick}
-      className={`relative aspect-[3/4] overflow-hidden rounded-2xl text-start ${getGridClass(image.size)}`}
-      whileHover={{ scale: 1.01 }}
+      className={`group relative aspect-[3/4] overflow-hidden rounded-2xl text-start shadow-soft ring-1 ring-glass-border ${getGridClass(image.size)}`}
+      whileHover={{ y: -4 }}
       whileTap={{ scale: 0.99 }}
     >
       <SafeImage
@@ -49,8 +59,12 @@ const GalleryItem = memo(function GalleryItem({
         alt={image.alt}
         fill
         sizes="(max-width: 768px) 50vw, 25vw"
-        className="object-cover transition-transform duration-500 hover:scale-105"
+        className="object-cover transition-transform duration-700 group-hover:scale-110"
       />
+      <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-primary-dark/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="absolute inset-x-0 bottom-0 translate-y-full p-4 transition-transform duration-300 group-hover:translate-y-0">
+        <p className="text-sm font-medium text-white">{image.alt}</p>
+      </div>
     </motion.button>
   );
 });
@@ -73,8 +87,9 @@ export default function GalleryPage() {
     <div className="min-h-screen bg-obsidian">
       <Header />
 
-      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6">
-        <PageHeader
+      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6">
+        <PageHeroStrip
+          image={pageImages.gallery}
           label={isArabic ? "الصور" : "Gallery"}
           title={isArabic ? "أجواء المكان" : "Inside the café"}
           description={
@@ -82,23 +97,25 @@ export default function GalleryPage() {
           }
         />
 
-        <motion.div
-          className="bento-grid"
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-        >
-          {images.map((image) => (
+        <div className="bento-grid">
+          {images.map((image, index) => (
             <GalleryItem
-              key={image.src}
+              key={`${image.src}-${index}`}
               image={image}
+              index={index}
               onClick={() => setSelectedImage(image)}
             />
           ))}
-        </motion.div>
+        </div>
 
-        <Reveal className="mt-16 text-center">
-          <div className="inline-flex flex-col items-center rounded-2xl border border-glass-border bg-surface px-8 py-8 shadow-soft">
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewportTight}
+          transition={scrollTransition}
+        >
+          <div className="inline-flex flex-col items-center rounded-2xl border border-glass-border bg-surface px-8 py-8 shadow-card">
             <p className="text-sm text-subtext">
               {isArabic ? "تابعنا على إنستغرام" : "Follow us on Instagram"}
             </p>
@@ -116,7 +133,7 @@ export default function GalleryPage() {
               </Button>
             </motion.a>
           </div>
-        </Reveal>
+        </motion.div>
       </main>
 
       <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>

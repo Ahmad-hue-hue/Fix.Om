@@ -5,12 +5,17 @@ import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { PageHeroStrip } from "@/components/ui/page-hero-strip";
-import { Reveal } from "@/components/layout/page-header";
 import { SafeImage } from "@/components/ui/safe-image";
 import { Button } from "@/components/ui/button";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
 import { pageImages } from "@/lib/images";
-import { defaultTransition } from "@/lib/motion";
+import {
+  revealFromLeft,
+  revealFromRight,
+  revealScale,
+  scrollTransition,
+  viewportOnce,
+} from "@/lib/motion";
 
 const aboutSections = [
   {
@@ -65,18 +70,27 @@ export default function AboutPage() {
           }
         />
 
-        <div className="space-y-16 md:space-y-24">
-          {aboutSections.map((section, index) => (
-            <Reveal key={section.id} delay={index * 0.06}>
+        <div className="space-y-20 md:space-y-28">
+          {aboutSections.map((section, index) => {
+            const imageFirst = index % 2 === 0;
+            const imageVariant = imageFirst ? revealFromLeft : revealFromRight;
+            const textVariant = imageFirst ? revealFromRight : revealFromLeft;
+
+            return (
               <section
+                key={section.id}
                 className={`grid items-center gap-8 md:grid-cols-2 md:gap-14 ${
-                  index % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
+                  !imageFirst ? "md:[&>*:first-child]:order-2" : ""
                 }`}
               >
                 <motion.div
-                  className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-card"
-                  whileHover={{ scale: 1.01 }}
-                  transition={defaultTransition}
+                  className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-card ring-1 ring-glass-border"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportOnce}
+                  variants={imageVariant}
+                  transition={scrollTransition}
+                  whileHover={{ scale: 1.02 }}
                 >
                   <SafeImage
                     src={section.image}
@@ -85,29 +99,52 @@ export default function AboutPage() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/30 to-transparent" />
                 </motion.div>
 
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportOnce}
+                  variants={textVariant}
+                  transition={{ ...scrollTransition, delay: 0.1 }}
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
                     {String(index + 1).padStart(2, "0")}
                   </p>
-                  <h2 className="mt-2 font-display text-2xl font-bold text-bone sm:text-3xl md:text-4xl">
+                  <h2 className="mt-3 font-display text-2xl font-bold text-bone sm:text-3xl md:text-4xl">
                     {isArabic ? section.titleArabic : section.title}
                   </h2>
-                  <p className="mt-4 text-subtext leading-relaxed">
+                  <p className="mt-4 text-base leading-relaxed text-subtext md:text-lg">
                     {isArabic ? section.descriptionArabic : section.description}
                   </p>
-                </div>
+                </motion.div>
               </section>
-            </Reveal>
-          ))}
+            );
+          })}
         </div>
 
-        <Reveal className="mt-20 text-center">
-          <Link href="/contact">
+        <motion.div
+          className="mt-20 overflow-hidden rounded-2xl border border-glass-border bg-surface p-8 text-center shadow-card md:p-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={revealScale}
+          transition={scrollTransition}
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+            {isArabic ? "زُرنا" : "Visit us"}
+          </p>
+          <h3 className="mt-2 text-xl font-bold text-bone sm:text-2xl">
+            {isArabic ? "نود رؤيتك في FIX" : "We'd love to see you at FIX"}
+          </h3>
+          <p className="mx-auto mt-3 max-w-md text-subtext">
+            {isArabic ? "الدرزيز، عُمان" : "Ad Driz, Oman"}
+          </p>
+          <Link href="/contact" className="mt-6 inline-block">
             <Button size="lg">{isArabic ? "تواصل معنا" : "Get in touch"}</Button>
           </Link>
-        </Reveal>
+        </motion.div>
       </main>
 
       <Footer />

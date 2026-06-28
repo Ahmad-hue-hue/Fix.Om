@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { StoreInfoBar } from "@/components/home/store-info-bar";
 import { Reveal } from "@/components/layout/page-header";
+import { SafeImage } from "@/components/ui/safe-image";
 import { Button } from "@/components/ui/button";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
 import { fadeUp, staggerContainer, defaultTransition } from "@/lib/motion";
@@ -141,8 +141,8 @@ export default function Home() {
                   className="w-[220px] shrink-0 snap-start overflow-hidden rounded-2xl border border-glass-border bg-surface shadow-soft sm:w-[240px]"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-cream">
-                    <Image
-                      src={getItemImage(item.categoryId)}
+                    <SafeImage
+                      src={getItemImage(item.categoryId, item.id, i)}
                       alt={isArabic ? item.nameArabic : item.name}
                       fill
                       sizes="240px"
@@ -186,13 +186,13 @@ export default function Home() {
             </Reveal>
 
             <motion.div
-              className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card"
+              className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card ring-1 ring-glass-border"
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={defaultTransition}
             >
-              <Image
+              <SafeImage
                 src={pageImages.homeAbout}
                 alt={isArabic ? "تحضير القهوة" : "Coffee craft"}
                 fill
