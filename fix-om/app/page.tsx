@@ -10,6 +10,7 @@ import { PopularPicks } from "@/components/home/popular-picks";
 import { GalleryPreview } from "@/components/home/gallery-preview";
 import { SafeImage } from "@/components/ui/safe-image";
 import { Button } from "@/components/ui/button";
+import { BilingualToggle } from "@/components/menu/bilingual-toggle";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
 import {
   fadeUp,
@@ -82,17 +83,8 @@ export default function Home() {
               animate="visible"
               className="max-w-2xl"
             >
-              <motion.div
-                variants={fadeUp}
-                transition={defaultTransition}
-                className="mb-6 flex flex-wrap gap-2"
-              >
-                <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white/90 backdrop-blur-md">
-                  {isArabic ? "الدرزيز، عُمان" : "Ad Driz, Oman"}
-                </span>
-                <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white/90 backdrop-blur-md">
-                  {isArabic ? "8 ص – 11 م" : "8 AM – 11 PM"}
-                </span>
+              <motion.div variants={fadeUp} transition={defaultTransition} className="mb-5">
+                <BilingualToggle variant="hero" />
               </motion.div>
 
               <motion.h1
