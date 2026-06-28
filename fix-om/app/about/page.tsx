@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { PageHeader, Reveal } from "@/components/layout/page-header";
+import { PageHeroStrip } from "@/components/ui/page-hero-strip";
+import { Reveal } from "@/components/layout/page-header";
 import { SafeImage } from "@/components/ui/safe-image";
 import { Button } from "@/components/ui/button";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
+import { pageImages } from "@/lib/images";
 import { defaultTransition } from "@/lib/motion";
 
 const aboutSections = [
@@ -51,8 +53,9 @@ export default function AboutPage() {
     <div className="min-h-screen bg-obsidian">
       <Header />
 
-      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6">
-        <PageHeader
+      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6">
+        <PageHeroStrip
+          image={pageImages.about}
           label={isArabic ? "قصتنا" : "Our story"}
           title={isArabic ? "من الحبة إلى الفنجان" : "From bean to cup"}
           description={
@@ -71,7 +74,7 @@ export default function AboutPage() {
                 }`}
               >
                 <motion.div
-                  className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-soft"
+                  className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-card"
                   whileHover={{ scale: 1.01 }}
                   transition={defaultTransition}
                 >

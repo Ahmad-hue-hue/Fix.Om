@@ -4,11 +4,11 @@ import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { PageHeader } from "@/components/layout/page-header";
+import { PageHeroStrip } from "@/components/ui/page-hero-strip";
 import { CategoryTabs } from "@/components/menu/category-tabs";
 import { MenuItemCard } from "@/components/menu/menu-item-card";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
-import { getItemImage } from "@/lib/images";
+import { getItemImage, pageImages } from "@/lib/images";
 import { staggerContainer } from "@/lib/motion";
 import menuData from "@/content/menu.json";
 
@@ -39,8 +39,9 @@ export default function MenuPage() {
     <div className="min-h-screen bg-obsidian">
       <Header />
 
-      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6">
-        <PageHeader
+      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6">
+        <PageHeroStrip
+          image={pageImages.menu}
           label={isArabic ? "القائمة" : "Menu"}
           title={isArabic ? "قائمنا" : "Our Menu"}
           description={isArabic ? "صُنع بدقة" : "Crafted with precision"}
