@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -10,6 +11,7 @@ import { Reveal } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
 import { fadeUp, staggerContainer, defaultTransition } from "@/lib/motion";
+import { cafeImages, getItemImage } from "@/lib/images";
 import menuData from "@/content/menu.json";
 import brandData from "@/content/brand.json";
 
@@ -24,7 +26,10 @@ export default function Home() {
   ];
 
   const featuredItems = useMemo(
-    () => menuData.categories.flatMap((c) => c.items).slice(0, 8),
+    () =>
+      menuData.categories.flatMap((c) =>
+        c.items.slice(0, 2).map((item, i) => ({ ...item, categoryId: c.id, index: i }))
+      ).slice(0, 8),
     []
   );
 
@@ -43,25 +48,24 @@ export default function Home() {
       <Header />
 
       <main id="main-content">
-        {/* Hero */}
-        <section className="relative isolate min-h-[85svh] overflow-hidden">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover"
-          >
-            <source src="/assets/hero-video.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/95 via-primary-dark/55 to-primary-dark/25" />
+        {/* Hero — Mobbin-style full-bleed image */}
+        <section className="relative isolate min-h-[88svh] overflow-hidden">
+          <Image
+            src={cafeImages.hero}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/95 via-primary-dark/55 to-primary-dark/30" />
 
-          <div className="relative z-10 mx-auto flex min-h-[85svh] max-w-6xl flex-col justify-end px-4 pb-12 pt-28 sm:px-6 sm:pb-16">
+          <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-6xl flex-col justify-end px-4 pb-12 pt-28 sm:px-6 sm:pb-16">
             <motion.div
               variants={staggerContainer}
               initial="hidden"
               animate="visible"
-              className="max-w-lg"
+              className="max-w-xl"
             >
               <motion.p
                 variants={fadeUp}
@@ -106,24 +110,27 @@ export default function Home() {
 
         <StoreInfoBar />
 
-        {/* Popular picks */}
-        <section className="py-16 sm:py-20">
+        {/* Popular picks — image cards */}
+        <section className="section-padding">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <Reveal className="mb-8 flex items-end justify-between gap-4">
               <div>
-                <h2 className="text-2xl font-bold text-bone sm:text-3xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
                   {isArabic ? "الأكثر طلباً" : "Popular picks"}
-                </h2>
-                <p className="mt-1 text-sm text-subtext">
-                  {isArabic ? "من قائمتنا" : "From our menu"}
                 </p>
+                <h2 className="mt-1 text-2xl font-bold text-bone sm:text-3xl">
+                  {isArabic ? "من قائمتنا" : "From our menu"}
+                </h2>
               </div>
-              <Link href="/menu" className="text-sm font-semibold text-primary hover:text-primary-light">
-                {isArabic ? "عرض الكل" : "See all"}
+              <Link
+                href="/menu"
+                className="text-sm font-semibold text-primary hover:text-primary-light"
+              >
+                {isArabic ? "عرض الكل →" : "See all →"}
               </Link>
             </Reveal>
 
-            <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-1 scrollbar-hide snap-x snap-mandatory sm:-mx-6 sm:gap-4 sm:px-6">
+            <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-1 scrollbar-hide snap-x snap-mandatory sm:-mx-6 sm:px-6">
               {featuredItems.map((item, i) => (
                 <motion.article
                   key={item.id}
@@ -131,28 +138,37 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ ...defaultTransition, delay: i * 0.04 }}
-                  whileHover={{ y: -3 }}
-                  className="w-[240px] shrink-0 snap-start rounded-2xl border border-glass-border bg-surface p-4 shadow-soft sm:w-[260px] sm:p-5"
+                  whileHover={{ y: -4 }}
+                  className="w-[220px] shrink-0 snap-start overflow-hidden rounded-2xl border border-glass-border bg-surface shadow-soft sm:w-[240px]"
                 >
-                  <div className="mb-4 flex h-24 items-end rounded-xl bg-cream px-3 pb-3">
-                    <span className="text-xs font-semibold uppercase tracking-wide text-primary/80">
+                  <div className="relative aspect-square overflow-hidden bg-cream">
+                    <Image
+                      src={getItemImage(item.categoryId, item.index + i)}
+                      alt={isArabic ? item.nameArabic : item.name}
+                      fill
+                      sizes="240px"
+                      className="object-cover"
+                    />
+                    <span className="absolute end-2.5 top-2.5 rounded-full bg-white/95 px-2 py-0.5 text-[11px] font-bold text-primary">
                       {item.price.toFixed(1)} OMR
                     </span>
                   </div>
-                  <h3 className="font-semibold text-bone line-clamp-1">
-                    {isArabic ? item.nameArabic : item.name}
-                  </h3>
-                  <p className="mt-1 text-sm text-subtext line-clamp-2 leading-relaxed">
-                    {isArabic ? item.descriptionArabic : item.description}
-                  </p>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-bone line-clamp-1">
+                      {isArabic ? item.nameArabic : item.name}
+                    </h3>
+                    <p className="mt-1 text-sm text-subtext line-clamp-2 leading-relaxed">
+                      {isArabic ? item.descriptionArabic : item.description}
+                    </p>
+                  </div>
                 </motion.article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* About */}
-        <section className="border-y border-glass-border bg-surface py-16 sm:py-20">
+        {/* About teaser */}
+        <section className="border-y border-glass-border bg-surface section-padding">
           <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center md:gap-16">
             <Reveal>
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
@@ -172,35 +188,25 @@ export default function Home() {
             </Reveal>
 
             <motion.div
-              className="grid grid-cols-2 gap-3"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
+              className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card"
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
+              transition={defaultTransition}
             >
-              {[
-                { href: "/gallery", label: isArabic ? "الصور" : "Gallery" },
-                { href: "/menu", label: isArabic ? "القائمة" : "Menu" },
-                { href: "/contact", label: isArabic ? "اتصل بنا" : "Contact" },
-                { href: brandData.instagramUrl, label: "Instagram", external: true },
-              ].map((link) => (
-                <motion.div key={link.label} variants={fadeUp} transition={defaultTransition}>
-                  <Link
-                    href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
-                    className="flex min-h-[84px] items-center justify-center rounded-2xl border border-glass-border bg-obsidian text-sm font-semibold text-bone transition-colors hover:border-primary/25 hover:text-primary"
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
+              <Image
+                src={cafeImages.craft}
+                alt={isArabic ? "تحضير القهوة" : "Coffee craft"}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
             </motion.div>
           </div>
         </section>
 
         {/* Reviews */}
-        <section className="py-16 sm:py-20">
+        <section className="section-padding">
           <div className="mx-auto max-w-xl px-4 sm:px-6">
             <Reveal className="text-center">
               <h2 className="text-2xl font-bold text-bone sm:text-3xl">
@@ -242,8 +248,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Visit */}
-        <section className="border-t border-glass-border bg-surface py-16 sm:py-20">
+        {/* Visit CTA */}
+        <section className="border-t border-glass-border bg-surface section-padding">
           <Reveal className="mx-auto max-w-6xl px-4 text-center sm:px-6">
             <h2 className="text-2xl font-bold text-bone sm:text-3xl">
               {isArabic ? "زُرنا" : "Visit us"}

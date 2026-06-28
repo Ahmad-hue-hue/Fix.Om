@@ -40,51 +40,63 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const linkClass = (active: boolean) =>
-    onHero
-      ? active
-        ? "text-white"
-        : "text-white/75 hover:text-white"
-      : active
-        ? "text-primary"
-        : "text-subtext hover:text-primary";
-
   return (
     <motion.header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         onHero
-          ? "bg-transparent py-4 md:py-5"
-          : "border-b border-glass-border bg-surface/95 py-3 shadow-soft backdrop-blur-xl"
+          ? "bg-transparent py-3 md:py-4"
+          : "border-b border-glass-border bg-surface/95 py-2.5 shadow-soft backdrop-blur-xl md:py-3"
       }`}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" aria-label="Home">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+        <Link href="/" aria-label="Home" className="shrink-0">
           <Logo size="md" variant={onHero ? "light" : "default"} />
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${linkClass(pathname === link.href)}`}
-            >
-              {language === "ar" ? link.labelArabic : link.label}
-              {pathname === link.href && (
-                <motion.span
-                  layoutId="nav-underline"
-                  className={`absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full ${onHero ? "bg-white" : "bg-primary"}`}
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-            </Link>
-          ))}
+        {/* Desktop nav — Mobbin pill bar */}
+        <nav
+          className={`hidden items-center gap-0.5 rounded-full p-1 md:flex ${
+            onHero ? "bg-white/10 backdrop-blur-md" : "bg-cream/60"
+          }`}
+          aria-label="Main navigation"
+        >
+          {navLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                  active
+                    ? onHero
+                      ? "text-primary"
+                      : "text-primary"
+                    : onHero
+                      ? "text-white/80 hover:text-white"
+                      : "text-subtext hover:text-primary"
+                }`}
+              >
+                {active && (
+                  <motion.span
+                    layoutId="header-nav-pill"
+                    className={`absolute inset-0 rounded-full shadow-soft ${
+                      onHero ? "bg-white" : "bg-surface"
+                    }`}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">
+                  {language === "ar" ? link.labelArabic : link.label}
+                </span>
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <motion.button
             type="button"
             onClick={toggleLanguage}
@@ -102,7 +114,9 @@ export function Header() {
 
           <motion.button
             type="button"
-            className={`md:hidden flex h-9 w-9 items-center justify-center rounded-full ${onHero ? "text-white" : "text-primary"}`}
+            className={`flex h-9 w-9 items-center justify-center rounded-full md:hidden ${
+              onHero ? "text-white" : "text-primary"
+            }`}
             onClick={() => setIsMobileMenuOpen((v) => !v)}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileMenuOpen}
@@ -118,7 +132,7 @@ export function Header() {
           <>
             <motion.button
               type="button"
-              className="fixed inset-0 top-14 z-40 bg-bone/20 backdrop-blur-[2px] md:hidden"
+              className="fixed inset-0 top-14 z-40 bg-primary-dark/40 backdrop-blur-sm md:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -126,34 +140,43 @@ export function Header() {
               aria-label="Close menu overlay"
             />
             <motion.nav
-              className="fixed bottom-0 end-0 top-14 z-50 w-[min(100%,280px)] border-s border-glass-border bg-surface p-4 md:hidden"
+              className="fixed bottom-0 end-0 top-14 z-50 flex w-[min(100%,300px)] flex-col border-s border-glass-border bg-surface md:hidden"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 340, damping: 32 }}
+              aria-label="Mobile navigation"
             >
-              <ul className="space-y-1">
-                {navLinks.map((link, i) => (
-                  <motion.li
-                    key={link.href}
-                    initial={{ opacity: 0, x: 12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.04 }}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={closeMobileMenu}
-                      className={`block rounded-xl px-3 py-3 text-sm font-medium ${
-                        pathname === link.href
-                          ? "bg-primary/10 text-primary"
-                          : "text-bone hover:bg-cream"
-                      }`}
+              <ul className="flex-1 space-y-1 p-4">
+                {navLinks.map((link, i) => {
+                  const active = pathname === link.href;
+                  return (
+                    <motion.li
+                      key={link.href}
+                      initial={{ opacity: 0, x: 12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.04 }}
                     >
-                      {language === "ar" ? link.labelArabic : link.label}
-                    </Link>
-                  </motion.li>
-                ))}
+                      <Link
+                        href={link.href}
+                        onClick={closeMobileMenu}
+                        className={`block rounded-xl px-4 py-3.5 text-[15px] font-medium ${
+                          active
+                            ? "bg-primary text-white"
+                            : "text-bone hover:bg-cream"
+                        }`}
+                      >
+                        {language === "ar" ? link.labelArabic : link.label}
+                      </Link>
+                    </motion.li>
+                  );
+                })}
               </ul>
+              <div className="border-t border-glass-border p-4">
+                <p className="text-center text-xs text-subtext">
+                  {language === "ar" ? "FIX — قهوه متخصصة" : "FIX — Speciality Coffee"}
+                </p>
+              </div>
             </motion.nav>
           </>
         )}

@@ -2,10 +2,10 @@
 
 import { useState, useMemo, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { PageHeader } from "@/components/layout/page-header";
-import { SafeImage } from "@/components/ui/safe-image";
+import { PageBanner } from "@/components/layout/page-banner";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,7 +13,7 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
 import { Reveal } from "@/components/layout/page-header";
 import { fadeUp, staggerContainer, defaultTransition } from "@/lib/motion";
-import galleryData from "@/content/gallery.json";
+import { cafeImages, galleryImages } from "@/lib/images";
 import brandData from "@/content/brand.json";
 
 interface GalleryImage {
@@ -44,7 +44,7 @@ const GalleryItem = memo(function GalleryItem({
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
     >
-      <SafeImage
+      <Image
         src={image.src}
         alt={image.alt}
         fill
@@ -60,21 +60,15 @@ export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const isArabic = language === "ar";
 
-  const images: GalleryImage[] = useMemo(
-    () =>
-      galleryData.images.map((img) => ({
-        ...img,
-        size: img.size as "small" | "medium" | "large",
-      })),
-    []
-  );
+  const images: GalleryImage[] = useMemo(() => galleryImages, []);
 
   return (
     <div className="min-h-screen bg-obsidian">
       <Header />
 
-      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6">
-        <PageHeader
+      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6">
+        <PageBanner
+          image={cafeImages.galleryBanner}
           label={isArabic ? "الصور" : "Gallery"}
           title={isArabic ? "أجواء المكان" : "Inside the café"}
           description={
@@ -130,7 +124,7 @@ export default function GalleryPage() {
                 transition={{ duration: 0.25 }}
               >
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-bone/5 md:aspect-video">
-                  <SafeImage
+                  <Image
                     src={selectedImage.src}
                     alt={selectedImage.alt}
                     fill
