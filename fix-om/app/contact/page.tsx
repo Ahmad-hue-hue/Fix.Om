@@ -3,56 +3,52 @@
 import { motion } from "framer-motion";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { PageHeader, Reveal } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faMapMarkerAlt, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faWhatsapp, faInstagram, faApple, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faWhatsapp, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
 import { fadeUp, staggerContainer, defaultTransition } from "@/lib/motion";
 import brandData from "@/content/brand.json";
 
 export default function ContactPage() {
   const { language } = useBilingual();
-  const { phone, whatsapp, instagram, email, address, locationUrl } = brandData;
+  const { phone, whatsapp, instagram, email, locationUrl } = brandData;
   const isArabic = language === "ar";
 
   const instagramUrl = instagram.startsWith("http")
     ? instagram
     : `https://instagram.com/${instagram}`;
 
-  const contactActions = [
+  const channels = [
     {
       id: "call",
       icon: faPhone,
-      label: isArabic ? "اتصل الآن" : "Call Now",
-      sublabel: phone,
+      label: isArabic ? "اتصل" : "Call",
+      value: phone,
       href: `tel:${phone}`,
-      className: "bg-primary text-white hover:bg-primary-light",
     },
     {
       id: "email",
       icon: faEnvelope,
-      label: isArabic ? "بريد إلكتروني" : "Email",
-      sublabel: email,
+      label: isArabic ? "بريد" : "Email",
+      value: email,
       href: `mailto:${email}`,
-      className: "bg-bone text-white hover:bg-bone/90",
     },
     {
       id: "whatsapp",
       icon: faWhatsapp,
-      label: isArabic ? "واتساب" : "WhatsApp",
-      sublabel: isArabic ? "أرسل رسالة" : "Send a message",
+      label: "WhatsApp",
+      value: isArabic ? "رسالة" : "Message us",
       href: `https://wa.me/${whatsapp}`,
-      className: "bg-[#25D366] text-white hover:opacity-90",
     },
     {
       id: "instagram",
       icon: faInstagram,
       label: "Instagram",
-      sublabel: "@FIX.OM",
+      value: "@fix.om",
       href: instagramUrl,
-      className: "bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-600 text-white hover:opacity-90",
     },
   ];
 
@@ -60,90 +56,63 @@ export default function ContactPage() {
     <div className="min-h-screen bg-obsidian">
       <Header />
 
-      <main id="main-content" className="pt-28 pb-16 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
-          <SectionHeading
-            eyebrow={isArabic ? "FIX" : "Contact"}
-            title={isArabic ? "تواصل معنا" : "Get in Touch"}
-            description={
-              isArabic ? "نود أن نسمع منك" : "We'd love to hear from you"
-            }
-          />
+      <main id="main-content" className="mx-auto max-w-4xl px-4 pb-16 pt-28 sm:px-6">
+        <PageHeader
+          label={isArabic ? "تواصل" : "Contact"}
+          title={isArabic ? "نحن هنا لمساعدتك" : "We're here to help"}
+          description={
+            isArabic ? "تواصل معنا أو زُرنا مباشرة" : "Reach out or visit us in person"
+          }
+        />
 
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-12"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            {contactActions.map((action) => (
-              <motion.a
-                key={action.id}
-                href={action.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={fadeUp}
-                transition={defaultTransition}
-                className={`flex flex-col items-center justify-center p-6 md:p-8 rounded-2xl ${action.className} transition-all duration-300 shadow-soft`}
-                whileHover={{ scale: 1.03, y: -4 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <FontAwesomeIcon icon={action.icon} className="w-8 h-8 md:w-10 md:h-10 mb-3" />
-                <span className="text-sm md:text-base font-semibold text-center" dir="auto">
-                  {action.label}
-                </span>
-                <span className="text-xs opacity-80 mt-1 text-center" dir="auto">
-                  {action.sublabel}
-                </span>
-              </motion.a>
-            ))}
-          </motion.div>
+        <motion.div
+          className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          {channels.map((channel) => (
+            <motion.a
+              key={channel.id}
+              href={channel.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeUp}
+              transition={defaultTransition}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex flex-col items-center rounded-2xl border border-glass-border bg-surface p-5 text-center shadow-soft md:p-6"
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-primary">
+                <FontAwesomeIcon icon={channel.icon} className="h-4 w-4" />
+              </span>
+              <span className="mt-3 text-sm font-semibold text-bone">{channel.label}</span>
+              <span className="mt-1 text-xs text-subtext" dir="auto">
+                {channel.value}
+              </span>
+            </motion.a>
+          ))}
+        </motion.div>
 
-          <motion.div
-            className="surface-card p-6 md:p-10"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, ...defaultTransition }}
-          >
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <FontAwesomeIcon icon={faMapMarkerAlt} className="w-5 h-5 text-primary" />
-              <h2 className="text-xl md:text-2xl font-semibold text-bone">
-                {isArabic ? "زُرنا" : "Visit Us"}
-              </h2>
-            </div>
-
-            <p className="text-center text-subtext text-base md:text-lg mb-8">
-              {address || (isArabic ? "الدرزيز، عُمان" : "Ad Driz, Oman")}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href={locationUrl} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="lg" className="gap-2 w-full sm:w-auto">
-                  <FontAwesomeIcon icon={faApple} className="w-5 h-5" />
-                  {isArabic ? "خرائط آبل" : "Apple Maps"}
-                </Button>
-              </a>
-              <a href={locationUrl} target="_blank" rel="noopener noreferrer">
-                <Button variant="default" size="lg" className="gap-2 w-full sm:w-auto">
-                  <FontAwesomeIcon icon={faGoogle} className="w-5 h-5" />
-                  {isArabic ? "خرائط غوغل" : "Google Maps"}
-                </Button>
-              </a>
-            </div>
-          </motion.div>
-
-          <motion.p
-            className="mt-10 text-center text-subtext"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={defaultTransition}
-          >
-            {isArabic
-              ? "مفتوح يومياً من 8:00 صباحاً حتى 11:00 مساءً"
-              : "Open daily from 8:00 AM to 11:00 PM"}
-          </motion.p>
-        </div>
+        <Reveal className="mt-10 rounded-2xl border border-glass-border bg-surface p-6 shadow-soft md:p-10">
+          <div className="flex items-center justify-center gap-2">
+            <FontAwesomeIcon icon={faMapMarkerAlt} className="h-4 w-4 text-primary" />
+            <h2 className="text-lg font-semibold text-bone md:text-xl">
+              {isArabic ? "الموقع" : "Location"}
+            </h2>
+          </div>
+          <p className="mt-3 text-center text-subtext">
+            {isArabic ? "الدرزيز، عُمان" : "Ad Driz, Oman"}
+          </p>
+          <p className="mt-2 text-center text-sm text-subtext">
+            {isArabic ? "8:00 ص – 11:00 م يومياً" : "Open daily 8:00 AM – 11:00 PM"}
+          </p>
+          <div className="mt-6 flex justify-center">
+            <a href={locationUrl} target="_blank" rel="noopener noreferrer">
+              <Button size="lg">{isArabic ? "افتح الخريطة" : "Open in Maps"}</Button>
+            </a>
+          </div>
+        </Reveal>
       </main>
 
       <Footer />

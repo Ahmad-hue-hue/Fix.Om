@@ -4,12 +4,14 @@ import { useState, useMemo, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { PageHeader } from "@/components/layout/page-header";
 import { SafeImage } from "@/components/ui/safe-image";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
+import { Reveal } from "@/components/layout/page-header";
 import { fadeUp, staggerContainer, defaultTransition } from "@/lib/motion";
 import galleryData from "@/content/gallery.json";
 import brandData from "@/content/brand.json";
@@ -21,52 +23,40 @@ interface GalleryImage {
 }
 
 function getGridClass(size: string) {
-  switch (size) {
-    case "large":
-      return "md:col-span-2 md:row-span-2";
-    case "medium":
-      return "md:col-span-1 md:row-span-1";
-    default:
-      return "md:col-span-1";
-  }
+  if (size === "large") return "md:col-span-2 md:row-span-2";
+  return "md:col-span-1";
 }
 
 const GalleryItem = memo(function GalleryItem({
   image,
   onClick,
-  index,
 }: {
   image: GalleryImage;
   onClick: () => void;
-  index: number;
 }) {
   return (
-    <motion.div
+    <motion.button
+      type="button"
       variants={fadeUp}
-      transition={{ ...defaultTransition, delay: (index % 6) * 0.05 }}
-      className={`relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer group ${getGridClass(image.size)}`}
+      transition={defaultTransition}
       onClick={onClick}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      className={`relative aspect-[3/4] overflow-hidden rounded-2xl text-start ${getGridClass(image.size)}`}
+      whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
     >
       <SafeImage
         src={image.src}
         alt={image.alt}
         fill
         sizes="(max-width: 768px) 50vw, 25vw"
-        className="object-cover transition-transform duration-700 group-hover:scale-110"
+        className="object-cover transition-transform duration-500 hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-bone/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-        <p className="text-white text-sm font-medium">{image.alt}</p>
-      </div>
-    </motion.div>
+    </motion.button>
   );
 });
 
 export default function GalleryPage() {
   const { language } = useBilingual();
-  const { instagram } = brandData;
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const isArabic = language === "ar";
 
@@ -79,86 +69,67 @@ export default function GalleryPage() {
     []
   );
 
-  const instagramUrl = instagram.startsWith("http")
-    ? instagram
-    : `https://instagram.com/${instagram}`;
-
   return (
     <div className="min-h-screen bg-obsidian">
       <Header />
 
-      <main id="main-content" className="pt-28 pb-16 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeading
-            eyebrow={isArabic ? "FIX" : "Visuals"}
-            title={isArabic ? "الصور" : "Gallery"}
-            description={
-              isArabic
-                ? "رحلة بصرية عبر عالمنا"
-                : "A visual journey through our world"
-            }
-          />
+      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6">
+        <PageHeader
+          label={isArabic ? "الصور" : "Gallery"}
+          title={isArabic ? "أجواء المكان" : "Inside the café"}
+          description={
+            isArabic ? "لمحة من عالمنا" : "A glimpse of our space and craft"
+          }
+        />
 
-          <motion.div
-            className="bento-grid"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            {images.map((image, index) => (
-              <GalleryItem
-                key={image.src}
-                image={image}
-                index={index}
-                onClick={() => setSelectedImage(image)}
-              />
-            ))}
-          </motion.div>
+        <motion.div
+          className="bento-grid"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          {images.map((image) => (
+            <GalleryItem
+              key={image.src}
+              image={image}
+              onClick={() => setSelectedImage(image)}
+            />
+          ))}
+        </motion.div>
 
-          <motion.div
-            className="mt-20 text-center"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={defaultTransition}
-          >
-            <div className="surface-card p-8 md:p-10 inline-block max-w-md w-full">
-              <h3 className="font-display text-2xl font-semibold text-bone mb-3">
-                {isArabic ? "تابعنا على إنستغرام" : "Follow us on Instagram"}
-              </h3>
-              <p className="text-subtext mb-6">
-                {isArabic
-                  ? "ابق على اطلاع بأحدث إبداعاتنا"
-                  : "Stay updated with our latest creations"}
-              </p>
-              <motion.a
-                href={instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white hover:bg-primary-light transition-all duration-300"
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <FontAwesomeIcon icon={faInstagram} className="w-5 h-5" />
+        <Reveal className="mt-16 text-center">
+          <div className="inline-flex flex-col items-center rounded-2xl border border-glass-border bg-surface px-8 py-8 shadow-soft">
+            <p className="text-sm text-subtext">
+              {isArabic ? "تابعنا على إنستغرام" : "Follow us on Instagram"}
+            </p>
+            <motion.a
+              href={brandData.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Button className="gap-2">
+                <FontAwesomeIcon icon={faInstagram} className="h-4 w-4" />
                 @fix.om
-              </motion.a>
-            </div>
-          </motion.div>
-        </div>
+              </Button>
+            </motion.a>
+          </div>
+        </Reveal>
       </main>
 
       <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className="max-w-5xl p-0 bg-transparent border-none shadow-none">
+        <DialogContent className="max-w-4xl border-none bg-transparent p-0 shadow-none">
           <AnimatePresence>
             {selectedImage && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.94 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.94 }}
-                transition={{ duration: 0.3 }}
-                className="relative"
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.25 }}
               >
-                <div className="relative aspect-[4/3] md:aspect-video rounded-2xl overflow-hidden bg-bone/5">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-bone/5 md:aspect-video">
                   <SafeImage
                     src={selectedImage.src}
                     alt={selectedImage.alt}
@@ -166,7 +137,6 @@ export default function GalleryPage() {
                     className="object-contain"
                   />
                 </div>
-                <p className="text-center text-white/80 mt-4 text-sm">{selectedImage.alt}</p>
               </motion.div>
             )}
           </AnimatePresence>

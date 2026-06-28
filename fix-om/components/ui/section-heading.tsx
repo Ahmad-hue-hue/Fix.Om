@@ -22,24 +22,24 @@ export function SectionHeading({
   return (
     <motion.div
       className={cn(
-        "mb-10 md:mb-14",
-        align === "center" ? "text-center mx-auto max-w-2xl" : "text-left max-w-xl",
+        "mb-10 md:mb-12",
+        align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-xl text-start",
         className
       )}
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-60px" }}
       transition={defaultTransition}
     >
-      <p className="text-primary text-xs sm:text-sm uppercase tracking-[0.2em] font-medium mb-3">
+      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
         {eyebrow}
       </p>
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-bone tracking-tight">
+      <h2 className="mt-2 text-2xl font-bold tracking-tight text-bone sm:text-3xl md:text-4xl">
         {title}
       </h2>
       {description && (
-        <p className="mt-3 md:mt-4 text-subtext text-sm sm:text-base md:text-lg leading-relaxed">
+        <p className="mt-3 text-sm leading-relaxed text-subtext sm:text-base">
           {description}
         </p>
       )}

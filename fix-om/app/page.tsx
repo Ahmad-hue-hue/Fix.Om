@@ -6,9 +6,10 @@ import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { StoreInfoBar } from "@/components/home/store-info-bar";
+import { Reveal } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
-import { defaultTransition } from "@/lib/motion";
+import { fadeUp, staggerContainer, defaultTransition } from "@/lib/motion";
 import menuData from "@/content/menu.json";
 import brandData from "@/content/brand.json";
 
@@ -27,13 +28,14 @@ export default function Home() {
     []
   );
 
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [reviewIndex, setReviewIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    const t = setInterval(
+      () => setReviewIndex((i) => (i + 1) % testimonials.length),
+      5000
+    );
+    return () => clearInterval(t);
   }, [testimonials.length]);
 
   return (
@@ -41,8 +43,8 @@ export default function Home() {
       <Header />
 
       <main id="main-content">
-        {/* Hero — bottom-aligned content, no overlapping layers */}
-        <section className="relative isolate min-h-[88svh]">
+        {/* Hero */}
+        <section className="relative isolate min-h-[85svh] overflow-hidden">
           <video
             autoPlay
             muted
@@ -52,84 +54,90 @@ export default function Home() {
           >
             <source src="/assets/hero-video.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/90 via-primary-dark/50 to-primary-dark/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/95 via-primary-dark/55 to-primary-dark/25" />
 
-          <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-6xl flex-col justify-end px-4 pb-10 pt-28 sm:px-6 sm:pb-14 sm:pt-32">
+          <div className="relative z-10 mx-auto flex min-h-[85svh] max-w-6xl flex-col justify-end px-4 pb-12 pt-28 sm:px-6 sm:pb-16">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-xl"
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+              className="max-w-lg"
             >
-              <p className="text-sm font-medium uppercase tracking-[0.15em] text-white/70">
+              <motion.p
+                variants={fadeUp}
+                transition={defaultTransition}
+                className="text-xs font-semibold uppercase tracking-[0.16em] text-white/70"
+              >
                 {isArabic ? "قهوه متخصصة" : "Speciality Coffee"}
-              </p>
-              <h1 className="mt-3 font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl">
-                {isArabic ? (
-                  <>FIX — أصلح يومك</>
-                ) : (
-                  <>
-                    FIX
-                    <br />
-                    YOUR DAY
-                  </>
-                )}
-              </h1>
-              <p className="mt-4 max-w-md text-base leading-relaxed text-white/80 sm:text-lg">
-                {isArabic
-                  ? brandData.taglineArabic
-                  : brandData.tagline}
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              </motion.p>
+              <motion.h1
+                variants={fadeUp}
+                transition={defaultTransition}
+                className="mt-3 font-display text-[2.5rem] font-bold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl"
+              >
+                {isArabic ? "أصلح يومك" : "Your Day, Fixed"}
+              </motion.h1>
+              <motion.p
+                variants={fadeUp}
+                transition={defaultTransition}
+                className="mt-4 text-base leading-relaxed text-white/80 sm:text-lg"
+              >
+                {isArabic ? brandData.taglineArabic : brandData.tagline}
+              </motion.p>
+              <motion.div
+                variants={fadeUp}
+                transition={defaultTransition}
+                className="mt-8 flex flex-col gap-3 sm:flex-row"
+              >
                 <Link href="/menu" className="w-full sm:w-auto">
-                  <Button size="lg" variant="hero" className="w-full sm:min-w-[160px]">
-                    {isArabic ? "عرض القائمة" : "View Menu"}
+                  <Button size="lg" variant="hero" className="w-full sm:min-w-[148px]">
+                    {isArabic ? "القائمة" : "View Menu"}
                   </Button>
                 </Link>
                 <Link href="/contact" className="w-full sm:w-auto">
-                  <Button size="lg" variant="heroOutline" className="w-full sm:min-w-[160px]">
-                    {isArabic ? "الموقع والاتصال" : "Find Us"}
+                  <Button size="lg" variant="heroOutline" className="w-full sm:min-w-[148px]">
+                    {isArabic ? "زُرنا" : "Find Us"}
                   </Button>
                 </Link>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </section>
 
         <StoreInfoBar />
 
-        {/* Featured menu — horizontal scroll, Mobbin-style product row */}
-        <section className="py-14 sm:py-20">
+        {/* Popular picks */}
+        <section className="py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="mb-8 flex items-end justify-between gap-4">
+            <Reveal className="mb-8 flex items-end justify-between gap-4">
               <div>
                 <h2 className="text-2xl font-bold text-bone sm:text-3xl">
                   {isArabic ? "الأكثر طلباً" : "Popular picks"}
                 </h2>
-                <p className="mt-1 text-sm text-subtext sm:text-base">
+                <p className="mt-1 text-sm text-subtext">
                   {isArabic ? "من قائمتنا" : "From our menu"}
                 </p>
               </div>
-              <Link
-                href="/menu"
-                className="shrink-0 text-sm font-semibold text-primary hover:text-primary-light"
-              >
-                {isArabic ? "الكل ←" : "See all →"}
+              <Link href="/menu" className="text-sm font-semibold text-primary hover:text-primary-light">
+                {isArabic ? "عرض الكل" : "See all"}
               </Link>
-            </div>
+            </Reveal>
 
-            <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 scrollbar-hide snap-x snap-mandatory sm:-mx-6 sm:px-6">
-              {featuredItems.map((item, index) => (
+            <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-1 scrollbar-hide snap-x snap-mandatory sm:-mx-6 sm:gap-4 sm:px-6">
+              {featuredItems.map((item, i) => (
                 <motion.article
                   key={item.id}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ ...defaultTransition, delay: index * 0.04 }}
-                  className="w-[260px] shrink-0 snap-start rounded-2xl border border-glass-border bg-surface p-5 shadow-soft"
+                  viewport={{ once: true }}
+                  transition={{ ...defaultTransition, delay: i * 0.04 }}
+                  whileHover={{ y: -3 }}
+                  className="w-[240px] shrink-0 snap-start rounded-2xl border border-glass-border bg-surface p-4 shadow-soft sm:w-[260px] sm:p-5"
                 >
-                  <div className="mb-4 flex h-28 items-center justify-center rounded-xl bg-cream/80">
-                    <span className="text-3xl" aria-hidden="true">☕</span>
+                  <div className="mb-4 flex h-24 items-end rounded-xl bg-cream px-3 pb-3">
+                    <span className="text-xs font-semibold uppercase tracking-wide text-primary/80">
+                      {item.price.toFixed(1)} OMR
+                    </span>
                   </div>
                   <h3 className="font-semibold text-bone line-clamp-1">
                     {isArabic ? item.nameArabic : item.name}
@@ -137,92 +145,97 @@ export default function Home() {
                   <p className="mt-1 text-sm text-subtext line-clamp-2 leading-relaxed">
                     {isArabic ? item.descriptionArabic : item.description}
                   </p>
-                  <p className="mt-4 text-sm font-semibold text-primary">
-                    {item.price.toFixed(1)} OMR
-                  </p>
                 </motion.article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* About snippet */}
-        <section className="border-y border-glass-border bg-surface py-14 sm:py-20">
+        {/* About */}
+        <section className="border-y border-glass-border bg-surface py-16 sm:py-20">
           <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center md:gap-16">
-            <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-primary">
-                {isArabic ? "عن FIX" : "About FIX"}
+            <Reveal>
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
+                {isArabic ? "عنّا" : "About us"}
               </p>
               <h2 className="mt-2 text-2xl font-bold text-bone sm:text-3xl">
                 {isArabic ? "معايرة دقيقة في كل فنجان" : "Precision in every cup"}
               </h2>
               <p className="mt-4 text-subtext leading-relaxed">
                 {isArabic
-                  ? "نحضّر قهوتنا المتخصصة بعناية — من الإسبريسو إلى التحضير بالتقطير — في أجواء هادئة في الدرزيز."
-                  : "We craft specialty coffee with care — from espresso to pour-over — in a calm space in Ad Driz."}
+                  ? "نحضّر قهوتنا المتخصصة بعناية في أجواء هادئة بالدرزيز."
+                  : "Specialty coffee, carefully prepared in a calm space in Ad Driz."}
               </p>
               <Link href="/about" className="mt-6 inline-block">
-                <Button variant="outline">{isArabic ? "اقرأ المزيد" : "Read more"}</Button>
+                <Button variant="outline">{isArabic ? "اقرأ المزيد" : "Learn more"}</Button>
               </Link>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
+            </Reveal>
+
+            <motion.div
+              className="grid grid-cols-2 gap-3"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
               {[
                 { href: "/gallery", label: isArabic ? "الصور" : "Gallery" },
                 { href: "/menu", label: isArabic ? "القائمة" : "Menu" },
                 { href: "/contact", label: isArabic ? "اتصل بنا" : "Contact" },
                 { href: brandData.instagramUrl, label: "Instagram", external: true },
               ].map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  target={link.external ? "_blank" : undefined}
-                  rel={link.external ? "noopener noreferrer" : undefined}
-                  className="flex min-h-[88px] items-center justify-center rounded-2xl border border-glass-border bg-obsidian px-4 text-center text-sm font-semibold text-bone transition-colors hover:border-primary/30 hover:text-primary"
-                >
-                  {link.label}
-                </Link>
+                <motion.div key={link.label} variants={fadeUp} transition={defaultTransition}>
+                  <Link
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
+                    className="flex min-h-[84px] items-center justify-center rounded-2xl border border-glass-border bg-obsidian text-sm font-semibold text-bone transition-colors hover:border-primary/25 hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section className="py-14 sm:py-20">
-          <div className="mx-auto max-w-2xl px-4 sm:px-6">
-            <h2 className="text-center text-2xl font-bold text-bone sm:text-3xl">
-              {isArabic ? "آراء العملاء" : "Guest reviews"}
-            </h2>
+        {/* Reviews */}
+        <section className="py-16 sm:py-20">
+          <div className="mx-auto max-w-xl px-4 sm:px-6">
+            <Reveal className="text-center">
+              <h2 className="text-2xl font-bold text-bone sm:text-3xl">
+                {isArabic ? "آراء العملاء" : "Guest reviews"}
+              </h2>
+            </Reveal>
 
-            <div className="relative mt-8 min-h-[180px]">
+            <div className="relative mt-8 min-h-[160px]">
               <AnimatePresence mode="wait">
                 <motion.blockquote
-                  key={currentTestimonial}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  key={reviewIndex}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35 }}
-                  className="rounded-2xl border border-glass-border bg-surface p-8 text-center shadow-soft"
+                  className="rounded-2xl border border-glass-border bg-surface p-7 text-center shadow-soft sm:p-8"
                 >
                   <p className="text-base leading-relaxed text-bone sm:text-lg">
-                    &ldquo;{isArabic ? testimonials[currentTestimonial].textArabic : testimonials[currentTestimonial].text}&rdquo;
+                    &ldquo;{isArabic ? testimonials[reviewIndex].textArabic : testimonials[reviewIndex].text}&rdquo;
                   </p>
                   <footer className="mt-4 text-sm font-medium text-subtext">
-                    {testimonials[currentTestimonial].name}
+                    {testimonials[reviewIndex].name}
                   </footer>
                 </motion.blockquote>
               </AnimatePresence>
             </div>
 
-            <div className="mt-6 flex justify-center gap-2">
-              {testimonials.map((_, index) => (
+            <div className="mt-5 flex justify-center gap-1.5">
+              {testimonials.map((_, i) => (
                 <button
-                  key={index}
+                  key={i}
                   type="button"
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`h-1.5 rounded-full transition-all ${
-                    index === currentTestimonial ? "w-6 bg-primary" : "w-1.5 bg-glass-border"
-                  }`}
-                  aria-label={`Review ${index + 1}`}
+                  onClick={() => setReviewIndex(i)}
+                  className={`h-1.5 rounded-full transition-all ${i === reviewIndex ? "w-5 bg-primary" : "w-1.5 bg-glass-border"}`}
+                  aria-label={`Review ${i + 1}`}
                 />
               ))}
             </div>
@@ -230,8 +243,8 @@ export default function Home() {
         </section>
 
         {/* Visit */}
-        <section className="border-t border-glass-border bg-surface py-14 sm:py-20">
-          <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
+        <section className="border-t border-glass-border bg-surface py-16 sm:py-20">
+          <Reveal className="mx-auto max-w-6xl px-4 text-center sm:px-6">
             <h2 className="text-2xl font-bold text-bone sm:text-3xl">
               {isArabic ? "زُرنا" : "Visit us"}
             </h2>
@@ -243,12 +256,10 @@ export default function Home() {
                 <Button size="lg">{isArabic ? "الاتجاهات" : "Get directions"}</Button>
               </a>
               <a href={`https://wa.me/${brandData.whatsapp}`} target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline">
-                  {isArabic ? "واتساب" : "WhatsApp"}
-                </Button>
+                <Button size="lg" variant="outline">{isArabic ? "واتساب" : "WhatsApp"}</Button>
               </a>
             </div>
-          </div>
+          </Reveal>
         </section>
       </main>
 

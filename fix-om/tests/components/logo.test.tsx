@@ -12,8 +12,8 @@ describe("Logo", () => {
   it("renders with different sizes", () => {
     const { container: sm } = render(<Logo size="sm" />);
     const { container: lg } = render(<Logo size="lg" />);
-    expect(sm.querySelector('[style*="36"]')).toBeInTheDocument();
-    expect(lg.querySelector('[style*="64"]')).toBeInTheDocument();
+    expect(sm.querySelector('[style*="40"]')).toBeInTheDocument();
+    expect(lg.querySelector('[style*="56"]')).toBeInTheDocument();
   });
 
   it("applies custom className", () => {

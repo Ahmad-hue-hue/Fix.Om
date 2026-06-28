@@ -12,7 +12,7 @@ import { useBilingual } from "@/lib/hooks/use-bilingual";
 const navLinks = [
   { href: "/", label: "Home", labelArabic: "الرئيسية" },
   { href: "/menu", label: "Menu", labelArabic: "القائمة" },
-  { href: "/about", label: "About", labelArabic: "عن الفيكس" },
+  { href: "/about", label: "About", labelArabic: "عنّا" },
   { href: "/gallery", label: "Gallery", labelArabic: "الصور" },
   { href: "/contact", label: "Contact", labelArabic: "اتصل بنا" },
 ];
@@ -24,11 +24,9 @@ export function Header() {
   const { language, toggleLanguage } = useBilingual();
 
   const isHome = pathname === "/";
-  const isHeroHeader = isHome && !isScrolled;
+  const onHero = isHome && !isScrolled;
 
-  const closeMobileMenu = useCallback(() => {
-    setIsMobileMenuOpen(false);
-  }, []);
+  const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -36,146 +34,127 @@ export function Header() {
   }, [pathname, closeMobileMenu]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 48);
-    };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navLinkClass = (active: boolean) => {
-    if (isHeroHeader) {
-      return active
+  const linkClass = (active: boolean) =>
+    onHero
+      ? active
         ? "text-white"
-        : "text-white/70 hover:text-white";
-    }
-    return active
-      ? "text-primary"
-      : "text-subtext hover:text-primary";
-  };
+        : "text-white/75 hover:text-white"
+      : active
+        ? "text-primary"
+        : "text-subtext hover:text-primary";
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled || !isHome
-          ? "bg-surface/90 backdrop-blur-xl border-b border-glass-border py-3 shadow-soft"
-          : "bg-transparent py-5 md:py-6"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        onHero
+          ? "bg-transparent py-4 md:py-5"
+          : "border-b border-glass-border bg-surface/95 py-3 shadow-soft backdrop-blur-xl"
       }`}
-      initial={{ y: -100, opacity: 0 }}
+      initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex-shrink-0">
-            <Logo size="md" variant={isHeroHeader ? "light" : "default"} />
-          </Link>
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6">
+        <Link href="/" aria-label="Home">
+          <Logo size="md" variant={onHero ? "light" : "default"} />
+        </Link>
 
-          <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link, index) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: -16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.08 + index * 0.06 }}
-              >
-                <Link
-                  href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full ${navLinkClass(pathname === link.href)}`}
-                >
-                  {language === "ar" ? link.labelArabic : link.label}
-                  {pathname === link.href && (
-                    <motion.span
-                      className={`absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full ${
-                        isHeroHeader ? "bg-white" : "bg-primary"
-                      }`}
-                      layoutId="nav-indicator"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                </Link>
-              </motion.div>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <motion.button
-              onClick={toggleLanguage}
-              className={`flex items-center gap-2 px-3 py-2 rounded-full text-xs font-semibold transition-all duration-300 ${
-                isHeroHeader
-                  ? "bg-white/15 text-white border border-white/20 hover:bg-white/25"
-                  : "bg-primary text-white hover:bg-primary-light"
-              }`}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              aria-label={language === "en" ? "Switch to Arabic" : "Switch to English"}
+        <nav className="hidden items-center gap-1 md:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${linkClass(pathname === link.href)}`}
             >
-              <FontAwesomeIcon icon={faGlobe} className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>{language === "en" ? "EN" : "ع"}</span>
-            </motion.button>
+              {language === "ar" ? link.labelArabic : link.label}
+              {pathname === link.href && (
+                <motion.span
+                  layoutId="nav-underline"
+                  className={`absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full ${onHero ? "bg-white" : "bg-primary"}`}
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+            </Link>
+          ))}
+        </nav>
 
-            <motion.button
-              className={`md:hidden p-2 rounded-full transition-colors ${
-                isHeroHeader ? "text-white" : "text-primary"
-              }`}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isMobileMenuOpen}
-              type="button"
-              whileTap={{ scale: 0.92 }}
-            >
-              <FontAwesomeIcon
-                icon={isMobileMenuOpen ? faXmark : faBars}
-                className="w-5 h-5"
-                aria-hidden="true"
-              />
-            </motion.button>
-          </div>
+        <div className="flex items-center gap-2">
+          <motion.button
+            type="button"
+            onClick={toggleLanguage}
+            className={`flex h-9 items-center gap-1.5 rounded-full px-3 text-xs font-semibold transition-colors ${
+              onHero
+                ? "border border-white/20 bg-white/10 text-white hover:bg-white/20"
+                : "bg-primary text-white hover:bg-primary-light"
+            }`}
+            whileTap={{ scale: 0.96 }}
+            aria-label="Toggle language"
+          >
+            <FontAwesomeIcon icon={faGlobe} className="h-3.5 w-3.5" />
+            {language === "en" ? "EN" : "ع"}
+          </motion.button>
+
+          <motion.button
+            type="button"
+            className={`md:hidden flex h-9 w-9 items-center justify-center rounded-full ${onHero ? "text-white" : "text-primary"}`}
+            onClick={() => setIsMobileMenuOpen((v) => !v)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+            whileTap={{ scale: 0.92 }}
+          >
+            <FontAwesomeIcon icon={isMobileMenuOpen ? faXmark : faBars} className="h-5 w-5" />
+          </motion.button>
         </div>
       </div>
 
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            <motion.div
-              className="md:hidden fixed inset-0 top-[68px] bg-bone/20 backdrop-blur-sm"
+            <motion.button
+              type="button"
+              className="fixed inset-0 top-14 z-40 bg-bone/20 backdrop-blur-[2px] md:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={closeMobileMenu}
+              aria-label="Close menu overlay"
             />
-            <motion.div
-              className="md:hidden fixed top-[68px] right-0 bottom-0 w-[min(100%,280px)] bg-surface border-l border-glass-border shadow-elevated"
+            <motion.nav
+              className="fixed bottom-0 end-0 top-14 z-50 w-[min(100%,280px)] border-s border-glass-border bg-surface p-4 md:hidden"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 320, damping: 32 }}
+              transition={{ type: "spring", stiffness: 340, damping: 32 }}
             >
-              <nav className="flex flex-col pt-8 px-6 gap-1">
-                {navLinks.map((link, index) => (
-                  <motion.div
+              <ul className="space-y-1">
+                {navLinks.map((link, i) => (
+                  <motion.li
                     key={link.href}
-                    initial={{ opacity: 0, x: 16 }}
+                    initial={{ opacity: 0, x: 12 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.04 }}
+                    transition={{ delay: i * 0.04 }}
                   >
                     <Link
                       href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`block py-3 px-3 rounded-xl text-base font-medium transition-colors duration-300 ${
+                      onClick={closeMobileMenu}
+                      className={`block rounded-xl px-3 py-3 text-sm font-medium ${
                         pathname === link.href
                           ? "bg-primary/10 text-primary"
-                          : "text-bone hover:bg-cream hover:text-primary"
+                          : "text-bone hover:bg-cream"
                       }`}
                     >
                       {language === "ar" ? link.labelArabic : link.label}
                     </Link>
-                  </motion.div>
+                  </motion.li>
                 ))}
-              </nav>
-            </motion.div>
+              </ul>
+            </motion.nav>
           </>
         )}
       </AnimatePresence>
