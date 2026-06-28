@@ -28,7 +28,7 @@ export default function Home() {
   const featuredItems = useMemo(
     () =>
       menuData.categories.flatMap((c) =>
-        c.items.slice(0, 2).map((item, i) => ({ ...item, categoryId: c.id, index: i }))
+        c.items.slice(0, 2).map((item) => ({ ...item, categoryId: c.id }))
       ).slice(0, 8),
     []
   );
@@ -143,7 +143,7 @@ export default function Home() {
                 >
                   <div className="relative aspect-square overflow-hidden bg-cream">
                     <Image
-                      src={getItemImage(item.categoryId, item.index + i)}
+                      src={getItemImage(item.categoryId)}
                       alt={isArabic ? item.nameArabic : item.name}
                       fill
                       sizes="240px"
