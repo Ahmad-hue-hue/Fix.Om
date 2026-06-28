@@ -10,14 +10,13 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-defaults:
-  run:
-    working-directory: fix-om
-
 jobs:
   quality:
     name: Lint, Test & Build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fix-om
 
     steps:
       - name: Checkout
