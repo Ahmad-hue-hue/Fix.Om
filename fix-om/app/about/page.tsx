@@ -1,15 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { PageBanner } from "@/components/layout/page-banner";
-import { Reveal } from "@/components/layout/page-header";
+import { PageHeader, Reveal } from "@/components/layout/page-header";
+import { SafeImage } from "@/components/ui/safe-image";
 import { Button } from "@/components/ui/button";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
-import { cafeImages } from "@/lib/images";
 import { defaultTransition } from "@/lib/motion";
 
 const aboutSections = [
@@ -21,7 +19,7 @@ const aboutSections = [
       "We source our beans from the finest single-origin farms across the world. Every batch is carefully selected for its unique flavor profile and ethical farming practices.",
     descriptionArabic:
       "نحصل على حبوبنا من أفضل المزارع ذات الأصل الواحد في العالم. يتم اختيار كل دفعة بعناية لتحقيق ملف النكهة الفريد والممارسات الزراعية الأخلاقية.",
-    image: cafeImages.origin,
+    image: "/assets/WhatsApp Image 2026-04-25 at 12.09.04 AM.jpeg",
   },
   {
     id: "craft",
@@ -30,8 +28,8 @@ const aboutSections = [
     description:
       "Our brewing methods are a testament to precision. From V60 pour-overs to Aeropress and cold brew, each cup is crafted with patience and expertise.",
     descriptionArabic:
-      "طرق التحضير لدينا هي دليل على الدقة. من صب V60 إلى إيروبرس وكولد برو، كل فنجان مصنوع بالصبر والخبرة.",
-    image: cafeImages.craft,
+      "طرق التحضير لدينا هي دليل على الدقة. من صب V60 إلى إيروبрес وكولد برو، كل فنجان مصنوع بالصبر والخبرة.",
+    image: "/assets/WhatsApp Image 2026-04-24 at 5.46.57 PM.jpeg",
   },
   {
     id: "space",
@@ -41,7 +39,7 @@ const aboutSections = [
       "A minimalist sanctuary designed for focus and conversation. Clean, intentional, and inviting.",
     descriptionArabic:
       "ملاذ مصمم ببساطة للتركيز والمحادثة. نظيف ومتعمد وودود.",
-    image: cafeImages.space,
+    image: "/assets/WhatsApp Image 2026-04-24 at 5.46.34 PM.jpeg",
   },
 ];
 
@@ -53,9 +51,8 @@ export default function AboutPage() {
     <div className="min-h-screen bg-obsidian">
       <Header />
 
-      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6">
-        <PageBanner
-          image={cafeImages.aboutBanner}
+      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6">
+        <PageHeader
           label={isArabic ? "قصتنا" : "Our story"}
           title={isArabic ? "من الحبة إلى الفنجان" : "From bean to cup"}
           description={
@@ -74,11 +71,11 @@ export default function AboutPage() {
                 }`}
               >
                 <motion.div
-                  className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-card"
+                  className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-soft"
                   whileHover={{ scale: 1.01 }}
                   transition={defaultTransition}
                 >
-                  <Image
+                  <SafeImage
                     src={section.image}
                     alt={isArabic ? section.titleArabic : section.title}
                     fill

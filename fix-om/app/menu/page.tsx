@@ -4,11 +4,11 @@ import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { PageBanner } from "@/components/layout/page-banner";
+import { PageHeader } from "@/components/layout/page-header";
 import { CategoryTabs } from "@/components/menu/category-tabs";
 import { MenuItemCard } from "@/components/menu/menu-item-card";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
-import { cafeImages, getItemImage } from "@/lib/images";
+import { getItemImage } from "@/lib/images";
 import { staggerContainer } from "@/lib/motion";
 import menuData from "@/content/menu.json";
 
@@ -39,12 +39,11 @@ export default function MenuPage() {
     <div className="min-h-screen bg-obsidian">
       <Header />
 
-      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6">
-        <PageBanner
-          image={cafeImages.menuBanner}
+      <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6">
+        <PageHeader
           label={isArabic ? "القائمة" : "Menu"}
-          title={isArabic ? "مشروباتنا ووجباتنا" : "Drinks & bites"}
-          description={isArabic ? "صُنع بدقة، يُقدَّم بعناية" : "Crafted with precision, served with care"}
+          title={isArabic ? "مشروباتنا" : "Our drinks & bites"}
+          description={isArabic ? "صُنع بدقة" : "Crafted with precision"}
         />
 
         <CategoryTabs
