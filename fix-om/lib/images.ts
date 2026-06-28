@@ -15,10 +15,6 @@ export const categoryImages: Record<string, string> = {
   desserts: unsplash("photo-1578985545062-69928b1d9587"),
 };
 
-export function stripEmoji(text: string): string {
-  return text.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, "").trim();
-}
-
 export function getItemImage(categoryId: string): string {
   return categoryImages[categoryId] ?? categoryImages["coffee-hot-cold"];
 }

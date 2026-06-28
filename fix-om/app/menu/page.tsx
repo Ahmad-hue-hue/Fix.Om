@@ -42,7 +42,7 @@ export default function MenuPage() {
       <main id="main-content" className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6">
         <PageHeader
           label={isArabic ? "القائمة" : "Menu"}
-          title={isArabic ? "مشروباتنا" : "Our drinks & bites"}
+          title={isArabic ? "قائمنا" : "Our Menu"}
           description={isArabic ? "صُنع بدقة" : "Crafted with precision"}
         />
 
@@ -63,9 +63,8 @@ export default function MenuPage() {
           {current.items.map((item) => (
             <MenuItemCard
               key={item.id}
-              name={isArabic ? item.nameArabic : item.name}
-              description={isArabic ? item.descriptionArabic : item.description}
-              price={item.price}
+              item={item}
+              isArabic={isArabic}
               image={getItemImage(current.id)}
             />
           ))}

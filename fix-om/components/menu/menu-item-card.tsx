@@ -4,14 +4,25 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { fadeUp, defaultTransition } from "@/lib/motion";
 
-interface MenuItemCardProps {
+interface MenuItem {
+  id: string;
   name: string;
-  description: string;
+  nameArabic: string;
   price: number;
+  description: string;
+  descriptionArabic: string;
+}
+
+interface MenuItemCardProps {
+  item: MenuItem;
+  isArabic: boolean;
   image: string;
 }
 
-export function MenuItemCard({ name, description, price, image }: MenuItemCardProps) {
+export function MenuItemCard({ item, isArabic, image }: MenuItemCardProps) {
+  const name = isArabic ? item.nameArabic : item.name;
+  const description = isArabic ? item.descriptionArabic : item.description;
+
   return (
     <motion.article
       variants={fadeUp}
@@ -28,7 +39,7 @@ export function MenuItemCard({ name, description, price, image }: MenuItemCardPr
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <span className="absolute end-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-primary shadow-soft backdrop-blur-sm">
-          {price.toFixed(1)} OMR
+          {item.price.toFixed(1)} OMR
         </span>
       </div>
       <div className="p-4 md:p-5">

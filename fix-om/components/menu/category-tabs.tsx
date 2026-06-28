@@ -2,7 +2,6 @@
 
 import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { stripEmoji } from "@/lib/images";
 
 interface Category {
   id: string;
@@ -45,9 +44,7 @@ export function CategoryTabs({
         >
           {categories.map((category, index) => {
             const isActive = activeIndex === index;
-            const label = isArabic
-              ? stripEmoji(category.nameArabic)
-              : stripEmoji(category.name);
+            const label = isArabic ? category.nameArabic : category.name;
 
             return (
               <button
