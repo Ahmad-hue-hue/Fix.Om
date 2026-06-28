@@ -1,22 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  --color-obsidian: #F7F7F7;
-  --color-bone: #2D2D2D;
-  --color-subtext: #6B6B6B;
+  --color-obsidian: #FAFAF8;
+  --color-bone: #1C1C1A;
+  --color-subtext: #6E6E68;
   --color-primary: #1A4352;
   --color-primary-light: #2A5A6B;
   --color-primary-dark: #0F2D38;
-  --color-green-open: #22C55E;
-  --color-closed: #6B7280;
-  --color-glass: rgba(0, 0, 0, 0.05);
-  --color-glass-border: rgba(0, 0, 0, 0.1);
-  --color-glass-highlight: rgba(0, 0, 0, 0.08);
+  --color-cream: #F3EDE4;
+  --color-cream-dark: #E8DFD2;
+  --color-green-open: #16A34A;
+  --color-closed: #78716C;
+  --color-glass: rgba(255, 255, 255, 0.72);
+  --color-glass-border: rgba(28, 28, 26, 0.08);
+  --color-glass-highlight: rgba(255, 255, 255, 0.92);
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
 
   --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-display: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), system-ui, serif;
   --font-mono: var(--font-mono), monospace;
   --font-arabic: var(--font-arabic), system-ui, sans-serif;
+
+  --shadow-soft: 0 4px 24px rgba(28, 28, 26, 0.06);
+  --shadow-card: 0 8px 32px rgba(28, 28, 26, 0.08);
+  --shadow-elevated: 0 20px 60px rgba(28, 28, 26, 0.12);
 
   --animate-fade-in: fade-in 0.5s ease-out;
   --animate-fade-up: fade-up 0.6s ease-out;
@@ -24,6 +32,7 @@
   --animate-pulse-glow: pulse-glow 2s infinite;
   --animate-shimmer: shimmer 2s infinite;
   --animate-float: float 6s ease-in-out infinite;
+  --animate-marquee: marquee 28s linear infinite;
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -42,7 +51,7 @@
 
   @keyframes pulse-glow {
     0%, 100% { box-shadow: 0 0 20px rgba(26, 67, 82, 0); }
-    50% { box-shadow: 0 0 30px rgba(26, 67, 82, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(26, 67, 82, 0.25); }
   }
 
   @keyframes shimmer {
@@ -53,6 +62,11 @@
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 }
 
@@ -74,7 +88,7 @@ body {
 
 ::selection {
   background: var(--color-primary);
-  color: #F7F7F7;
+  color: #FAFAF8;
 }
 
 ::-webkit-scrollbar {
@@ -96,23 +110,37 @@ body {
 
 .glass {
   background: var(--color-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-glass-border);
 }
 
 .glass-hover {
   background: var(--color-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-glass-border);
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .glass-hover:hover {
   background: var(--color-glass-highlight);
-  border-color: var(--color-primary);
-  box-shadow: 0 8px 32px rgba(209, 209, 209, 0.3);
+  border-color: rgba(26, 67, 82, 0.2);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+
+.surface-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
+}
+
+.surface-card:hover {
+  box-shadow: var(--shadow-card);
+  border-color: rgba(26, 67, 82, 0.15);
 }
 
 .text-gradient-primary {
@@ -131,17 +159,17 @@ body {
   background-clip: text;
 }
 
-.text-glow {
-  text-shadow: 0 0 40px rgba(26, 67, 82, 0.3);
+.font-display {
+  font-family: var(--font-display);
 }
 
 .card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
 
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(209, 209, 209, 0.3), 0 0 0 1px rgba(26, 67, 82, 0.1);
+  box-shadow: var(--shadow-elevated);
 }
 
 .focus-ring:focus-visible {
@@ -164,7 +192,7 @@ body {
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  opacity: 0.5;
+  opacity: 0.4;
   transition: opacity 0.3s ease;
 }
 
@@ -180,7 +208,7 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.02;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
@@ -192,7 +220,7 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .text-gradient-primary {
     animation: none;
     background-size: 100%;
@@ -221,17 +249,12 @@ body {
   transform: translateX(100%);
 }
 
-.focus-outline:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
 .skip-link {
   position: absolute;
   top: -40px;
   left: 0;
   background: var(--color-primary);
-  color: #F7F7F7;
+  color: #FAFAF8;
   padding: 8px 16px;
   z-index: 100;
   transition: top 0.3s;
@@ -241,11 +264,44 @@ body {
   top: 0;
 }
 
-/* Hide scrollbar utility */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(26, 67, 82, 0.35) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(15, 45, 56, 0.55) 0%, rgba(15, 45, 56, 0.75) 100%);
+}
+
+.section-padding {
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 180px;
+    gap: 1rem;
+  }
 }

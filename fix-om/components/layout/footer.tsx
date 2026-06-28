@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { faPhone, faEnvelope, faMapMarkerAlt, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { Logo } from "./logo";
 import { useBilingual } from "@/lib/hooks/use-bilingual";
 import brandData from "@/content/brand.json";
@@ -15,7 +15,7 @@ const quickLinksHrefs = ["/", "/menu", "/about", "/gallery", "/contact"];
 
 export function Footer() {
   const { language } = useBilingual();
-  const { instagram, phone, whatsapp, email, locationUrl, address } = brandData;
+  const { instagram, phone, whatsapp, email, locationUrl } = brandData;
   const isArabic = language === "ar";
   const quickLinks = isArabic ? quickLinksAr : quickLinksEn;
 

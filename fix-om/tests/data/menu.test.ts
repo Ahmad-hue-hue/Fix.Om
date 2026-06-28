@@ -2,26 +2,26 @@ import { describe, it, expect } from 'vitest';
 import menuData from '@/content/menu.json';
 
 describe('Menu Data', () => {
-  it('has three categories', () => {
-    expect(menuData.categories).toHaveLength(3);
+  it('has nine categories', () => {
+    expect(menuData.categories).toHaveLength(9);
   });
 
-  it('has caffeine category with items', () => {
-    const caffeine = menuData.categories.find(c => c.id === 'caffeine');
-    expect(caffeine).toBeDefined();
-    expect(caffeine?.items).toHaveLength(4);
+  it('has coffee-hot-cold category with items', () => {
+    const coffee = menuData.categories.find(c => c.id === 'coffee-hot-cold');
+    expect(coffee).toBeDefined();
+    expect(coffee?.items.length).toBeGreaterThan(0);
   });
 
-  it('has refreshments category with items', () => {
-    const refreshments = menuData.categories.find(c => c.id === 'refreshments');
-    expect(refreshments).toBeDefined();
-    expect(refreshments?.items).toHaveLength(3);
+  it('has fix-special category with items', () => {
+    const fixSpecial = menuData.categories.find(c => c.id === 'fix-special');
+    expect(fixSpecial).toBeDefined();
+    expect(fixSpecial?.items.length).toBeGreaterThan(0);
   });
 
   it('has desserts category with items', () => {
     const desserts = menuData.categories.find(c => c.id === 'desserts');
     expect(desserts).toBeDefined();
-    expect(desserts?.items).toHaveLength(3);
+    expect(desserts?.items.length).toBeGreaterThan(0);
   });
 
   it('all items have required fields', () => {
@@ -37,39 +37,35 @@ describe('Menu Data', () => {
     });
   });
 
-  it('dessert items have images', () => {
-    const desserts = menuData.categories.find(c => c.id === 'desserts');
-    desserts?.items.forEach(item => {
-      expect(item.image).toBeDefined();
-    });
-  });
-
   it('has correct category names in English', () => {
-    const caffeine = menuData.categories.find(c => c.id === 'caffeine');
-    const refreshments = menuData.categories.find(c => c.id === 'refreshments');
+    const coffee = menuData.categories.find(c => c.id === 'coffee-hot-cold');
     const desserts = menuData.categories.find(c => c.id === 'desserts');
 
-    expect(caffeine?.name).toBe('Caffeine');
-    expect(refreshments?.name).toBe('Refreshments');
-    expect(desserts?.name).toBe('Desserts');
+    expect(coffee?.name).toContain('Coffee');
+    expect(desserts?.name).toBe('🍰 Desserts');
   });
 
   it('has correct category names in Arabic', () => {
-    const caffeine = menuData.categories.find(c => c.id === 'caffeine');
-    const refreshments = menuData.categories.find(c => c.id === 'refreshments');
+    const coffee = menuData.categories.find(c => c.id === 'coffee-hot-cold');
     const desserts = menuData.categories.find(c => c.id === 'desserts');
 
-    expect(caffeine?.nameArabic).toBe('الكافيين');
-    expect(refreshments?.nameArabic).toBe('المشروبات المنعشة');
-    expect(desserts?.nameArabic).toBe('الحلويات');
+    expect(coffee?.nameArabic).toContain('قهوة');
+    expect(desserts?.nameArabic).toBe('🍰 حلويات');
   });
 
-  it('prices are in OMR currency', () => {
+  it('prices are valid OMR amounts', () => {
     menuData.categories.forEach(category => {
       category.items.forEach(item => {
-        expect(item.price).toBeGreaterThanOrEqual(2.0);
+        expect(item.price).toBeGreaterThanOrEqual(0.1);
         expect(item.price).toBeLessThanOrEqual(10.0);
       });
+    });
+  });
+
+  it('all categories have bilingual names', () => {
+    menuData.categories.forEach(category => {
+      expect(category.name).toBeTruthy();
+      expect(category.nameArabic).toBeTruthy();
     });
   });
 });

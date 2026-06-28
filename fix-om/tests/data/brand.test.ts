@@ -28,7 +28,8 @@ describe('Brand Data', () => {
   });
 
   it('has valid location URL', () => {
-    expect(brandData.locationUrl).toContain('linktr.ee');
+    expect(brandData.locationUrl).toMatch(/^https:\/\//);
+    expect(brandData.locationUrl).toContain('maps');
   });
 
   it('has valid operating hours', () => {

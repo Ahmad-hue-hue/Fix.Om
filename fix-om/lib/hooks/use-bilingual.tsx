@@ -14,16 +14,13 @@ interface BilingualContextType {
 const BilingualContext = createContext<BilingualContextType | undefined>(undefined);
 
 export function BilingualProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("en");
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window === "undefined") return "en";
+    const saved = localStorage.getItem("language") as Language;
+    return saved === "en" || saved === "ar" ? saved : "en";
+  });
   
   const isRTL = language === "ar";
-
-  useEffect(() => {
-    const saved = localStorage.getItem("language") as Language;
-    if (saved && (saved === "en" || saved === "ar")) {
-      setLanguageState(saved);
-    }
-  }, []);
 
   useEffect(() => {
     document.documentElement.dir = isRTL ? "rtl" : "ltr";
